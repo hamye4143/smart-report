@@ -1,0 +1,49 @@
+
+.shape { 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+ ::ng-deep .mat-form-field-wrapper{
+    margin-bottom : 0;
+    padding : 0;
+    font-size: 0.813rem;
+ }
+ .value-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+ }
+
+ .label {
+     font-weight: 600;
+     font-size: .9rem;
+     flex-shrink: 0;
+     flex-grow: 1; /*flex-basis의 값보다 커질 수 있는지를 결정하는 속성이에*/
+     width: 25%;
+ }
+
+ .label-value {
+     width: 75%;
+     height:100%;
+     align-self: center;
+
+ }
+
+.a {
+    background-color: tan;
+    align-items: center;
+}
+.select-group {
+    padding-top:.5rem;
+
+}
+
+.sub-category .mat-chip-selected {
+    background-color: orange !important;
+    color: #fff;
+  }

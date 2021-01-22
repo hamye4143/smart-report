@@ -1,0 +1,50 @@
+<!-- <section>
+    <div class="example-button-row">
+        <button mat-button>홈</button>
+        <button mat-stroked-button [matMenuTriggerFor]="menu">
+        {{category?.type1}} <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
+        <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+        <button mat-stroked-button [matMenuTriggerFor]="menu2">
+        {{category?.type2}} <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu2="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+        </mat-menu>
+        <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+
+        <button mat-stroked-button [matMenuTriggerFor]="menu3">
+        {{category?.type3}}<mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu3="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu> 
+        <mat-icon matListIcon>keyboard_arrow_right</mat-icon>
+
+        <button mat-stroked-button [matMenuTriggerFor]="menu4">
+        {{category?.type4}}<mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu4="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu> 
+        
+    </div>
+</section> -->
+
+<section>
+    <div class="example-button-row">
+        <span *ngFor="let cate of category">
+            <button mat-stroked-button="mat-stroked-button">
+                {{cate.code_name}}
+            </button>
+            <mat-icon class="arrow-right-icon">keyboard_arrow_right</mat-icon>
+        </span>
+    </div>
+</section>

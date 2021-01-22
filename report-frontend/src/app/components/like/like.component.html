@@ -1,0 +1,16 @@
+
+
+<div class="heart-div">
+    <button mat-icon-button [class.like]="isLike" (click)="toggle($event)" > 
+        <mat-icon aria-label="heart icon">favorite</mat-icon>
+    </button> 
+
+    <!-- <button class= "bubbly-button" [class.like]="isLike"  (click)="toggle($event)" > 
+        <mat-icon aria-label="heart icon">favorite</mat-icon>
+    </button>  -->
+    <!--좋아요 개수-->
+    <span><b>{{totalLikes}}</b></span>
+</div>
+
+
+<!-- <p>The state is {{checked ? 'ON' : 'OFF'}}.</p> -->

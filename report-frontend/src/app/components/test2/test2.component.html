@@ -1,0 +1,115 @@
+<!-- 
+<div class="root">
+    <div>
+        <label>클릭한 데이터: </label>
+        pdi{{pid}}
+        <input *ngIf="sendData" [(ngModel)]="name">
+        <input *ngIf="sendData" [(ngModel)]="description">
+        <input *ngIf="sendData" [(ngModel)]="isUse">
+
+
+        <div>
+            자식 :
+            <div *ngFor="let child of sendData.children">
+                {{child.name}}
+            </div>
+        </div>
+
+
+
+        <button (click)="onAddSurgeries()">자식 추가</button>
+        <form [formGroup]="form">
+          <table>
+            <ng-container formArrayName="surgeries">
+              <tr *ngFor="let ctrl of form.get('surgeries')['controls']; let i = index" [formGroupName]="i">
+                <td><input type="text" class="form-control" formControlName="name"></td>
+                <td><input type="text" class="form-control" formControlName="description"></td>
+                <td><input type="text" class="form-control" formControlName="isUse"></td>
+              </tr>
+            </ng-container>
+          </table>
+        </form>
+    
+        <pre>{{form.value | json}}</pre>
+  
+
+        <div>
+            <button mat-raised-button color="primary" class="action" (click)="edit()">수정/저장</button>
+            <button mat-raised-button color="primary" class="action" (click)="addChildren()">자식 추가</button>
+            <button mat-raised-button color="primary" class="action" (click)="edit()">삭제</button>
+        </div>
+    </div>
+</div> -->
+
+<!-- <button (click)="decrement()">-</button> -->
+<!-- <span>{{counter}}</span> -->
+<!-- <input [(ngModel)]="counter"> -->
+<div class="shape">
+  <div class="valueForm" *ngIf="counterValue">
+    <!-- {{counter|json}} -->
+    <div class="value-row">
+      <div class="label">카테고리명</div>
+      <!--전체 카테고리는 수정불가-->
+
+      <mat-form-field *ngIf="counter.Id ==1 " class="label-value" appearance="outline" >
+        <input type="text" matInput placeholder="Name" [(ngModel)]="counter.Name" disabled>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="counter.Id !=1" class="label-value" appearance="outline" >
+        <input type="text" matInput placeholder="Name" [(ngModel)]="counter.Name">
+      </mat-form-field>
+
+    </div>
+    <div class="value-row">
+      <div class="label">카테고리 설명</div>
+      <mat-form-field *ngIf="counter.Id ==1 " class="label-value" appearance="outline">
+        <input type="text" matInput placeholder="Description" [(ngModel)]="counter.Description" disabled>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="counter.Id !=1" class="label-value" appearance="outline">
+        <input type="text" matInput placeholder="Description" [(ngModel)]="counter.Description" >
+      </mat-form-field>
+    </div>
+    <div class="value-row">
+      <div class="label">사용 설정</div>
+      <mat-radio-group *ngIf="counter.Id !=1 " class="select-group label-value" aria-label="Select an option" [(ngModel)]="counter.is_use" (change)="onItemChange($event.value)">
+        <mat-radio-button checked value="Y">공개</mat-radio-button><!--isUse'Y'라면-->
+        <mat-radio-button value="N">비공개</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-radio-group *ngIf="counter.Id ==1 " class="select-group label-value" aria-label="Select an option" [(ngModel)]="counter.is_use" (change)="onItemChange($event.value)">
+        <mat-radio-button checked value="Y" disabled>공개</mat-radio-button><!--isUse'Y'라면-->
+        <mat-radio-button value="N" disabled>비공개</mat-radio-button>
+      </mat-radio-group>
+
+    </div>
+  
+    <div class="value-row">
+      <div class="label">하위 카테고리</div>
+      <mat-chip-list aria-label="selection" class="sub-category label-value">
+        <mat-chip class="sub-category" *ngFor="let child of counter.Children"selected>{{child.Name}}</mat-chip>
+      </mat-chip-list>
+
+      <!-- <div *ngFor="let child of counter.children">
+        {{child.name}}
+      </div> -->
+    </div>
+  </div>
+
+  <!-- <div>{{counter|json}}</div> -->
+  <div>
+    <form [formGroup]="form">
+      <table>
+        <ng-container formArrayName="surgeries">
+          <tr *ngFor="let ctrl of form.get('surgeries')['controls']; let i = index" [formGroupName]="i">
+            <td><input type="text" class="form-control" formControlName="name"></td>
+            <td><input type="text" class="form-control" formControlName="description"></td>
+            <td><input type="text" class="form-control" formControlName="isUse"></td>
+          </tr>
+        </ng-container>
+      </table>
+    </form>
+    <!-- <pre>{{form.value | json}}</pre> -->
+
+  </div>
+</div>

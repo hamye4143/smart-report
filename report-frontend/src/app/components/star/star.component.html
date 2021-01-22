@@ -1,0 +1,23 @@
+<div>
+  <div class="star">
+    <div *ngIf="isblogdetailsPage">
+      <button class="star-button" mat-raised-button (click)="open_dialog()">
+        <div>
+          <ul class="list-inline rating-list" *ngFor="let star of stars">
+            <li [ngClass]="{'selected': (star <= selectedValue)}">
+              <mat-icon>star</mat-icon>
+            </li>
+          </ul>
+        </div>
+      </button>
+    </div>
+    <div *ngIf="!isblogdetailsPage">
+      <ul class="list-inline rating-list" *ngFor="let star of stars">
+        <li [ngClass]="{'selected': (star <= selectedValue)}">
+          <mat-icon>star</mat-icon>
+        </li>
+      </ul>
+    </div>
+    <span>{{star_avg_value}}/5</span>
+  </div>
+</div>

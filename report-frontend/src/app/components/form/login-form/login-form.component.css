@@ -1,0 +1,28 @@
+
+.form {
+    width: 100%;
+    font-size: 1rem;
+}
+.form__input {
+    width: 100%;
+    margin-top: 6px;
+}
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.form-actions__login {
+    width: 95%;
+    margin: 1rem 0;
+
+}
+.form-actions__forget {
+    font-size: 12px;
+    font-weight: 400;
+    color: blue;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}

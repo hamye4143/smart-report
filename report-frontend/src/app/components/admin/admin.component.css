@@ -1,0 +1,52 @@
+.wrapper{
+    width:100%;
+    height:100%;
+    /* margin:100px 20px; */
+}
+
+.nav-container{
+    grid-area:navigation;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #455a64;
+}
+.nav-container-heading h2{
+    font-size: 2.3em;
+    color: #f5f5f5;
+    font-weight: lighter;
+}
+
+.button_group {
+    display: flex;
+    width: 100vw;
+    flex-direction: row;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    margin-top:80px;
+}
+
+.button_group button{
+    margin:20px;
+    padding:6px 15px;
+    font-size:1.1em;
+    background-color: #4fc3f7;
+    color: #f5f5f5;
+    font-weight: lighter;
+}
+
+.button_group button mat-icon{
+    margin-right:10px;
+}
+
+.main-container{
+    width:100%;
+    height:100%;
+    grid-area:main-content;
+}
+
+#signout-button{
+    background-color: tomato;
+    color: white;
+}

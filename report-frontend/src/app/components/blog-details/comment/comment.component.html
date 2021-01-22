@@ -1,0 +1,91 @@
+<div *ngIf="visible" class="inline full-width comment">
+    <mat-form-field class="full-width">
+        <input matInput type="text" [(ngModel)]="content" placeholder="댓글 쓰기">
+    </mat-form-field>
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" class="add_comment" (click)="submit_comment()">댓글 작성</button>
+    </div>
+</div>
+
+
+
+<!-- <section>
+    <h4>Table example</h4>
+    <article>
+        <table class="table">
+            <colgroup>
+                <col class="name" />
+                <col class="role" />
+                <col class="active" />
+            </colgroup>
+            <tr>
+                <th>Name</th>
+            </tr>
+            <tr *ngFor="let account of accounts; index as index">
+                <td>
+                    <editable data-testid="table-name" (save)="updateField(index, 'name')"
+                        (cancel)="cancel(index, 'name')">
+                        <ng-template viewMode>
+                            {{ account.name }}
+                        </ng-template>
+                        <ng-template editMode>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="name" type="text"
+                                    [formControl]="getControl(index, 'name')" />
+                            </div>
+                        </ng-template>
+                    </editable>
+                </td>
+            </tr>
+        </table>
+    </article>
+</section> -->
+
+<div role="list">
+    <!-- <div mat-subheader>All comments</div> -->
+    <div role="listitem" *ngFor="let comment of comments; index as index">
+        <div id="div_{{comment.id}}">
+            <!--viewMode-->
+            <div id="viewComment_{{comment.id}}" class="viewComment">
+                <div class="upper-div">
+                    <img matListAvatar class="user-img" src="./assets/user.png" [alt]="fullName">
+                    <div mat-line>{{comment.author.name}}</div>
+                    <mat-icon class="gray time-icon">access_time</mat-icon>
+                    <div class="gray">{{comment.created_at | date:'y년 M월 d일'}}</div>
+                </div>
+
+                <div mat-line class="content"> {{comment.content}} </div>
+
+                <button mat-icon-button color="primary"
+                    *ngIf="auth_service.is_logged_in() && loginUser?.id == comment?.author.id"
+                    (click)="updateMode(comment.id,comment.content)">
+                    수정
+                </button>
+                <button mat-icon-button color="primary"
+                    *ngIf="auth_service.is_logged_in() && loginUser?.id == comment?.author.id"
+                    (click)="open_dialog_delete('댓글을 삭제하시겠습니까?', comment.id)">
+                    삭제
+                </button>
+            </div>
+
+            <!--EditMode-->
+            <div id="editComment_{{comment.id}}" class="editComment">
+                <div class="upper-div">
+                    <img matListAvatar class="user-img" src="./assets/user.png" [alt]="fullName">
+                    <div mat-line>{{comment.author.name}}</div>
+                    <mat-icon class="gray time-icon">access_time</mat-icon>
+                    <div class="gray">{{comment.created_at | date:'y년 M월 d일'}}</div>
+                </div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <input matInput type="text" [(ngModel)]="contentPlaceholder" placeholder="댓글 수정">
+                </mat-form-field>
+                <button mat-icon-button color="primary" (click)="cancelEdit(comment.id)">
+                    취소
+                </button>
+                <button mat-icon-button color="primary" (click)="updateComment(comment.id)">
+                    저장
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

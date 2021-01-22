@@ -1,0 +1,5 @@
+<mat-list role="list">
+    <mat-list-item *ngFor="let value of like_lists" role="listitem" [routerLink]="['/blog',value.id]">
+        {{value.title}}
+    </mat-list-item>
+</mat-list>

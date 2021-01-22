@@ -1,0 +1,206 @@
+<div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches">
+
+  <!-- Top navbar -->
+  <mat-toolbar class="navbar1">
+    <!--class="navbar"-->
+
+    <mat-toolbar-row class="top-toolbar">
+
+      <a class="navbar-brand" [routerLink]="['/home']" matTooltip="Home">
+        Aive Labs
+      </a>
+      <!-- <span class="search">
+      <app-search-bar (searchEvent)="searchEvent($event)" [keyword]="keyword"></app-search-bar>
+    </span> -->
+
+
+
+      <button mat-icon-button (click)="snav.toggle()" fxHide fxShow.xs>
+        <mat-icon class="menu-icon">menu</mat-icon>
+      </button>
+
+      <div class="menu-list" fxShow fxHide.xs>
+        <button mat-button [routerLink]="['/home']">메인</button>
+        <button mat-button [matMenuTriggerFor]="menuTop" *ngIf="isAdmin==='Y'">관리</button>
+        <mat-menu #menuTop="matMenu">
+          <button mat-menu-item [routerLink]="['/admin/all-blogs']">레포트 관리</button>
+          <button mat-menu-item [routerLink]="['/admin/category']">메인화면 관리</button>
+          <!-- <button mat-menu-item [routerLink]="['/test3']">메인화면 관리 - 테스트</button> -->
+
+          <button mat-menu-item [routerLink]="['/admin/sort']">카테고리 관리</button>
+        </mat-menu>
+
+        <button mat-button [routerLink]="['/admin/email']">메일</button>
+        <button mat-button [routerLink]="['/statistics']">통계</button>
+        <button mat-button [routerLink]="['/question-list']">문의사항</button>
+      </div>
+      <span class="navbar-spacer"></span>
+
+      <!--   
+    <button mat-icon-button [matMenuTriggerFor]="notificationMenu">
+      <mat-icon matBadge="2" matBadgeColor="accent">notifications</mat-icon>
+    </button>
+    <mat-menu #notificationMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+
+      <a mat-menu-item>
+        <span>You have new tasks</span>
+      </a>
+      <a mat-menu-item>
+        <span>You have a new message</span>
+      </a>
+
+    </mat-menu> -->
+
+
+
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <mat-icon class="menu-icon">person</mat-icon>
+        <span class="menu-icon" fxShow fxHide.xs>
+          {{userName}}
+        </span>
+      </button>
+
+
+
+      <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+
+        <a mat-menu-item [routerLink]="['/admin/myinfo']">
+          <mat-icon>person</mat-icon>
+          <span>마이페이지</span>
+        </a>
+
+        <a mat-menu-item [routerLink]="['/login']" *ngIf="!auth_service.is_logged_in()">
+          <mat-icon>login</mat-icon>
+          <span> 로그인 </span>
+        </a>
+
+
+        <a mat-menu-item *ngIf="auth_service.is_logged_in()"
+          (click)="open_dialog('로그아웃하시겠습니까?')">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>로그아웃</span>
+        </a>
+
+      </mat-menu>
+    </mat-toolbar-row>
+
+    <!--카테고리 정렬-->
+
+    <mat-toolbar-row class="bottom-toolbar">
+      <div class="bottom-toolbar-inner">
+        <!-- <div class="page2-inner"> -->
+        <span *ngFor="let item of finalData">
+          <!-- Handle branch node buttons here -->
+          <span *ngIf="item.Children && item.Children.length > 0">
+            <button mat-button class="menu-button" [matMenuTriggerFor]="menu.childMenu">
+              <!--[matMenuTriggerFor]="menu.childMenu"-->
+              {{item.Name}}
+              <mat-icon>expand_more</mat-icon>
+            </button>
+            <app-menu-item #menu [items]="item.Children"></app-menu-item>
+          </span><!-- Leaf node buttons here -->
+          <span *ngIf="!item.Children || item.Children.length === 0">
+            <!-- <button mat-button class="menu-button" [routerLink]="['/category-list']" [queryParams]= "{ cn: item.Name, page: 1, sortBy :1, row:10 }"> -->
+            <button mat-button class="menu-button" (click)="navigate(item.Name)">
+              {{item.Name}}
+            </button>
+          </span>
+        </span>
+      </div>
+
+    </mat-toolbar-row>
+
+
+  </mat-toolbar>
+
+
+
+  <mat-sidenav-container class="navbar-sidenav-container">
+    <!-- Side nav -->
+    <mat-sidenav #snav [(opened)]="opended" [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav">
+
+      <!-- <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav"> -->
+
+      <mat-nav-list>
+        <h3 mat-subheader>Home</h3>
+
+        <a mat-list-item [routerLink]="['/home']">
+          <mat-icon mat-list-icon>
+            Main
+          </mat-icon>
+          <p mat-line> 메인화면 </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/admin/all-blogs']">
+          <mat-icon mat-list-icon>
+            dashboard
+          </mat-icon>
+          <p mat-line> 레포트 관리 </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/admin/category']">
+          <mat-icon mat-list-icon>category</mat-icon>
+          <p mat-line> 메인화면 관리 </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/admin/sort']">
+          <mat-icon mat-list-icon>sort</mat-icon>
+          <p mat-line> 카테고리 관리 </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/admin/email']">
+          <mat-icon mat-list-icon>mail</mat-icon>
+          <p mat-line> 메일 </p>
+        </a>
+
+
+        <a mat-list-item [routerLink]="['/statistics']">
+          <mat-icon mat-list-icon>
+            show_chart
+          </mat-icon>
+          <p mat-line> 차트 </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/question-list']">
+          <mat-icon mat-list-icon>
+            question_answer
+          </mat-icon>
+          <p mat-line> 문의사항 </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/admin/myinfo']">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <p mat-line> 마이페이지 </p>
+        </a>
+
+        <a mat-list-item *ngIf="auth_service.is_logged_in()"
+          (click)="open_dialog('로그아웃 하시겠습니까?')">
+          <mat-icon mat-list-icon>exit_to_app</mat-icon>
+          <p mat-line> 로그아웃 </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/login']" *ngIf="!auth_service.is_logged_in()">
+          <mat-icon mat-list-icon>login</mat-icon>
+          <p mat-line> 로그인 </p>
+        </a>
+
+      </mat-nav-list>
+
+    </mat-sidenav>
+
+    <!-- Main content -->
+    <mat-sidenav-content class="sidenav-content">
+
+      <div class="progress-bar-container">
+
+      </div>
+
+
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>

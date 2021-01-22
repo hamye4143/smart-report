@@ -1,0 +1,35 @@
+.selected{
+  color:#ffd700;
+}
+
+.selected:hover{
+  color:#ffd700;
+}
+
+ul {
+  color:#bbb;
+  list-style: none;
+  padding-right:2px;
+  display:table-cell;
+}
+ul li{
+  display: inline-block;
+}
+
+.star{
+  display:table;
+  padding-right:.6rem;
+}
+span{
+  display:table-cell;
+  vertical-align:middle;
+  padding-left:2px;
+  font-weight:600;
+  color:rgb(91, 87, 87);
+  padding-left:.7rem;
+}
+
+.star-button {
+
+  padding-top:.59rem;
+}

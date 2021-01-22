@@ -1,0 +1,97 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+
+        <mat-card class="card">
+            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                <div class="card-title">
+                    <div>메인화면 관리</div>
+                    <!-- <button mat-raised-button color="primary" class="add-contact" (click)="addCategory()">추가</button> -->
+                </div>
+            </mat-card-title>
+            <mat-card-content>
+                <div class="container">
+                    <table mat-table [dataSource]="dataSource" matSort matSortStart="desc">
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="select">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox 
+                                    *ngIf="clickListId"
+                                    (change)="$event ? masterToggle($event) : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                    [aria-label]="checkboxLabel()"
+                                    >
+                                </mat-checkbox>
+                            </th>
+                            <!-- <td mat-cell *matCellDef="let row; let i = index;">
+                                <mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
+                            </td> -->
+                            <td mat-cell *matCellDef="let row; let i = index;">
+                                <mat-checkbox 
+                                    id="checkbox_{{row.id}}"
+                                    *ngIf="clickListId"
+                                    (click)="$event.stopPropagation();custom_click2(row)"
+                                    (change)="$event ? selection.toggle(row) : null;"
+                                    [checked] ="isChecked(row) " 
+                                    [aria-label]="checkboxLabel(row)"
+                                    >
+                                    <!--[checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)"-->
+                                </mat-checkbox>
+                            </td>
+                        </ng-container>
+                        <!-- index Column -->
+                        <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element; let i = index; ">{{i+1}}</td>
+                        </ng-container>
+                        <!-- created_at Column -->
+                        <ng-container matColumnDef="created_at">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 날짜 </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.created_at | date:'y년 M월 d일'}} </td>
+                        </ng-container>
+                        <!-- title Column -->
+                        <ng-container matColumnDef="title">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 제목 </th>
+                            <td mat-cell *matCellDef="let element" [routerLink]="['/blog', element.id]">
+                                {{element?.title}} </td>
+                        </ng-container>
+
+                        <!-- content Column -->
+                        <!-- <ng-container matColumnDef="content">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 내용 </th>
+                            <td mat-cell *matCellDef="let element">{{element?.content}}
+                            </td>
+                        </ng-container> -->
+
+
+                        <!-- user Column -->
+                        <ng-container matColumnDef="user">
+                            <th mat-header-cell *matHeaderCellDef> 글쓴이 </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.author.name}} </td>
+                        </ng-container>
+
+                        <!-- details Column -->
+                        <ng-container matColumnDef="viewCount">
+                            <th mat-header-cell *matHeaderCellDef> 조회수 </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{element?.view_count}}
+
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSize]="6" [pageSizeOptions]="[2,4,6,10,20]" showFirstLastButtons>
+                    </mat-paginator>
+
+
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <app-test4 (mainList)="mainListFunc($event)" [clickList]="rowClickList" (clickListId)="clickListIdFunc($event)"></app-test4>
+
+
+    </div>
+</div>

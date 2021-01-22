@@ -1,0 +1,21 @@
+.selected{
+    color:#ffd700;
+  }
+
+.selected:hover{
+color:#ffd700;
+}
+
+ul {
+color:#bbb;
+display: inline-block;
+list-style: none;
+}
+
+.selected > mat-icon{
+/* color:yellow; */
+}
+
+.rating-list{
+    cursor: pointer;
+}

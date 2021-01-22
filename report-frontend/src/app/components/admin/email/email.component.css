@@ -1,0 +1,101 @@
+/* 페이지 전체 요소에 적용. 박스 사이즈를 테두리를 포함한 크기로 지정 */
+* {
+    box-sizing: border-box;
+}
+
+.file_container {
+    padding: 2rem 1rem;
+    text-align: center;
+    border: dashed 1px #979797;
+    position: relative;
+    margin: 0 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    background: #f2f0f0;
+}
+.visible {
+    display: block;
+}
+#fileDropRef {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    
+    display: none;
+}
+.color-gray {
+    color: #979797;
+    align-self: center;
+}
+.file-button {
+    margin-left: 1rem;
+}
+
+.hidden-input {
+    display: none;
+}
+
+/*업로드 버튼 */
+.filebox {
+    display:inline; 
+    justify-content: center;
+    margin-left:1rem;
+}
+
+.filebox label {
+  display: inline;
+  padding: .5em .75em;
+  color: #999;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: .25em;
+}
+
+.filebox input[type="file"] {  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+
+.list-item {
+    /* background: #979797; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between !important;
+}
+
+.down-button {
+    margin-left: 1rem;
+}
+
+.remove-button {
+    margin-left: 1rem;
+}
+
+.sent-pic {
+    width: 6rem;
+    margin-bottom:2rem;
+}
+
+.mat-card-2 {
+    height: 24rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

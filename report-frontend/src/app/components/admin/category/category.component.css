@@ -1,0 +1,126 @@
+.all-blogs-container{
+    width:90vw;
+    margin: 0 5vw;
+  
+}
+
+mat-card {
+    margin-bottom: 4vh;
+}
+.my_list:hover {
+    background: #eeeeee;
+    cursor: pointer;
+}
+
+.profile-card {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+.check_row{
+    /* width:100%; */
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    margin-top:1rem;
+    background: gold;
+
+}
+
+/*drag and drop*/
+.example-list {
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .example-box {
+    padding: 20px 10px;
+    border-right: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .blog-card-list{
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    margin-top:1rem;
+  
+  }
+  .blog-card{
+    /* width: 20%; */
+    flex: 0 0 auto;
+    margin-left: 1rem;
+    max-width: 10rem;
+    box-shadow: none !important;
+    border: 1px solid #bbb;
+    border-radius: 0 !important;
+
+}
+
+.blog-card img{
+    cursor: pointer;
+}
+
+.posts{
+  margin: 2rem 0;
+}
+.list{
+  margin-top: 1rem;
+}
+.list_div{
+  background: green;
+  height: auto;
+  width: 100vw;
+}
+
+.action{
+  margin-right:1rem;
+}
+
+.arrow-right-icon {
+  vertical-align: middle;
+}
+
+

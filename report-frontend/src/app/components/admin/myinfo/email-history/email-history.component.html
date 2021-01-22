@@ -1,0 +1,84 @@
+<!-- <mat-list>
+    <mat-list-item class="item" *ngFor="let i of data">
+        <mat-icon mat-list-icon>mail</mat-icon>
+        
+        <div>{{cleanString(i.receivers)}}</div>
+        <div>{{i.title}} </div>
+        <div class="right">{{i.created_at | date:'y년 M월 d일'}}</div>
+    </mat-list-item>
+    
+</mat-list> -->
+
+<!-- <div>
+    <div class="div" *ngFor="let i of data; index as index">
+        <div class="item">
+            <div class="item-first">
+                <mat-icon mat-list-icon>mail</mat-icon>
+                <div>{{cleanString(i.receivers)}}</div>
+                <div class="title">{{i.title}}</div>
+            </div>
+            <div class="right">
+                <span>{{i.created_at | date:'y년 M월 d일'}}</span>
+                <button mat-stroked-button (click)="enableButton(index)">
+                    더보기
+                    <mat-icon id="arrow_drop_up_{{index}}">
+                        arrow_drop_up
+                    </mat-icon>
+                    <mat-icon class="arrow_drop_up_icon" id="arrow_drop_down_{{index}}">
+                        arrow_drop_down
+                    </mat-icon>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="detail" id="div_{{index}}">
+            <div class="detail-content">
+                <div class="receivers">받는 사람 <b>{{cleanString(i.receivers)}}</b></div>
+                
+                <div class="title">제목 <b>{{i.title}}</b> </div>
+                <div class="title">날짜 <b>{{i.created_at | date:'y년 M월 d일'}}</b> </div>
+                <div class="content">내용 <b>{{i.content}}</b></div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="table-responsive">
+    <table class="table table-borderless">
+        <tbody *ngFor="let i of data; index as index">
+            <tr>
+                <td class="align-middle">{{index + 1}}</td>
+                <td class="align-middle">{{cleanString(i.receivers)}}</td>
+                <td class="align-middle">{{i.title}}</td>
+                <td class="more-td">
+                    <button mat-stroked-button (click)="enableButton(index)">
+                        더보기
+                        <mat-icon id="arrow_drop_up_{{index}}">
+                            arrow_drop_up
+                        </mat-icon>
+                        <mat-icon class="arrow_drop_up_icon" id="arrow_drop_down_{{index}}">
+                            arrow_drop_down
+                        </mat-icon>
+                    </button>
+                </td>
+            </tr>
+
+            <tr class="detail-tr" id="div_{{index}}"> 
+                <td colspan="4">
+                    <div class="detail">
+                        <div class="detail-content">
+                            <div class="receivers">받는 사람 <b>{{cleanString(i.receivers)}}</b></div>
+                            <div class="title">제목 <b>{{i.title}}</b> </div>
+                            <div class="title">날짜 <b>{{i.created_at | date:'y년 M월 d일'}}</b> </div>
+                            <div class="content">내용 <b>{{i.content}}</b></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>

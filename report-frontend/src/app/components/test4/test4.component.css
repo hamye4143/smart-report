@@ -1,0 +1,26 @@
+.listCategory {
+    display: flex;
+}
+
+.card-img-top {
+    width: 2rem;
+}
+
+.expansion-panel {
+    margin-top:1rem;
+}
+
+.card_div {
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+}
+
+.card {
+    flex: 0 0 auto;
+    min-width: 10rem;
+    margin-right: 1rem;
+}
+.button-action {
+    margin: 2rem .6rem 0 .6rem;
+}

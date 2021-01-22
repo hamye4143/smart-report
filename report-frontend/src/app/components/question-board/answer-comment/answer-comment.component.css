@@ -1,0 +1,59 @@
+.answer_card {
+    margin-top:1.5rem;
+}
+
+.answer {
+    display: flex;
+    flex-direction: column;
+    margin: .4rem 0;
+    
+}
+
+.answer-title {
+    font-weight: 600;
+    color:rgb(136, 131, 131);
+    padding: .4rem 0;
+    font-size: 1rem;
+}
+
+.row-1 {
+    padding: .1rem 0;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed #bbb;
+    color:rgb(136, 131, 131);
+    font-size: .8rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.row-2 {
+    padding: .8rem 0;
+
+}
+.row-3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+.row-3 button {
+    margin: 0 .2rem;
+}
+
+.row-1-1 {
+    display: flex;
+    align-items: center;
+}
+.viewAnswer {
+    border: 1px solid rgb(233, 233, 233);
+    /* background-color: rgb(244, 244, 244); */
+    border-radius: 4px;
+    padding: .4rem;
+}
+.editAnswer {
+    display: none;
+    padding: .4rem;
+    border-radius: 4px;
+    background-color: rgb(244, 244, 244);
+}

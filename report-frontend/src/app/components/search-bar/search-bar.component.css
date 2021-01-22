@@ -1,0 +1,126 @@
+
+.form-field {
+    font-size: 4rem;
+    /* background: #141921; */
+    /* max-width: 28rem; */
+    width: 50%;
+}
+.form-field:focus {
+    }
+
+/* input:hover {
+    background-color: gold;
+}
+input:active {
+    background-color: gold;
+} */
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: center;
+    /* margin-top: 1rem; */
+}
+
+.form-control {
+    border-radius: 0.3rem;
+    /* border: 1px solid #bbb; */
+    font-size: 1rem;
+}
+
+.input-group-text {
+    /* border: 1px solid #bbb; */
+    background-color: #232E3D;
+    border-radius: 0.3rem;
+}
+
+.search-icon {
+    color: #fff;
+}
+
+.input-group {
+
+    top: 2;
+
+}
+
+.sort {
+    color: #232E3D;
+    font-size: .8rem;
+}
+
+.sort-button { 
+    background: #bbb;
+    /* border: 1px solid #bbb; */
+}
+
+.ss {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    max-width: 37rem;
+    justify-content: center;
+    
+
+}
+
+.form-ex {
+    width:70%;
+    
+}
+
+::ng-deep .mat-form-field-wrapper{
+    margin-bottom : 0;
+    padding : 0;
+ }
+
+ .search-bar-button { 
+    font-size: 0.906rem;
+    /* flex-grow: 1; */
+    flex:1;
+    
+}
+
+.search-sort-button { 
+    font-size: 0.906rem;
+    /* flex-grow: 2; */
+    /* flex-basis: .4rem; */
+    max-width: 6rem;
+
+
+}
+
+.selectpicker {
+    padding-right:10px;
+    background-color: #bbb;
+}
+
+
+/**/
+
+.ng-autocomplete {
+    width:100%;
+    max-width: 600px;
+    display: table;
+    margin: 0 auto;
+  }
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    line-height: 45px;
+    height: 45px;
+    padding: 0 16px;
+    text-align: left;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+span {
+    margin-left: 5px;
+}

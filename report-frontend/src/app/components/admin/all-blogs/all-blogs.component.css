@@ -1,0 +1,40 @@
+
+
+.card-title {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+::ng-deep .my-form-field .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+.apply-button {
+}
+.button-div {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.datepicker {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+.filter_form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+table {
+    width: 100%;
+}
+
+.search-bar {
+    font-size: 0.813rem;
+}

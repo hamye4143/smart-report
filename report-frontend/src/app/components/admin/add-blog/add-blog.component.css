@@ -1,0 +1,106 @@
+/* 페이지 전체 요소에 적용. 박스 사이즈를 테두리를 포함한 크기로 지정 */
+* {
+    box-sizing: border-box;
+}
+
+/* 박스 스타일 지정 */
+.wrapper {
+    justify-content: center;
+
+}
+/* 폼 영역 스타일 지정 */
+.mat-form-field {
+    width: 100%;
+}
+
+.file_container {
+    padding: 2rem;
+    text-align: center;
+    border: dashed 1px #979797;
+    position: relative;
+    margin: 0 auto;
+
+}
+.visible {
+    display: block;
+}
+#fileDropRef {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.container {
+    font-size: 1rem;
+
+}
+.mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-48 {
+    font-size: 3.6rem;
+}
+
+.color-gray {
+    color: #979797;
+}
+
+.example-viewport {
+    height: 200px;
+    width: 20%;
+    border: 1px solid rgb(150, 147, 147);
+    margin: 0 1rem;
+}
+
+.example-item {
+    height: 50px;
+    background: chocolate;
+}
+
+.category_selector {
+    width: 80%;
+}
+
+.list {
+
+}
+.list-item {
+    background-color: indianred;
+
+
+
+}
+.item_class {
+    background: chocolate;
+}
+.group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.add-blog-additional-categories {
+    margin: 2rem 0;
+}
+.add-blog-additional-tags {
+    padding: 2rem 0;
+
+}
+
+.click:hover {
+    background: #eee;
+    outline: none;
+}
+
+.click:focus {
+    background: #eee;
+    outline: none;
+}
+
+::ng-deep .custom-style{
+    color:#fff;
+}

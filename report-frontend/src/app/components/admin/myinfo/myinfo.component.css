@@ -1,0 +1,33 @@
+.all-blogs-container{
+    width:90vw;
+    margin: 0 5vw;
+  
+}
+
+mat-card {
+    margin-bottom: 4vh;
+}
+
+.my_list:hover {
+    background: #eeeeee;
+    cursor: pointer;
+}
+
+.profile-card {
+    text-align: center;
+}
+/*비번변경*/
+.password-rules .mat-divider {
+    position: unset !important;
+}
+.title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+.sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}

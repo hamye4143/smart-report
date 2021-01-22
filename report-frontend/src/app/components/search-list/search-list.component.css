@@ -1,0 +1,375 @@
+.table {
+    background: #fff;
+}
+.card_div {
+    height: auto;
+    margin-top: 1rem;
+}
+.title-image { 
+    width: 2rem;
+    margin: 0 auto;
+}
+/* .img {
+    width: 7.813rem;
+    min-width: 7.813rem;
+    max-height: 11.563rem;
+    border: 1px solid #888;
+} */
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+mat-figure {
+    background: red;
+    padding: 0;
+}
+
+:host >>> .contents > .mat-figure {
+    align-items: start !important;
+    justify-content: flex-start !important;
+    /* background: green; */
+    padding-top: 1rem;
+
+}
+
+.contents {
+    padding: 1rem;
+}
+
+
+.title {
+    font-size: 1rem;
+    font-weight: 600s;
+}
+
+.bb {
+    height: 100%;
+}
+
+.list {
+    background: teal;
+    width: 100%;
+}
+.container {
+    width: 100%;
+    padding:0;
+}
+
+.container2 {
+    display: flex;
+    flex-wrap: nowrap;
+    /* background: burlywood; */
+
+}
+.side-bar {
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+    border-radius: 0.375rem;
+    margin-right:1.2rem;
+    height: auto;
+}
+.side-bar-div {
+    border-bottom:1px solid #eee;
+    width: 100%;
+    padding-bottom: 0rem;
+}
+.side-bar-div-content {
+    padding:.8rem;
+    padding-bottom:1.6rem;
+}
+.div-button {
+    margin: .3rem .2rem;
+}
+.main-bar {
+    /* background: #eee; */
+}
+.item {
+    flex-grow: 1;
+    flex-basis: 13%;
+    /*는 Flex 아이템의 기본 크기를 설정*/
+    margin: 10px;
+    align-self: center;
+    text-align: center;
+    /* 해당 아이템 정렬*/
+
+}
+
+.title-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+
+.item2 {
+    flex-grow: 1;
+    flex-basis: 62%;
+    /*는 Flex 아이템의 기본 크기를 설정*/
+    margin: 15px 10px;
+    /* background: aliceblue; */
+    align-self: center;
+
+}
+
+.item3 {
+    flex-grow: 1;
+    flex-basis: 25%;
+    /*는 Flex 아이템의 기본 크기를 설정*/
+    margin: 10px;
+    /* background: bisque; */
+    align-self: center;
+    /* 해당 아이템 정렬*/
+}
+
+.cate-item {
+    border: 1px solid #000;
+    border-radius: 2px;
+    padding: 2px 3px;
+    margin: 0 2px;
+
+}
+
+.tag-item {
+    background: lightgray;
+    border-radius: 1px;
+    padding: 2px 3px;
+    margin: 0 2px;
+    color: rgb(58, 53, 53);
+}
+
+.comment {
+    display: flex;
+    flex-direction: row;
+}
+.title {
+    color: blue;
+    font-weight: 600;
+}
+.author {
+    color: #888;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navbar_ { 
+    /* background: #000; */
+    border-top:2px solid #000;
+    background: rgb(174, 172, 172, .2);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment-icon {
+    color:rgb(51, 63, 194);
+    margin-right: 4px;
+}
+
+.view-icon {
+    color: #bbb;
+    margin-right: 4px;
+}
+.download-icon {
+    color: rgb(237, 166, 166);
+    margin-right: 4px;
+}
+
+.result {
+    margin: 1.4rem 0;
+}
+.resultValue { 
+    font-weight: 600;
+    color:rgb(230, 144, 78);
+}
+.no-result {
+    font-weight: 600;
+    font-size: 1.7em;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    /* padding:.3rem 0;
+    border-top: 2px solid rgb(209, 207, 207);
+    border-bottom: 2px solid rgb(209, 207, 207); */
+
+}
+
+.option-tablesize > button {
+    margin-right: 1rem;
+}
+  .example-button-row {
+    font-size: 1rem;
+    height: 100%;
+  }
+
+  .example-button-row .mat-button-base {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+  }
+  
+  .num-select { 
+      width: auto;
+      align-self: center;/*수직축 정렬*/
+  }
+
+  .pagination-bar {
+      margin-top:2.3rem;
+  }
+
+.active-class {
+    background-color: rgb(142, 142, 216);
+    font-weight: 600;
+    color:#fff;
+}
+
+.ngx-pagination {
+    margin-left: 0;
+    margin-bottom: 1rem;
+}
+.ngx-pagination::after,
+.ngx-pagination::before {
+    content: ' ';
+    display: table;
+}
+.ngx-pagination::after {
+    clear: both;
+}
+.ngx-pagination li {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    margin-right: 0.0625rem;
+    border-radius: 0;
+}
+.ngx-pagination li {
+    display: inline-block;
+}
+.ngx-pagination a,
+.ngx-pagination button {
+    color: #0a0a0a;
+    display: block;
+    padding: 0.1875rem 0.625rem;
+    border-radius: 0;
+}
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+    background: #e6e6e6;
+}
+.ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: gold !important;
+    color: #fefefe;
+    cursor: default;
+}
+.ngx-pagination .disabled {
+    padding: 0.1875rem 0.625rem;
+    color: #cacaca;
+    cursor: default;
+}
+.ngx-pagination .disabled:hover {
+    background: transparent;
+}
+.ngx-pagination a,
+.ngx-pagination button {
+    cursor: pointer;
+}
+
+.ngx-pagination .pagination-previous a::before,
+.ngx-pagination .pagination-previous.disabled::before {
+    content: '«';
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-next.disabled::after {
+    content: '»';
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+.ngx-pagination .show-for-sr {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+.ngx-pagination .small-screen {
+    display: none;
+}
+@media screen and (max-width: 601px) {
+    .ngx-pagination.responsive .small-screen {
+        display: inline-block;
+    }
+    .ngx-pagination.responsive li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+        display: none;
+    }
+    .date-search {
+        width: 100%;
+    }
+}
+
+
+.paginator{
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+}
+
+.paginator /deep/ .ngx-pagination .current {
+    background: rgb(131, 131, 131);
+    border-radius: 4px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.paginator /deep/ .ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: #d4d4d4;
+    border-radius: 3px;
+    padding-left: 9px;
+    padding-right: 9px;
+    text-decoration: none;
+}
+
+.paginator /deep/ .ngx-pagination a:focus, .ngx-pagination button:focus {
+    outline: none;
+    background: #d4d4d4;
+}
+
+.datepicker {
+    font-size: .8rem;
+}
+
+.noData-div {
+    margin-top: 1rem;
+}
+.date-search {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.sort-span {
+    margin:0 .5rem;
+    cursor: pointer;
+}
+
+.option-div {
+    width: 100%;
+    height: 15rem;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+
+.custom-slider {
+    font-size:0.8rem;
+}

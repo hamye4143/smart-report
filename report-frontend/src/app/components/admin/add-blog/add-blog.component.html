@@ -1,0 +1,92 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <mat-card flex-gt-sm>
+      <mat-card-title>업로드</mat-card-title>
+
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="title" placeholder="제목">
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="내용" [(ngModel)]="content"></textarea>
+      </mat-form-field>
+
+      <h3>파일 첨부</h3>
+      <div class="file_container" appDnd (fileDropped)="onFileDropped($event)">
+        <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+        <!-- <img src="assets/img/dnd/ic-upload-file.svg" alt=""> -->
+        <div class="color-gray">
+          <mat-icon class="md-48">cloud_upload</mat-icon>
+          <h3>Drag and drop file here</h3>
+          <h3>or</h3>
+        </div>
+        <label for="fileDropRef">
+          <button mat-raised-button color="primary">
+            {{ myFiles[0] ? '파일 추가': '파일 올리기'}}
+          </button>
+        </label>
+      </div>
+      <div class="files-list">
+        <mat-list>
+          <div mat-subheader>첨부파일 ({{myFiles.length}})개</div>
+
+          <button mat-stroked-button [style.visibility]="myFiles[0] ? 'visible' : 'hidden'"
+            (click)="remove_file_all()">모두삭제</button>
+
+
+          <mat-list-item *ngFor="let file of myFiles">
+            <mat-icon mat-list-icon>attach_file</mat-icon>
+            <div mat-line><b>{{file.name}}</b></div>
+            <div mat-line>타입: {{file.type}} </div>
+            <div mat-line>사이즈: {{file.size}} </div>
+            <button mat-icon-button color="warn">
+              <mat-icon (click)="remove_file(file)">delete</mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+
+        </mat-list>
+      </div>
+
+      <!--카테고리 설정 -->
+      <mat-divider></mat-divider>
+
+      <div class="add-blog-additional-categories">
+        <h3>카테고리</h3>
+        <div class="group">
+          <mat-form-field class="category_selector">
+            <mat-label>최근 등록한 카테고리 선택</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="food">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-stroked-button id="create-action" color="basic" class="search">카테고리검색</button>
+        </div>
+
+        <div class="list">
+
+          <app-category-select (category_list)="setCategoryList($event)"></app-category-select>
+
+        </div>
+
+      </div>
+      <mat-divider></mat-divider>
+
+
+      <!--태그 -->
+      <div class="add-blog-additional-tags">
+        <h3>태그</h3>
+        <tag-component></tag-component>
+      </div>
+
+      <div mat-dialog-actions align="end">
+        <button mat-raised-button id="create-action" color="primary"
+          (click)="open_dialog('게시글을 업로드하시겠습니까?')">제출</button>
+      </div>
+    </mat-card>
+
+  </div>
+</div>

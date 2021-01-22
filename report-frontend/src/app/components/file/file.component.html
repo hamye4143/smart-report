@@ -1,0 +1,30 @@
+<!--not used-->
+<div>
+    <div>
+        <ng-container>
+            <input #fileInputs name="files" type="file" id="file" multiple hidden
+                (change)="getFileDetails($event)">
+
+            <button mat-raised-button color="primary" (click)="fileInputs.click()" >
+                {{ myFiles[0] ? 'Add File': 'Upload File'}}
+            </button>
+
+            <button [disabled]="! myFiles[0] " (click)="remove_file_all()">
+                Cancel
+            </button>
+            
+            </ng-container>
+    </div>
+    <!-- <pre>{{myFiles | json}}</pre> -->
+    <div *ngFor="let file of myFiles">
+      <div>
+        *  {{file.name}} - {{file.type}} - {{file.size}}
+        <button mat-icon-button color="warn">
+            <mat-icon class="mat-18" (click)="remove_file(file)">delete</mat-icon>
+        </button>
+      </div> 
+    </div>
+    <button (click)="uploadFiles()">Upload</button>
+
+
+</div>

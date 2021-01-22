@@ -1,0 +1,162 @@
+  .review_card{
+      margin-top:1.5rem;
+  }
+
+  .location_popup_box {
+      display: none;
+      z-index: 12000;
+      background: pink;
+      border : 2px;
+      position: absolute;
+      left:25px;
+      top:20px;
+
+  }
+  .title_img {
+    /* max-width: 198px; */
+    width:12rem;
+    height: 18rem;
+    border: 1px solid #dadada;
+  }
+
+  .chip-list{
+
+  }
+
+.item{
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 16px;
+    position: relative; */
+
+    background: gold;
+
+    
+}
+mat-chip-list{
+    padding-left:16px
+}
+.list{
+    background: grey;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 16px;
+    position: relative;
+
+
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    background: #dadada;
+
+
+  }
+
+  .rounded {
+    border-radius: 3px;
+  }
+
+  .upper_class{
+    
+  }
+
+  .upper_class mat-list-item {
+    display: inline-block;
+
+  }
+.check{
+  background: grey !important;
+}
+.row{
+  background: grey;
+}
+.divider{
+  width: 90%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid rgb(210, 206, 206); */
+  margin: .4rem 0;
+  padding: .4rem;
+}
+
+
+.answer-title {
+  font-weight: 600;
+  color:rgb(136, 131, 131);
+  padding: .4rem 0;
+  font-size: 1rem;
+}
+.line {
+  padding:0 .2rem;
+}
+.row-1 {
+  padding: .1rem 0;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px dashed #bbb;
+  color:rgb(136, 131, 131);
+  font-size: .8rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.row-2 {
+  padding: .8rem 0 1rem 0;
+}
+.row-3 {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-end; */
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: .5rem;
+}
+.row-3 button {
+  margin: 0 .2rem;
+}
+.row-1-1 {
+  display: flex;
+  align-items: center;
+}
+.row-3-1 {
+  font-weight: 500;
+}
+.img-content {
+  max-width: 100%;
+  width: auto;
+  height: 5rem;
+}
+.star-value {
+  margin-top: 1rem;
+
+}
+.upper { 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.download-div {
+  display: flex;
+  width: 100%;
+  align-content: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: .8rem 0 1rem 0;
+  border-bottom: 1px dashed #bbb;
+}

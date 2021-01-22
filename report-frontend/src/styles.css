@@ -1,0 +1,255 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~@circlon/angular-tree-component/css/angular-tree-component.css';
+
+html, body { /* 세로로 컨텐츠를 꽉 채우도록, 컨텐츠에 여백은 0 으로 */
+    /* height: 100%;
+    margin: 0; */
+}
+
+/*new*/
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 10px; /*14px*/
+}
+
+.full-width {
+  width: 100%;
+}
+
+.container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.spinner {
+  left: 49%;
+  position: fixed !important;
+  top: 15%;
+  z-index: 9999;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.login-container {
+  height: 80vh;
+}
+
+.login-actions {
+  margin-left: unset !important;
+}
+
+.mat-list-item,
+.mat-menu-item {
+  font-size: 14px !important;
+}
+
+.command-wrapper button {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.mat-dialog-title {
+  margin: 0 !important;
+}
+
+.mat-column-actions {
+  flex: 0 0 60px;
+}
+
+.mat-table .mat-row:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.mat-table td.mat-cell a:hover {
+  text-decoration: underline;
+}
+
+.mat-table td.mat-cell:first-child,
+.mat-table td.mat-footer-cell:first-child,
+.mat-table th.mat-header-cell:first-child {
+  padding-left: 20px !important;
+}
+
+.mat-table td.mat-cell:last-child,
+.mat-table td.mat-footer-cell:last-child,
+.mat-table th.mat-header-cell:last-child {
+  padding-right: 10px !important;
+}
+
+.mat-table .mat-cell a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.no-records {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.refresh-button {
+  margin-top: 8px !important;
+}
+
+.no-records .mat-icon {
+  width: 130px;
+  height: 130px;
+  font-size: 130px;
+  color: #c7c7c7;
+}
+
+p .mat-icon {
+  vertical-align: middle;
+}
+
+.mat-slide-toggle.full-width {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.mat-tooltip {
+  font-size: 14px;
+}
+
+.fixed-fab {
+  position: fixed !important;
+  right: 2%;
+  bottom: 3%;
+}
+
+/* Highlight on hover */
+.submitted-timesheet-day:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected),
+/* Highlight */
+.submitted-timesheet-day>div:not(.mat-calendar-body-selected) {
+  border-radius: 999px;
+  background-color: rgba(14, 152, 5, 0.25);
+}
+
+.table-wrapper {
+  overflow: auto;
+  height: calc(100vh - 270px);
+  max-height: 450px;
+  /* padding: 10px 5px; */
+}
+
+.animate {
+  animation-name: show;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* 폼 영역 스타일 지정 */
+.mat-form-field {
+  /* width: 100%; */
+}
+
+/* .mat-grid-tile .mat-figure {
+  justify-content: flex-start !important ;
+  align-items: flex-start !important;
+} */
+
+
+
+@media (min-width: 1200px){
+  .container {
+      max-width: 1200px;
+  }
+}
+.mat-drawer-content {
+
+  height: 100vh !important;
+}
+
+mat-sidenav-content  {
+  /* background: #ededeef3; */
+  background: #fff;
+}
+
+
+.apexcharts-xaxistooltip.apexcharts-xaxistooltip-bottom.apexcharts-theme-light {
+  background-color: #536DFE;
+  color: #fff;
+  border: none;
+}
+
+div.apexcharts-xaxistooltip-bottom:after {
+  border-bottom-color: #536DFE;
+}
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+
+/*ng5 slider*/
+.custom-slider {
+  
+}
+.custom-slider .ng5-slider .ng5-slider-bar {
+  background: rgba(63, 81, 181, .4);
+  height: 2px;
+}
+.custom-slider .ng5-slider .ng5-slider-selection {
+  background: #3f51b5;
+}
+.custom-slider .ng5-slider .ng5-slider-pointer {
+  /* width: 8px;
+  height: 16px;
+  top: auto;
+  bottom: 0;
+  background-color: #3f51b5;
+  background: green;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px; */
+  width: 15px;
+  height:15px;
+  top:-6.2px;
+  margin-left:-3px;
+  background-color: #3f51b5;
+}
+.custom-slider .ng5-slider .ng5-slider-pointer:after {
+  display: none;
+}
+.custom-slider .ng5-slider .ng5-slider-bubble {
+  bottom: 14px;
+}
+.custom-slider .ng5-slider .ng5-slider-limit {
+  font-weight: bold;
+  color: gold;
+}
+.custom-slider .ng5-slider .ng5-slider-tick {
+  width: 1px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: rgba(63, 81, 181, .4);;
+  top: -1px;
+}
+.custom-slider .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+  background: gold;
+}
+
+.ng5-slider-inner-tooltip {
+  display: none !important;
+}
+.ng5-slider .ng5-slider-tick-legend {
+  white-space: nowrap !important;
+}

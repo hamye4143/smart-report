@@ -1,0 +1,13 @@
+
+  /* 메뉴의 anchor 태그 스타일 지정 최초는 흰색, 클릭시 회색으로 변경 */
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  a:hover,
+  a:active {
+    color: lightgray;
+  }
+
+

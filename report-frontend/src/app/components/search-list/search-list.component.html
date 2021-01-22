@@ -1,0 +1,159 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div class="side-bar">
+        <div class="side-bar-div">
+            <div class="side-bar-div-content">
+                <h6>검색조건</h6>
+                <!-- <ng5-slider [(value)]="counterValue" [options]="options"></ng5-slider> -->
+                <div class="custom-slider">
+                    <ng5-slider [(value)]="testValue.value" [options]="options"></ng5-slider>
+                </div>
+                <div class="custom-slider">
+                    <ng5-slider [(value)]="testValue.value3" [options]="options3"></ng5-slider>
+                </div>
+                <div class="custom-slider">
+                    <ng5-slider [(value)]="testValue.value4" [options]="options4"></ng5-slider>
+                </div>
+                <div class="custom-slider">
+                    <ng5-slider [(value)]="testValue.value5" [options]="options5"></ng5-slider>
+                </div>                
+            </div>
+
+            <div class="div-button" mat-dialog-actions align="end">
+                <button mat-raised-button id="create-action" color="primary"
+                    (click)="childReference.test_()">적용</button>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <div fxFlex="100%" class="main-bar">
+        <app-search-bar (searchEvent)="searchEvent($event)" [keyword]="keyword" [i]="i"></app-search-bar>
+
+        <div class="result">
+            <span class="resultValue">{{keyword}}</span>에 대한 검색 결과
+            <b>{{totalLength}}</b>건
+        </div>
+
+        <section>
+            <div class="example-button-row">
+                <button mat-button color="primary" class="button" *ngFor="let item of sortList"
+                    (click)="sortByfunc(item.index)"
+                    [ngClass]="{'active-class': sortBy == item.index }">{{item.value}}</button>
+            </div>
+
+            <div class="option-tablesize">
+                <button mat-stroked-button (click)="optionClick()">옵션 설정</button>
+
+                <!-- <div class="date-search">
+                    <mat-form-field appearance="outline" class="datepicker">
+                        <mat-label>날짜 검색</mat-label>
+                        <input matInput [matDatepicker]="picker" (dateInput)="addEvent($event.target.value, $event)">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div> -->
+
+
+                <select (change)="onTableSizeChange($event)" class="custom-select num-select">
+                    <option *ngFor="let size of tableSizes" [ngValue]="size">
+                        {{ size }}
+                    </option>
+                </select>
+            </div>
+
+        </section>
+
+        <app-search-list-option #child *ngIf="isSearchOption" (result)="searchListOption($event)" [keyword]="keyword"
+            [page]="page" [sortBy]="sortBy" [row]="row" [i]="i"  [(test)]="testValue"></app-search-list-option>
+            sendData:{{counterValue}}
+
+            test: {{testValue|json}}
+            
+            <!-- <button (click)="decrement()">-</button>
+            <button (click)="increment()">+</button> -->
+
+        <div *ngIf="count == 0" class="no-result">
+            <span class="resultValue">{{keyword}}</span>에 대한 결과가 없습니다.
+        </div>
+        <div *ngIf="count > 0">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div *ngFor="let file of searchedFiles | paginate: {
+            itemsPerPage: tableSize,
+            currentPage: currentPage,
+            totalItems: totalLength};
+            let i = index" [class.active]="i == currentIndex">
+            <div class="container2">
+                <div class="item">
+                    <img src="./assets/article.svg" alt="image" class="title-image" layout-fill="layout-fill"
+                        [routerLink]="['/blog',file.blog_id]">
+                </div>
+                <div class="item2">
+                    <div class="categories">
+                        <!--
+                            <span class="cate-item" *ngFor="let item of file.categories| keyvalue">
+                                {{ item.value }}
+                            </span>                                
+                            -->
+                        <span class="cate-item" *ngFor="let item of file.categories">
+                            {{ item.code_name }}
+                        </span>
+                    </div>
+                    <div class="title" [routerLink]="['/blog',file.blog_id]">{{file.origin_name}}</div>
+                    <div class="content">{{file.blogData.content}}</div>
+                    <div class="author">{{file.authorName}}
+                        |
+                        {{file.blogData.created_at | date:'y년 M월 d일'}}</div>
+                    <div class="author">{{file.type}}
+                        타입</div>
+                    <div class="tags">
+                        <span class="tag-item" *ngFor="let tag of file.tags">#{{tag.name}}</span>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="star">
+                        <app-star [blog_id]="file.blog_id" [isblogdetailsPage]=false></app-star>
+                    </div>
+
+                    <div class="comment">
+                        <mat-icon class="comment-icon">comment</mat-icon>
+                        <span class="comment-item">댓글
+                            <b>{{file.comments.length}}</b>개</span>
+                    </div>
+                    <div class="comment">
+                        <mat-icon class="view-icon">remove_red_eye</mat-icon>
+                        <span class="comment-item">조회수
+                            <b>{{file.blogData.view_count}}</b>회</span>
+                    </div>
+                    <div class="comment">
+                        <mat-icon class="download-icon">cloud_download</mat-icon>
+                        <span class="comment-item">다운로드수
+                            <b>{{file.download_cnt}}</b>회</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="noData-div" *ngIf="noData">데이터가 없습니다.</div>
+
+        <div class="d-flex justify-content-center pagination-bar">
+            <pagination-controls class="pagination-content" responsive="true" previousLabel="이전" nextLabel="다음"
+                (pageChange)="pageChange($event)">
+            </pagination-controls>
+        </div>
+    </div>
+</div>

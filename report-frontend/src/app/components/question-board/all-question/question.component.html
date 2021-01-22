@@ -1,0 +1,124 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+        <!-- <button mat-raised-button color="primary" class="add-contact" routerLink="['/admin/add-blog']">글쓰기</button> -->
+
+        <mat-card class="card">
+            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                <div class="card-title">
+                    <div>문의사항</div>
+                    <!-- <div>
+                    <mat-form-field>
+                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field>
+                    </div> -->
+                    <button mat-raised-button color="primary" [routerLink]="['/question/add-question']">
+                        글쓰기
+                    </button>
+                </div>
+            </mat-card-title>
+            <mat-card-content>
+                <div class="container">
+
+                <!--검색창-->
+                    <!-- <div class="filter_form">
+                        <div class="filter_group">
+                            <mat-form-field>
+                                <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                        </div>
+                    </div> -->
+                    <div>
+                        <mat-form-field appearance="outline" class='search-bar full-width'>
+                            <mat-label>검색창</mat-label>
+                            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="검색어를 입력하세요.">
+                        </mat-form-field>
+                    </div>
+
+                    <table mat-table [dataSource]="dataSource" matSort matSortStart="desc">
+
+                        <!-- index Column -->
+                        <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element; let i = index; ">{{i+1}}</td>
+                        </ng-container>
+
+                        <!-- title Column -->
+                        <ng-container matColumnDef="title">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 제목 </th>
+                            <td mat-cell *matCellDef="let element" [routerLink]="['/question', element.id]"> {{element?.title}} </td>
+                        </ng-container>
+
+                        <!-- created_at Column -->
+                        <ng-container matColumnDef="created_at">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> 날짜 </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.created_at | date:'y/M/d'}} </td>
+                        </ng-container>
+
+                        <!-- user Column -->
+                        <ng-container matColumnDef="user">
+                            <th mat-header-cell *matHeaderCellDef> 작성자 </th>
+                            <td mat-cell *matCellDef="let element"> {{element?.author.name}} </td>
+                        </ng-container>
+
+                        <!-- details Column -->
+                        <!-- <ng-container matColumnDef="details">
+                            <th mat-header-cell *matHeaderCellDef> 보기 </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button color="primary" [routerLink]="['/question', element.id]">
+                                    <mat-icon class="mat-18">reorder</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container> -->
+
+                        <!-- 작성자 회원번호와, 로그인한 사람의 회원번호가 같고, 로그인한 상태여야 수정, 삭제 -->
+                        <!-- <ng-container matColumnDef="update">
+                            <th mat-header-cell *matHeaderCellDef> 수정 </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button color="accent" [routerLink]="['/admin/update-blog', element.id]"
+                                    [disabled]="!(auth_service.is_logged_in() && loginUser?.id == element?.author.id)">
+                                    <mat-icon class="mat-18">edit</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="delete">
+                            <th mat-header-cell *matHeaderCellDef> 삭제 </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button color="warn"
+                                    (click)="open_dialog('Are you sure you want to delete this blog?', element.id)"
+                                    [disabled]="! (auth_service.is_logged_in() && loginUser?.id == element?.author.id)">
+                                    <mat-icon class="mat-18">delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container> -->
+                        
+                        <!--조회수-->
+                        <ng-container matColumnDef="viewCount">
+                            <th mat-header-cell *matHeaderCellDef> 조회수 </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{element.viewCount}}
+                            </td>
+                        </ng-container>
+
+                        <!--상태-->
+                        <ng-container matColumnDef="state">
+                            <th mat-header-cell *matHeaderCellDef>상태</th>
+                            <td mat-cell *matCellDef="let element">
+
+                                <button mat-flat-button disabled *ngIf="element.state == 1 ">답변대기</button>
+                                <button mat-flat-button color="warn" *ngIf="element.state == 3 ">답변완료</button>
+                                <button mat-flat-button disabled *ngIf="element.state == 2 ">답변 {{element.answerCounts}}</button>
+
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSize]="6" [pageSizeOptions]="[2,4,6,10,20]" showFirstLastButtons>
+                    </mat-paginator>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

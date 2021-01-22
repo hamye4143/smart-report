@@ -1,0 +1,39 @@
+<div class="all-blogs-container">
+    <!--검색창-->
+    <mat-form-field>
+        <input [(ngModel)]="search" matInput placeholder="검색창" >
+        <!-- <button  mat-icon-button matSuffix (click)="search()" >
+            <mat-icon>search</mat-icon>
+        </button> -->
+        <button mat-icon-button matSuffix id="search-action" (click)="search_blogs()">
+            <mat-icon>search</mat-icon>
+        </button>
+
+    </mat-form-field>
+
+    <div class="blog-container" *ngFor="let blog of blogs">
+        <div class="blog-container-image">
+            <img [src]="blog.feature_image" alt="Cover-image">
+        </div>
+        <div class="blog-container-details">
+            <h3>{{blog.title}}</h3>
+        </div>
+        <!--여기는 작성자 회원번호와, 로그인한 사람의 회원번호가 같고, 로그인한 상태여야 보여줌 -->
+        <div class="blog-container-actions" *ngIf ="auth_service.is_logged_in() && loginUser?.id == blog?.author.id">    <!--&& loginUser?.id == blog?.author.id-->
+            <button id="delete-action" mat-fab color="primary" aria-label="delete icon" (click)="open_dialog('게시글을 삭제하시겠습니까?', blog.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button id="edit-action" mat-fab aria-label="edit icon" [routerLink]="['/admin/update-blog', blog.id]" >
+            <mat-icon>edit</mat-icon>
+            </button>
+            <!-- <button mat-raised-button id="edit-action" [routerLink]="['/admin/update-blog', blog.id]" ><mat-icon>edit</mat-icon>Edit</button> -->
+            <!-- <button mat-raised-button id="delete-action" (click)="open_dialog('Are you sure you want to delete this blog?', blog.id)"><mat-icon>delete</mat-icon>Delete</button> -->
+        </div>
+    </div>
+</div>
+
+
+<mat-progress-spinner class="progress-spinner" mode="indeterminate" *ngIf="show_spinner"></mat-progress-spinner>
+
+
+

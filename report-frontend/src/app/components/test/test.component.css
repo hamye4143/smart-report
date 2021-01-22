@@ -1,0 +1,131 @@
+.size {
+    font-size: 1rem;
+    width: 50%;
+}
+
+.wrap { 
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.custom-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.example-tree {
+    flex-basis: 50%;
+}
+.example-tree-value {
+    height: 100%;
+    flex-basis: 50%;
+}
+.children-count {
+    color: #bbb;
+    margin-left: .3rem;
+}
+
+@media(max-width: 800px) {  /*768이하일때*/
+
+    .example-tree-value{ /*내려가게*/
+        display: block;
+        width: 100%;
+        flex-basis: 100%;
+    }
+    .filter-bar {
+        width: 100%;
+    }
+    .example-tree{
+        display: block;
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+}
+
+
+.node-content-wrapper, .tree-children {
+    position: relative;
+  }
+  
+  .node-content-wrapper::before, .tree-children::after {
+    content: "";
+    position: absolute;
+  }
+  
+  .node-content-wrapper::before {
+    border-bottom: 1px solid lightgrey;
+    border-left: 1px solid lightgrey;
+    height: 28px;
+    top: -17px;
+    width: 20px;
+    left: -28px;
+  }
+  
+  .tree-node-level-1 > tree-node-wrapper > .node-wrapper > .node-content-wrapper::before {
+    display: none;
+  }
+  
+  .tree-node-leaf > .node-wrapper > .node-content-wrapper::before {
+    width: 25px;
+  }
+  
+  .tree-children::after {
+    border-left: 1px solid lightgrey;
+    height: 100%;
+    top: -15px;
+    left: -15px;
+  }
+  
+  tree-node:last-child > .tree-node > .tree-children::after {
+    border-left: none;
+  }
+  
+  .toggle-children {
+    z-index: 1;
+  }
+
+  .filter-filed {
+      padding:0;
+      flex-basis: 40%;
+      font-size: 0.813rem;
+  }
+  .filter-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .filter-bar {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    align-items: center;
+    justify-content: space-between;
+    margin: .8rem 0;
+  }
+  .category-btn {
+      margin: 1rem .4rem;
+  }
+
+  .category-btn-div {
+      text-align: center;
+
+  }
+
+  ::ng-deep .mat-form-field-wrapper{
+    margin-bottom : 0;
+    padding : 0;
+ }
+
+ .tree {
+   text-align: center;
+   align-self: center;
+   
+ }
+
+ .locked { 
+   color:#bbb;
+ }

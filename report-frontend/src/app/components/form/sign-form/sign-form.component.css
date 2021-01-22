@@ -1,0 +1,21 @@
+
+ .form {
+     width: 100%;
+	 font-size: 1rem;
+}
+ .form__input {
+	 width: 100%;
+	 /* margin-top: -15px; */
+}
+ .form-actions {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 margin-top: 5px;
+}
+ .form-actions__create {
+	 margin: 0;
+	 width: 95%;
+	 box-shadow: 0 0 11px 0 #fff, 0 0 0 -2px #bbb, 0 1px 8px 0 #bbb;
+}
+ 

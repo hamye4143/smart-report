@@ -1,0 +1,30 @@
+
+.content {
+    /* background: green; */
+    width: 100%;
+    height: auto;
+
+    /* display: flex;
+    width: 100%;  
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch; */
+
+}
+
+.slider-div {
+    display: inline-block;
+    margin: 2rem 1%;
+    /* background: gold; */
+    width: 30%;
+
+}
+.div-button {
+    margin-top: 3rem;
+}
+
+.label {
+    font-weight: 600;
+}
+

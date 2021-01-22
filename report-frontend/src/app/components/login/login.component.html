@@ -1,0 +1,30 @@
+
+<div class="auth-page">
+  <div class="auth-page__content-block">
+    <div class="auth-page__content-wrapper">
+      <mat-tab-group class="auth-page__group">
+        <mat-tab label="Login">
+          <h4 class="auth-page__group-title">Welcome!</h4>
+          <p class="auth-page__group-sub-title">로그인</p>
+          <!--child의 sendLoginForm 가 output 하면 여기의 sendLoginForm 에서 받음 -->
+          <app-login-form (sendLoginForm)="sendLoginForm($event)"></app-login-form>
+        </mat-tab>
+        <mat-tab label="New User">
+          <h4 class="auth-page__group-title">Welcome!</h4>
+          <p class="auth-page__group-sub-title">회원 계정 생성</p>
+
+          <app-sign-form (sendSignForm)="sendSignForm($event)"></app-sign-form>
+        </mat-tab>
+      </mat-tab-group>
+
+      <p class="auth-page__footer-title">© 2014-{{todayDate}} Flatlogic, LLC. All rights reserved.</p>
+    </div>
+  </div>
+  <div class="auth-page__logo">
+    <div class="auth-page__logo-wrapper">
+      <img class="auth-page__logo-img" src="./assets/logo.svg" alt="logo">
+      <h6 class="auth-page__logo-title">Admin</h6>
+    </div>
+  </div>
+</div>
+

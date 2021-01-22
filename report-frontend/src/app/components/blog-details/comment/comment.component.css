@@ -1,0 +1,42 @@
+.inline{
+    display: inline-block;
+}
+
+.user-img {
+    width: 1.5rem;
+    margin-right:.3rem;
+}
+.time-icon {
+    margin: 0 -.6rem 0 1rem;
+
+}
+.gray {
+    line-height: 1.5rem;
+    font-size: .8rem;
+    color:rgb(167, 162, 162);
+}
+.comment_comment{
+    background-color: rgb(167, 162, 162);
+}
+.add_comment {
+    margin-bottom:1rem;
+}
+.editComment{
+    display: none;
+    /* border: 1px dashed rgb(225, 225, 225); */
+    background-color: rgb(245, 245, 245);
+    padding:.5rem 1rem;
+    border-radius: 4px;
+}
+
+.viewComment {
+    padding:1rem;
+}
+.upper-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.content {
+    margin-left: 1rem;
+}

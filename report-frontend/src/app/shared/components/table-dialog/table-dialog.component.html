@@ -1,0 +1,94 @@
+<!-- <h1 mat-dialog-title>Dialog with elements</h1>
+<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div> -->
+
+
+
+
+  <table mat-table class="full-width" [dataSource]="dataSource" matSort matSortStart="desc" >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox 
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+        (change)="$event ? selection.toggle(row) : null;  custom_toggle(row)"
+        [checked]="selection.isSelected(row)"
+        [aria-label]="checkboxLabel(row)">
+</mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef > No. </th>
+      <td mat-cell *matCellDef="let element; let i = index; ">{{i+1}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 제목 </th>
+      <td mat-cell *matCellDef="let element"> {{element?.title}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="content">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 내용 </th>
+      <td mat-cell *matCellDef="let element"> <p [innerHTML]="element?.content | sanitizeHTML "></p> </td>
+    </ng-container>
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 날짜 </th>
+        <td mat-cell *matCellDef="let element"> {{element?.created_at | date:'y년 M월 d일'}} </td>
+    </ng-container>              
+
+    <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef> 글쓴이 </th>
+        <td mat-cell *matCellDef="let element"> {{element.author.name}} </td>
+    </ng-container>         
+
+    <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef> 보기 </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" [routerLink]="['/blog', element.id]">
+                <mat-icon class="mat-18">reorder</mat-icon>
+            </button>
+        </td>
+    </ng-container>   
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="6" [pageSizeOptions]="[2,4,6,10,20]" showFirstLastButtons></mat-paginator>
+  
+  
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="onNoClick()">취소</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>선택</button>
+  </div>
+
+
+<!-- <div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+      <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput type="time" atp-time-picker [(ngModel)]="data.date1">
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput type="time" atp-time-picker [(ngModel)]="data.date2">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div> -->

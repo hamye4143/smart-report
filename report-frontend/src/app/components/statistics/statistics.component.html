@@ -1,0 +1,115 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="100%">
+        <div class="top-ten">
+            <div class="title">{{currentDate | date:'yyyy년 MM월 dd일'}}</div>
+            <div class="select-div">
+                <mat-select class="chart-select" [(ngModel)]="selectedMatSelectValue"
+                    (selectionChange)="selectedValue($event)">
+                    <mat-option [value]="matSelectFields.weekly">주간</mat-option>
+                    <mat-option [value]="matSelectFields.monthly">월간</mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+        <h4> 이번주/이번달 다운로드순 레포트 TOP 10</h4>
+        <div class="container">
+
+            <carousel *ngIf="data" [cellsToScroll]="3" objectFit="contain" [height]="350">
+                <div class="carousel-cell" *ngFor="let item of dataLengthList">
+                    <div class="card box-shadow" [routerLink]="['/blog/', data[item][0].id]">
+                        <div class="img-div">
+                            <img class="card-img-top" src="./assets/article.svg" alt="Card image cap">
+                        </div>
+                        <span class="img-name">{{data[item][1]?.origin_name}}</span>
+                        <div class="card-body">
+                            <h5 class="card-title">{{data[item][0]?.title}}</h5>
+                            <p class="card-text">{{data[item][0]?.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </carousel>
+        </div>
+
+        <!-- 이거안됨 -->
+        <!-- <carousel [cellsToScroll]="3" objectFit="contain" [height]="350">
+                <div class="carousel-cell" *ngFor="let dt of data">
+                    <div class="card box-shadow" [routerLink]="['/blog/', dt[0].id]">
+                        <div class="img-div">
+                            <img class="card-img-top" src="./assets/article.svg" alt="Card image cap">
+                        </div>
+                        <span class="img-name">{{dt[1]?.origin_name}}</span>
+                        <div class="card-body">
+                            <h5 class="card-title">{{dt[0]?.title}}</h5>
+                            <p class="card-text">{{dt[0]?.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </carousel> -->
+
+
+
+
+
+
+        <div class="charts-content__charts-wrapper">
+            <mat-card class="visits-chart charts-content__chart-item">
+                <mat-card-title class="visits-chart__header">
+                    <h5 class="visits-chart__title">오늘 접속자수</h5>
+                </mat-card-title>
+
+                <mat-card-content class="visits-chart__content">
+                    <div class="visits-chart__content-info">
+                        <h6 class="visits-chart__content-info-title">{{todayVisitors}}명</h6>
+                        <ngx-trend class="visits-chart__content-info-chart" autoDraw="true" autoDrawDuration="3000"
+                            autoDrawEasing="ease-out" smooth="true" [data]="[0,2,5,9,5,10,3,5,0,0,1,8,2,9,0]"
+                            [gradient]="['#2196F3']" radius="6.6" strokeWidth="5" strokeLinecap="round"></ngx-trend>
+                    </div>
+
+                    <div class="visits-chart__content-stats">
+                        <div>
+                            <p class="visits-chart__content-stats-title">Registration</p>
+                            <p class="visits-chart__content-stats-data">{{totalregisterCounts}}</p>
+                        </div>
+
+                        <div>
+                            <p class="visits-chart__content-stats-title">Sign Out</p>
+                            <p class="visits-chart__content-stats-data">{{logoutCounts}}</p>
+                        </div>
+
+                        <div>
+                            <p class="visits-chart__content-stats-title">NEW</p>
+                            <p class="visits-chart__content-stats-data">
+                                <span class="plus">+</span>{{newregisterCounts}}</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+
+
+
+
+            <mat-card class="charts-content__chart-item">
+                <mat-card-title>
+                    <p>오늘 검색어 키워드 TOP5</p>
+                </mat-card-title>
+                <app-pie-chart [pieChartData]="pieChartData$"></app-pie-chart>
+
+            </mat-card>
+
+        </div>
+
+
+        <div class="charts-content__charts-wrapper">
+            <mat-card class="charts-content__chart-item">
+                <mat-card-title>
+                    <p>일주일 접속자 수</p>
+                </mat-card-title>
+                <app-line-chart (todayVisitors)="todayVisitors($event)" [LineChartData]="LineChartData$">
+                </app-line-chart>
+
+            </mat-card>
+        </div>
+
+    </div>
+</div>

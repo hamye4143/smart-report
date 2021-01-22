@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>별점 주기</h1>
+
+<mat-dialog-content align="center">
+    <ul class="list-inline rating-list" 
+        *ngFor="let star of stars">
+            <li (click)="countStar(star)"
+                [ngClass]="{'selected': (star <= selectedValue)}">
+            <mat-icon>star</mat-icon>
+            </li> 
+    </ul>
+</mat-dialog-content>
+    
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" mat-dialog-close>취소</button>
+    <button mat-raised-button color="accent" (click)="onConfirmClick()">{{value}}</button>
+</mat-dialog-actions>

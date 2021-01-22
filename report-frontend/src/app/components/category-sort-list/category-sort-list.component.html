@@ -1,0 +1,92 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+    <div fxFlex="100%">
+        <app-search-bar (searchEvent)="searchEvent($event)" [keyword]="keyword" [i]="'all'"></app-search-bar>
+        <!-- 카테고리 -->
+
+
+        <section>
+            <div>
+                <span *ngFor="let cate of categroySortList">
+                    <button mat-stroked-button="mat-stroked-button">
+                        {{cate}}
+                    </button>
+                    <mat-icon class="arrow-right-icon">keyboard_arrow_right</mat-icon>
+                </span>
+            </div>
+
+            <select (change)="onTableSizeChange($event)" class="custom-select num-select">
+                <option *ngFor="let size of tableSizes" [ngValue]="size">
+                    {{ size }}
+                </option>
+            </select>
+        </section>
+
+        <!--카테고리 결과-->
+
+        <mat-divider></mat-divider>
+
+        <div *ngFor="let file of searchedFiles | paginate: {
+                itemsPerPage: tableSize,
+                currentPage: currentPage,
+                totalItems: totalLength};
+                let i = index" [class.active]="i == currentIndex">
+            <div class="container2">
+                <div class="item">
+                    <img src="./assets/article.svg" alt="image" class="title-image" layout-fill="layout-fill"
+                        [routerLink]="['/blog',file.blog_id]">
+
+                </div>
+
+                <div class="item2">
+                    <div class="categories">
+                        <span class="cate-item" *ngFor="let item of file.categories">
+                            {{ item.code_name }}
+                        </span>
+                    </div>
+                    <div class="title" [routerLink]="['/blog',file.blog_id]">{{file.origin_name}}</div>
+                    <div class="content">{{file.blogData.content}}</div>
+                    <div class="author">{{file.authorName}}
+                        |
+                        {{file.blogData.created_at | date:'y년 M월 d일'}}</div>
+                    <div class="author">{{file.type}}
+                        타입</div>
+                    <div class="tags">
+                        <span class="tag-item" *ngFor="let tag of file.tags">#{{tag.name}}</span>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="star">
+                        <app-star [blog_id]="file.blog_id"></app-star>
+                    </div>
+
+                    <div class="comment">
+                        <mat-icon class="comment-icon">comment</mat-icon>
+                        <span class="comment-item">댓글
+                            <b>{{file.comments.length}}</b>개</span>
+                    </div>
+                    <div class="comment">
+                        <mat-icon class="view-icon">remove_red_eye</mat-icon>
+                        <span class="comment-item">조회수
+                            <b>{{file.blogData.view_count}}</b>회</span>
+                    </div>
+                    <div class="comment">
+                        <mat-icon class="download-icon">cloud_download</mat-icon>
+                        <span class="comment-item">다운로드수
+                            <b>{{file.download_cnt}}</b>회</span>
+                    </div>
+
+                </div>
+
+            </div>
+            <mat-divider></mat-divider>
+
+        </div>
+        <div class="d-flex justify-content-center pagination-bar">
+            <pagination-controls class="pagination-content" responsive="true" previousLabel="이전" nextLabel="다음"
+                (pageChange)="pageChange($event)">
+            </pagination-controls>
+        </div>
+
+    </div>
+</div>

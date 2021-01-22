@@ -1,0 +1,23 @@
+<form class="form" [formGroup]="signInForm" (ngSubmit)="login()">
+    <mat-form-field class="full-width form__input">
+        <input type="text" matInput placeholder="Email" formControlName="id">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="form__input">
+        <input type="password" matInput placeholder="Password" formControlName="password"
+            [type]="hide? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide" type="button">
+            <mat-icon>{{hide? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <br>
+    <div class="full-width">
+        <mat-slide-toggle formControlName="rememberMe">Id 기억하기</mat-slide-toggle>
+    </div>
+
+    <div class="form-actions">
+        <button class="form-actions__login" type="submit" mat-raised-button color="primary"
+            [disabled]="!signInForm.valid">로그인</button>
+    </div>
+</form>

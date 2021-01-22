@@ -1,0 +1,147 @@
+<!-- 
+<div class="update-blog-container">
+    <div class="update-blog-main-form">
+        <div class="update-blog-input-title">
+            <mat-form-field>
+                <input matInput type="text" [(ngModel)]="blog_props.title" placeholder="Title of the blog">
+            </mat-form-field>
+        </div>
+        <div class="update-blog-input-content">
+            <ejs-richtexteditor [(value)]="blog_props.content" height="auto"></ejs-richtexteditor>
+        </div>
+    </div>
+    <div class="update-blog-additional-form">
+        <div class="update-blog-additional-feature-image">
+            <h3>Feature Image</h3>
+            <input #imageInput
+                type="file"
+                accept="image/*"
+                hidden
+                (change)="processFile(imageInput)">
+            <img class="feature-image" [src]="blog_props.feature_image">
+            <button mat-raised-button color="primary" (click)="imageInput.click()" >
+                Change Image
+            </button>
+        </div>
+        <div class="update-blog-additional-tags">
+            <h3>Tags</h3>
+                <tag-component [tags_data]="blog_props.tags" [test] = "test" ></tag-component> 
+        </div>
+        <div class="update-blog-additional-actions">
+            <button mat-raised-button id="update-action" (click)="open_dialog('게시글을 수정하시겠습니까?')">Update</button>
+        </div>
+    </div>
+</div>
+
+<mat-spinner *ngIf="show_spinner" class="progress-spinner" [diameter]="50"></mat-spinner>
+ -->
+
+
+
+        
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+          <mat-card flex-gt-sm>
+              <mat-card-title>업로드</mat-card-title>
+                  <mat-form-field>
+                    <input matInput type="text" [(ngModel)]="blog_props.title" placeholder="제목">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <textarea matInput placeholder="내용" [(ngModel)]="blog_props.content"></textarea>
+                  </mat-form-field>
+
+                  <h3>파일 첨부</h3>
+                  <div class="file_container" appDnd (fileDropped)="onFileDropped($event)">
+                    <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+                    <!-- <img src="assets/img/dnd/ic-upload-file.svg" alt=""> -->
+                    <div class="color-gray">
+                      <mat-icon class="md-48">cloud_upload</mat-icon>
+                      <h3>Drag and drop file here</h3>
+                      <h3>or</h3>
+                    </div>
+                    <label for="fileDropRef">
+                      <button mat-raised-button color="primary" >
+                        {{ myFiles[0] ? '파일 추가': '파일 올리기'}}
+                     </button>
+                    </label>
+                  </div>
+                  <div class="files-list">
+                    <mat-list>
+                      <div mat-subheader>첨부파일 ({{myFiles.length}})개</div>
+    
+                      <button mat-stroked-button [style.visibility]="myFiles[0] || prevFiles[0] ? 'visible' : 'hidden'" (click)="remove_file_all()">모두삭제</button>
+                        
+                    <!--기존-->
+                    <mat-list-item *ngFor="let file of prevFiles">
+                        <mat-icon mat-list-icon>attach_file</mat-icon>
+                        <div mat-line><b>{{file.origin_name}}</b></div>
+                        <div mat-line>타입: {{file.type}} </div>
+                        <div mat-line>사이즈: {{file.size}} </div>
+                        <button mat-icon-button color="warn">
+                          <mat-icon (click)="remove_file_prev(file)">delete</mat-icon>
+                        </button>
+                        <mat-divider></mat-divider>
+                      </mat-list-item>
+                    <!--신규-->
+                      <mat-list-item *ngFor="let file of myFiles">
+                        <mat-icon mat-list-icon>attach_file</mat-icon>
+                        <div mat-line><b>{{file.name}}</b></div>
+                        <div mat-line>타입: {{file.type}} </div>
+                        <div mat-line>사이즈: {{file.size}} </div>
+                        <button mat-icon-button color="warn">
+                          <mat-icon (click)="remove_file(file)">delete</mat-icon>
+                        </button>
+                        <mat-divider></mat-divider>
+                      </mat-list-item>
+                  
+                    </mat-list>
+                  </div>
+
+                  <mat-divider></mat-divider>
+
+                  <div class="update-blog-additional-categories">
+                    <h3>카테고리</h3>
+                    <div class="group">
+                      <mat-form-field class="category_selector">
+                        <mat-label>최근 등록한 카테고리 선택</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="food">
+                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <button mat-stroked-button id="create-action" color="basic" class="search">카테고리검색</button>
+                    </div>
+                    
+                    <div class="list">
+    
+                      <app-category-select (category_list)="setCategoryList($event)" [updateCategory]="blog_props.category"></app-category-select>
+    
+    
+                    </div>
+                 
+                      <!-- <mat-chip-list class="chips_list" aria-label="Fish selection" *ngFor="let item of category_list">
+                        <mat-chip>{{item}}<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon></mat-chip>
+    
+                      </mat-chip-list> -->
+                      
+    
+    
+                  </div>
+
+                  <mat-divider></mat-divider>
+
+                <div class="update-blog-additional-tags">
+                    <h3>태그</h3>
+                    <tag-component [tags_data]="blog_props.tags" [test]="test"></tag-component>
+                </div>
+               
+              <div mat-dialog-actions align="end">
+                  <button mat-raised-button id="create-action" color="primary" (click)="open_dialog('게시글을 수정하시겠습니까?')">수정</button>
+              </div>
+
+            </mat-card>
+  
+    </div>
+  </div>
+  

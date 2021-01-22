@@ -1,0 +1,20 @@
+
+<mat-selection-list #shoes [multiple]="false" [(ngModel)]="selectedOptions" (selectionChange)="onSelection($event, shoes.selectedOptions)" *ngFor="let item of TotalCategory;let i = index">
+  <mat-label *ngIf="item[0]"><b>{{i+1}}차 분류</b></mat-label>
+  <mat-list-option *ngFor="let shoe of item" [value]="shoe"><!--대분류-->
+    {{shoe.Name}}
+  </mat-list-option> 
+  
+</mat-selection-list>
+
+<mat-list>
+<div mat-subheader>카테고리 리스트</div>
+
+<mat-chip-list class="mat-chip-list" aria-label="category selection">
+<mat-chip *ngFor="let chip of chipsList" selected>
+  {{chip.code_name || chip.Name}}
+</mat-chip>
+
+</mat-chip-list>
+
+</mat-list>

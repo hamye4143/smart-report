@@ -1,0 +1,7 @@
+<mat-list role="list">
+    <mat-list-item *ngFor="let file of download_files" role="listitem">
+        <span>{{file.download_time|date:'y년 M월 d일'}}</span>
+        <span>{{file.origin_name}}</span>
+        <span>{{file.cnt}}회</span>
+    </mat-list-item><!--mat-list-option-->
+</mat-list>

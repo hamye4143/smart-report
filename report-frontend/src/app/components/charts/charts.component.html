@@ -1,0 +1,38 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+    <div fxFlex="100%">
+
+        <app-search-bar (searchEvent)="searchEvent($event)"></app-search-bar>
+        <!--메인 슬라이드 바-->
+
+
+        <!--메인 -->
+        <div *ngFor="let category of [1,2,3]; let i = index">
+            <div class="title">{{i+1}}</div>
+            <div class="description">{{category[0].description}}</div>
+            <div>
+                <!--4개 초과일때, 다음페이지로 -->
+                <div class="container">
+                <carousel [cellsToScroll]="3" objectFit="contain" [height]="350">
+                    <div class="carousel-cell" *ngFor="let blog of data">
+                            <div class="card carousel-in" [routerLink]="['/blog/',blog.id]">
+                                <img class="card-img-top" src="./assets/no_image.png" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{blog.blog.title}}</h5>
+                                    <p class="card-text">{{blog.blog.content}}</p>
+                                </div>
+    
+                            </div>
+                            <!-- <div>
+                                <img src="./assets/no_image.png">
+                                <div>{{blog.blog.title}}</div>
+                                <div>{{blog.blog.content}}</div>
+                            </div> -->
+                    </div>
+                </carousel>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

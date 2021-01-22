@@ -1,0 +1,28 @@
+<div mat-dialog-content="mat-dialog-content">
+    <mat-form-field>
+        <input matInput="matInput" placeholder="카테고리 이름" [(ngModel)]="data.Name"></mat-form-field>
+        <mat-form-field>
+            <textarea
+                matInput="matInput"
+                rows="4"
+                placeholder="카테고리 설명"
+                [(ngModel)]="data.Description"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions="mat-dialog-actions">
+        <button
+            mat-button="mat-button"
+            color="warn"
+            (click)="onNoClick()"
+            style="position: relative;right: 15px;">
+            취소
+        </button>
+        <button
+            mat-stroked-button="mat-stroked-button"
+            color="primary"
+            [disabled]="!(data.Name || data.Description)"
+            [mat-dialog-close]="{nodeName: data.Name, nodeDescription: data.Description}"
+            style="position: relative;left: 20px;">
+            {{data.Component}}
+        </button>
+    </div>
