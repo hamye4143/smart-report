@@ -86,6 +86,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
+import { RedirectComponent } from './components/redirect/redirect.component';
 
 
 @NgModule({
@@ -153,11 +154,10 @@ import { environment } from '../environments/environment';
     SuccessToastrComponent,
     InfoToastrComponent,
     SearchListOptionComponent,
-    
-
+    RedirectComponent
   ],
   imports: [
-    
+  
     BrowserModule,
     AppRoutingModule,
     MaterialModule,

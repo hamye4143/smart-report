@@ -2,6 +2,7 @@ import { AuthGuardService } from './shared/services/guards/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { RedirectComponent } from './components/redirect/redirect.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { AllBlogsComponent } from './components/admin/all-blogs/all-blogs.component';
@@ -30,6 +31,7 @@ import { ChartsComponent } from './components/charts/charts.component';
 
 
 const routes: Routes = [
+  { path: '', component: RedirectComponent },
   {
     path: '',
     component: LayoutComponent,

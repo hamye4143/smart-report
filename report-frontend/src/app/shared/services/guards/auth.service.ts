@@ -29,6 +29,7 @@ export class AuthService {
     private dialog:MatDialog,
     private notificationService: NotificationService,
     ) { }
+    
 
   login(credentials: Object) {
     return this.http.post(this.login_url, credentials).pipe(catchError(this.handlerError));

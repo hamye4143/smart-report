@@ -1,32 +1,4 @@
 <div class="search-bar">
-    <!--
-    <div class="input-group mb-3">
-        
-
-
-        <div class="input-group-prepend">
-            <select class="selectpicker input-group-text" [(value)]="selectedValue">
-                <option *ngFor="let option of options" [value]="option.value">
-                  {{option.name}}
-                </option>
-              </select>
-        </div> 
-    
-    <mat-form-field appearance="outline">
-        <mat-select [(value)]="selectedValue">
-          <mat-option [value]="option.value" *ngFor="let option of options">{{ option.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-        <input type="text" class="form-control" aria-label="search" [(ngModel)]="search_" placeholder="찾을 내용을 검색해주세요">
-        <div class="input-group-append">
-            <span class="input-group-text" (click)="searchFunc()">
-                <mat-icon class="search-icon">search</mat-icon>
-            </span>
-        </div>
-    </div>
--->
-
     <div class="ss">
         <mat-form-field appearance="outline" class="search-sort-button">
             <select matNativeControl required [(ngModel)]="selectedValue">
