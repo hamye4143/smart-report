@@ -122,8 +122,7 @@ export class SearchBarComponent implements OnInit {
     console.log(event)
   }
   searchFunc() {
-    console.log('searchFunc', this.selectedValue)
-    this.search_ = this.search_.trim()
+    this.search_ =  this.search_ ? this.search_.trim() : ""
     const data = {
       search_ : this.search_,
       i_ : this.selectedValue
@@ -133,7 +132,7 @@ export class SearchBarComponent implements OnInit {
       this.searchEvent.emit(data);
 
     }else{
-      this.notificationService.openSnackBar('빈 값 입니다.');
+      this.notificationService.openSnackBar('검색 창이 빈 값 입니다.');
     }
   }
 

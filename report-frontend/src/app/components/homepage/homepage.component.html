@@ -1,37 +1,33 @@
+
 <main role="main">
     <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">lorem</h1>
-            <p class="lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quidem quasi
-                placeat accusamus quas, odit dicta nam facilis voluptas dolorem?
-            </p>
-            <app-search-bar (searchEvent)="searchEvent($event)" [i]="'all'"></app-search-bar>
-        </div>
+      <div class="container">
+        <h1 class="jumbotron-heading">Smart Report</h1>
+        <p class="lead text-muted">다양한 스마트 리포트를 한곳에서 관리하고 탐색하세요. <br/>검색 기능을 통해 원하는 정보를 빠르게 찾아보세요.</p>
+        <app-search-bar (searchEvent)="searchEvent($event)" [i]="'all'"></app-search-bar>
+      </div>
     </section>
-
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div *ngFor="let category of all_categories; let i = index">
-                <div class="title">{{i+1}}.{{category.title}}</div>
-                <div class="description">{{category.description}}</div>
-                <div>
-                    <div class="container">
-                        <carousel [cellsToScroll]="3" objectFit="contain" [height]="280">
-                            <div class="carousel-cell" *ngFor="let blog of category.blogs">
-                                <div class="card box-shadow " [routerLink]="['/blog/',blog.id]">
-                                    <div class="img-div"><img class="card-img-top" src="./assets/article.svg"
-                                            alt="Card image cap"></div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{blog.title}}</h5>
-                                        <p class="card-text">{{blog.content}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </carousel>
-                    </div>
+  
+    <div class="album bg-light">
+      <div class="container">
+        <div *ngFor="let category of all_categories; let i = index">
+          <div class="title">{{i+1}}. {{category.title}}</div>
+          <div class="description">{{category.description}}</div>
+          <carousel [cellsToScroll]="3" objectFit="contain" [height]="280">
+            <div class="carousel-cell" *ngFor="let blog of category.blogs">
+              <div class="card" [routerLink]="['/blog/', blog.id]">
+                <div class="img-div">
+                  <img class="card-img-top" src="./assets/article.svg" alt="Card image cap">
                 </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{blog.title}}</h5>
+                  <p class="card-text">{{blog.content}}</p>
+                </div>
+              </div>
             </div>
+          </carousel>
         </div>
+      </div>
     </div>
-
-</main>
+  </main>
+  

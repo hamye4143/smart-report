@@ -68,10 +68,7 @@
 
         <app-search-list-option #child *ngIf="isSearchOption" (result)="searchListOption($event)" [keyword]="keyword"
             [page]="page" [sortBy]="sortBy" [row]="row" [i]="i"  [(test)]="testValue"></app-search-list-option>
-            sendData:{{counterValue}}
-
-            test: {{testValue|json}}
-            
+      
             <!-- <button (click)="decrement()">-</button>
             <button (click)="increment()">+</button> -->
 
