@@ -26,9 +26,7 @@ export class Test2Component {
   @Output() counterChange = new EventEmitter();
   
   @Input()
-  get counter() {
-    console.log('get')
- 
+  get counter() { 
     // this.counterValue.children[0]= 'this.form.value';
     // console.log('this.counterValue',this.counterValue);
 

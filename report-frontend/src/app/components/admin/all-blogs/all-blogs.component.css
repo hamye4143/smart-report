@@ -1,40 +1,54 @@
-
-
 .card-title {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
-}
-::ng-deep .my-form-field .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
-}
-.apply-button {
-}
-.button-div {
-    padding-left: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-}
-.datepicker {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-}
-
-.filter_form{
+  }
+  
+  
+  table {
     width: 100%;
+  }
+
+
+/* 📦 전체 필터 바 정렬 */
+.filter-bar {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-table {
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
     width: 100%;
-}
-
-.search-bar {
-    font-size: 0.813rem;
-}
+  }
+  
+  /* 🔍 검색창 크기 */
+  .filter-input {
+    flex: 1 1 300px;
+    min-width: 200px;
+  }
+  
+  /* 📅 날짜 선택 크기 */
+  .filter-date {
+    flex: 0 0 200px;
+    min-width: 180px;
+  }
+  
+  /* ✔️ 적용 버튼 정렬 */
+  .filter-btn {
+    height: 56px;
+    white-space: nowrap;
+  }
+  
+  /* 📱 반응형 대응 */
+  @media (max-width: 600px) {
+    .filter-bar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .filter-btn {
+      width: 100%;
+    }
+  }
+  
+  

@@ -405,20 +405,15 @@ export class TestComponent implements OnInit {
 
 
   }
-  object(data) { //일렬로 되어있는 데이터들 this.nodes 처럼 만들어줌
-    var o = {};
-    data.forEach(element => {
-      element.Children = (o[element.Id] && o[element.Id].Children) || [];
-      o[element.Id] = element;
-      o[element.parent_id] = o[element.parent_id] || {};
-      o[element.parent_id].Children = o[element.parent_id].Children || [];
-      o[element.parent_id]
-        .Children
-        .push(element);
+  object(data) {
+    const map = {};
+    data.forEach(item => {
+      item.Children = map[item.Id]?.Children || [];
+      map[item.Id] = item;
+      map[item.parent_id] = map[item.parent_id] || { Children: [] };
+      map[item.parent_id].Children.push(item);
     });
-    // console.log('e',o)
-
-    return o;
+    return map;
   }
 
   result = [];
@@ -462,26 +457,34 @@ export class TestComponent implements OnInit {
 
   }
 
-
   convertTreeToList(root) {
-    console.log('root', root)
-    const stack = [], array = [], hashMap = {};
-    stack.push(root);
-
+    const stack = [root];
+    this.result = [];
+  
     while (stack.length !== 0) {
       const node = stack.pop();
-      this.result.push(node)
-
-      if (node.Children != null) {
+      this.result.push(node);
+  
+      if (node.Children) {
         for (let i = node.Children.length - 1; i >= 0; i--) {
           stack.push(node.Children[i]);
         }
       }
     }
-    console.log('push', stack)
-
-    return array;
   }
+
+
+  isExpanded = true;
+
+  toggleExpand() {
+    this.isExpanded = !this.isExpanded;
+    if (this.isExpanded) {
+      this.tree.treeModel.expandAll();
+    } else {
+      this.tree.treeModel.collapseAll();
+    }
+  }
+  
   /*
   visitNode(node, hashMap, array) {
     if (!hashMap[node.data]) {

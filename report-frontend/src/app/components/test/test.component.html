@@ -1,98 +1,61 @@
-<!-- <div class="size">
-  <tree-root #tree [focused]="true" [nodes]="nodes" [options]="options" (activate)="clickNode($event)"></tree-root>
-
-  <div>
-    <app-test2 *ngIf="sendData" [sendData]="sendData" (change)="change($event)"></app-test2>
-    <button (click)="tree.treeModel.focusNextNode()">Next</button>
-    <button (click)="tree.treeModel.focusPreviousNode()">Prev</button>
-    <button
-    (click)="tree.treeModel.expandAll()">
-    Expand All
-  </button>
-  <button
-    (click)="clickAddomde()">
-    Collapse All
-  </button>
-  <button (click)="tree.treeModel.focusDrillDown()">drill down</button>
-  <button (click)="tree.treeModel.focusDrillUp()">drill up</button>
-  <button (click)="options.allowDrag = true">allowDrag</button>
-  </div>
-
-  
-
-</div>
-
- -->
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
   <div fxFlex="95%">
-    <mat-card flex-gt-sm="flex-gt-sm">
+    <mat-card>
       <mat-card-title>카테고리 종류 설정</mat-card-title>
-      <!-- <button mat-raised-button (click)="tree.treeModel.expandAll()">
-        펼치기
-      </button>
-      <button mat-raised-button (click)="tree.treeModel.collapseAll()">
-        닫기
-      </button> -->
-      <!-- <button mat-raised-button color="primary" class="action" (click)="addMainNode()">메인 카테고리 추가</button> -->
-      <!-- <div class="filter-bar">
-        <mat-form-field class="her" appearance="outline">
-          <input type="text" id="filter" matInput #filter (keyup)="tree.treeModel.filterNodes(filter.value)" placeholder="카테고리 검색" />
-        </mat-form-field>
-        <button mat-raised-button (click)="tree.treeModel.clearFilter()">클리어</button>
-      </div> -->
 
       <div class="custom-card">
-        <div class="example-tree">
-          <div class="filter-div">
-
-            <mat-form-field class="filter-filed" appearance="outline">
-              <input type="text" id="filter" matInput #filter (keyup)="tree.treeModel.filterNodes(filter.value)"
-                placeholder="카테고리 검색" />
+        <!-- 좌측 트리 영역 -->
+        <div class="tree-section">
+          <div class="filter-controls">
+            <mat-form-field appearance="outline" class="filter-input">
+              <input type="text" matInput #filter (keyup)="tree.treeModel.filterNodes(filter.value)" placeholder="카테고리 검색" />
             </mat-form-field>
-            <button mat-raised-button (click)="tree.treeModel.clearFilter()">클리어</button>
 
-            <div>
-              <button class="open-button" mat-raised-button (click)="tree.treeModel.expandAll()">
-                펼치기
-              </button>
-              <button class="open-button" mat-raised-button (click)="tree.treeModel.collapseAll()">
-                닫기
-              </button>
-            </div>
+            <button class="toggle-button" mat-raised-button (click)="toggleExpand()">
+              {{ isExpanded ? '모두 접기' : '모두 펼치기' }}
+            </button>
           </div>
-          <div class="tree">
-            <tree-root #tree [focused]="true" [nodes]="nodes" [options]="options" (activate)="clickNode($event)"
+
+          <div class="tree-container">
+            <tree-root #tree
+              [focused]="true"
+              [nodes]="nodes"
+              [options]="options"
+              (activate)="clickNode($event)"
               (initialized)="onTreeLoad(tree)">
-
+              
               <ng-template #treeNodeTemplate let-node>
-                <!-- {{node.data|json}} -->
-
-                <span *ngIf="node.data.is_use == 'Y'" title="{{node.data.subscription}}">{{ node.data.Name }}</span>
-                <span *ngIf="node.data.is_use == 'N'" title="{{node.data.subscription}}" class="locked">{{ node.data.Name }}</span>
+                <span [ngClass]="{ 'locked': node.data.is_use === 'N' }">
+                  {{ node.data.Name }}
+                </span>
                 <span class="children-count">({{ childrenCount2(node) }})</span>
               </ng-template>
+
             </tree-root>
           </div>
         </div>
 
-        <div class="example-tree-value">
-          <app-test2 [(counter)]="sendData"></app-test2>
-          <div class="category-btn-div" *ngIf="nodeBaguni">
-            <button mat-raised-button color="primary" class="category-btn action" (click)="addNode4()">하위 카테고리
-              추가</button>
-            <button mat-raised-button color="primary" class="category-btn action" (click)="deleteNode2()">카테고리
-              삭제</button>
+        <!-- 우측 카테고리 상세 -->
+        <div class="detail-section">
+          <div class="detail-section-inner">
+            <app-test2 [(counter)]="sendData"></app-test2>
+        
+            <div class="category-btn-group" *ngIf="nodeBaguni">
+              <button mat-raised-button color="primary" (click)="addNode4()">하위 카테고리 추가</button>
+              <button mat-raised-button color="warn" (click)="deleteNode2()">카테고리 삭제</button>
+            </div>
           </div>
         </div>
 
-      </div>
-      <mat-card-actions align="end">
-        <button mat-raised-button color="primary" class="action" (click)="saveCategory()">저장</button>
 
+
+      </div>
+
+
+      
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" (click)="saveCategory()">저장</button>
       </mat-card-actions>
     </mat-card>
-
-
-
   </div>
 </div>

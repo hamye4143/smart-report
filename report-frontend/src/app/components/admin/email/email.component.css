@@ -39,38 +39,86 @@
     display: none;
 }
 
-/*업로드 버튼 */
-.filebox {
-    display:inline; 
-    justify-content: center;
-    margin-left:1rem;
-}
 
-.filebox label {
-  display: inline;
-  padding: .5em .75em;
-  color: #999;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #fdfdfd;
-  cursor: pointer;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
-  border-radius: .25em;
-}
 
-.filebox input[type="file"] {  /* 파일 필드 숨기기 */
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip:rect(0,0,0,0);
-  border: 0;
-}
+/* 업로드 박스 */
+.file-upload-container {
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    margin: 2rem 0;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* 파일 없을 때 */
+  .file-upload-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .file-upload-empty mat-icon {
+    font-size: 48px;
+    color: #bbb;
+  }
+  
+  /* 파일 선택 라벨 */
+  .file-upload-label {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .file-upload-label:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* 파일 리스트 영역 */
+  .file-list {
+    text-align: left;
+    margin-top: 1rem;
+  }
+  
+  /* 파일 리스트 헤더 */
+  .file-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* 각 파일 아이템 */
+  .file-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* 파일 이름, 정보 */
+  .file-info {
+    flex-grow: 1;
+    margin-left: 1rem;
+  }
+  
+  .file-name {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .file-meta {
+    font-size: 0.85rem;
+    color: #777;
+  }
 
+  
 .list-item {
     /* background: #979797; */
     display: flex;

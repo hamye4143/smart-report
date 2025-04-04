@@ -1,62 +1,54 @@
-<div class="button-div">
-    <button mat-raised-button color="primary" class="button-action" (click)="addCategory()">추가</button>
-    <button mat-raised-button color="primary" class="button-action"(click)="saveAll()">저장</button>
-</div>
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-
-
-    <!-- mainListData: {{mainListData|json}} -->
-
-    <mat-accordion>
-        <!-- <mat-card class="card" cdkDrag *ngFor="let list of mainList; index as index" (click)="clickCard(index)" id="div_{{index}}"> -->
-        <mat-expansion-panel cdkDrag *ngFor="let list of mainListData; index as index" id="div_{{index}}"
-            class="expansion-panel" (click)="clickTable(list,index+1)" (opened)="panelOpenState = true"
-            (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    리스트 {{index +1 }}
-                </mat-panel-title>
-                <mat-panel-description>
-                    {{panelOpenState ? '닫기' : '열기'}}
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <h4>리스트 {{index+1}}</h4>
-            <!-- {{list|json}} -->
-            <mat-form-field class="full-width">
-                <input matInput type="text" [(ngModel)]="list.title" placeholder="제목">
+<div class="mainlist-container">
+    <div class="mainlist-actions">
+      <button mat-raised-button color="primary" (click)="addCategory()">추가</button>
+      <button mat-raised-button color="accent" (click)="saveAll()">저장</button>
+    </div>
+  
+    <div cdkDropList class="mainlist-accordion" (cdkDropListDropped)="drop($event)">
+      <mat-accordion>
+        <mat-expansion-panel
+          cdkDrag
+          *ngFor="let list of mainListData; index as index"
+          (click)="clickTable(list, index + 1)"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> 리스트 {{ index + 1 }} </mat-panel-title>
+            <mat-panel-description>
+              {{ panelOpenState ? '닫기' : '열기' }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+  
+          <div class="mainlist-fields">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>제목</mat-label>
+              <input matInput [(ngModel)]="list.title" />
             </mat-form-field>
-            <mat-form-field class="full-width">
-                <input matInput type="text" [(ngModel)]="list.description" placeholder="설명">
+  
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>설명</mat-label>
+              <input matInput [(ngModel)]="list.description" />
             </mat-form-field>
-
-            <div class="card_div">
-                <div class="card box-shadow" *ngFor="let item of list.blogs">
-                    <div class="img-div">
-                        <img class="card-img-top" src="./assets/article.svg" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{item.title}}</h5>
-                        <p class="card-text">{{item.content}}</p>
-                    </div>
-                </div>
+          </div>
+  
+          <div class="blog-preview-container">
+            <div class="blog-card" *ngFor="let item of list.blogs">
+              <div class="img-wrapper">
+                <img src="./assets/article.svg" alt="thumbnail" />
+              </div>
+              <div class="card-body">
+                <h5>{{ item.title }}</h5>
+                <p>{{ item.content }}</p>
+              </div>
             </div>
-
-            <!--버튼-->
-            <!-- <button mat-icon-button color="primary" (click)="save(list.id)">
-                        저장
-                    </button> -->
-
-            <div mat-dialog-actions align="end">
-                <button mat-raised-button color="primary" (click)="delete(list)">삭제</button>
-            </div>
-
-
-            <!-- <button mat-icon-button color="primary" (click)="clickTable(index+1)">
-                    테이블 선택
-                </button> -->
-
+          </div>
+  
+          <div class="panel-actions">
+            <button mat-raised-button color="warn" (click)="delete(list)">삭제</button>
+          </div>
         </mat-expansion-panel>
-
-    </mat-accordion>
-
-</div>
+      </mat-accordion>
+    </div>
+  </div>
+  

@@ -1,6 +1,5 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
     <div fxFlex="95%">
-        <!-- <button mat-raised-button color="primary" class="add-contact" routerLink="['/admin/add-blog']">글쓰기</button> -->
 
         <mat-card class="card">
             <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
@@ -11,12 +10,11 @@
                 </div>
             </mat-card-title>
             <mat-card-content>
-                <div class="container">
+                 <div class="container">
 
                     <!--검색창-->
                     <div class="filter_form">
                         <div class="filter_group">
-                            <!--fxLayout fxLayoutAlign="center center"-->
 
                             <mat-form-field appearance="outline" class='search-bar full-width'>
                                 <mat-label>검색창</mat-label>
@@ -25,38 +23,14 @@
                             </mat-form-field>
 
 
-                            <!-- <mat-form-field fxFlex="80%">
-                                <input matInput type="text" (keyup)="doFilter($event.target.value)"
-                                    placeholder="Filter">
-                            </mat-form-field> -->
+                  
                         </div>
 
                         <!--datepicker-->
-                        <div class="filter_group">
-                            <div class="datepicker">
-                                <mat-form-field appearance="outline" class='my-form-field search-bar'>
-                                    <input matInput [matDatepicker]="dp1"
-                                        (dateInput)="addEvent($event.target.value, $event)" placeholder="날짜 선택">
-                                    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-
-                                    <mat-datepicker #dp1></mat-datepicker>
-
-                                </mat-form-field>
-                                <div class="button-div">
-                                    <button mat-stroked-button class="apply-button" color="primary" (click)="dateApply()">적용</button>
-
-                                </div>
-
-                            </div>
-
-                            <!-- <button mat-stroked-button color="primary">적용</button> -->
-                        </div>
+                      
 
 
                     </div>
-
-
-
 
 
 
@@ -115,4 +89,5 @@
             </mat-card-content>
         </mat-card>
     </div>
+
 </div>

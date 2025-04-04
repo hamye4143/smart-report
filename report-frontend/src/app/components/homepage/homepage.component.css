@@ -67,6 +67,7 @@
   transition: transform 0.2s ease;
   overflow: hidden;
   background-color: #fff;
+  height: 100%;
 }
 
 .card:hover {

@@ -23,51 +23,40 @@
         <input matInput type="text" [(ngModel)]="title" placeholder="제목">
       </mat-form-field>
 
-      <div class="">
-        <span>파일첨부</span>
+      
+          <!-- 파일 첨부 -->
+          <div class="file-upload-container" appDnd (fileDropped)="onFileDropped($event)">
+            <div *ngIf="!myFiles.length" class="file-upload-empty">
+              <mat-icon>upload_file</mat-icon>
+              <p>여기에 파일을 드래그하거나 클릭하여 업로드하세요</p>
+              <label for="fileInput" class="file-upload-label">
+                파일 선택
+                <input type="file" id="fileInput" multiple (change)="fileBrowseHandler($event.target.files)" hidden />
+              </label>
+            </div>
+    
+            <div *ngIf="myFiles.length" class="file-list">
+              <div class="file-list-header">
+                <span>첨부파일 ({{ myFiles.length }}개)</span>
+                <button mat-stroked-button color="warn" (click)="remove_file_all()">모두 삭제</button>
+              </div>
+    
+              <mat-list>
+                <mat-list-item *ngFor="let file of myFiles" class="file-list-item">
+                  <mat-icon mat-list-icon>attach_file</mat-icon>
+                  <div class="file-info">
+                    <div class="file-name">{{ file.name }}</div>
+                    <div class="file-meta">{{ file.type }} • {{ file.size | number }} bytes</div>
+                  </div>
+                  <button mat-icon-button color="warn" (click)="remove_file(file)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
 
-        <div class="filebox">
-          <label for="ex_file">내 PC</label>
-       
-          <input type="file" id="ex_file" multiple (change)="fileBrowseHandler($event.target.files)">
-        </div>
-
-        <button class="down-button" mat-stroked-button (click)="enableButton()">
-          <mat-icon>{{ down? 'arrow_drop_up':'arrow_drop_down'}}</mat-icon>
-        </button>
-      </div>
-      <input type="file" #fileDropRef id="fileDropRef" multiple />
-
-      <div mat-subheader>첨부파일 ({{myFiles.length}})개
-
-        <button class="remove-button" mat-stroked-button [style.visibility]="myFiles[0] ? 'visible' : 'hidden'"
-        (click)="remove_file_all()">모두삭제</button>
-      </div>
-
-
-      <div *ngIf="down" class="file_container" appDnd (fileDropped)="onFileDropped($event)">
-        <div class="color-gray" *ngIf="!myFiles[0]">
-          <h4>+ 마우스로 파일을 끌어오세요</h4>
-        </div>
-
-        <div class="files-list">
-          <mat-list>
-            <mat-list-item class="list-item" *ngFor="let file of myFiles">
-              <mat-icon mat-list-icon>attach_file</mat-icon>
-              <div><b>{{file.name}}</b></div>
-              <div>타입: {{file.type}} </div>
-              <div>사이즈: {{file.size}} </div>
-              <button mat-icon-button color="warn">
-                <mat-icon (click)="remove_file(file)">delete</mat-icon>
-              </button>
-            </mat-list-item>
-
-
-          </mat-list>
-        </div>
-
-
-      </div>
+          
 
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>본문</mat-label>

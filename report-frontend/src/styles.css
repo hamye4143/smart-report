@@ -4,8 +4,9 @@
 @import '~@circlon/angular-tree-component/css/angular-tree-component.css';
 
 html, body { /* 세로로 컨텐츠를 꽉 채우도록, 컨텐츠에 여백은 0 으로 */
-    /* height: 100%;
-    margin: 0; */
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /*new*/
@@ -23,6 +24,8 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 1rem;
+  overflow: visible !important;
+
 }
 
 .spinner {

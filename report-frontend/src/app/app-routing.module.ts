@@ -60,7 +60,7 @@ const routes: Routes = [
           { path: 'update-blog/:id', component: UpdateBlogComponent },
           { path: 'myinfo', component: MyinfoComponent },
           { path: 'category', component: CategoryComponent },
-          { path: 'sort', component: TestComponent },
+          { path: 'sort', component: TestComponent }, //SortComponent
           { path: 'email', component: EmailComponent },
         ]
       },

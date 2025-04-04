@@ -13,6 +13,10 @@
     color: #2196F3;
 } */
 
+.card {
+    height: 100%;
+  }
+
 .card-custom {
     margin: 0.2rem 0.7rem;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -272,3 +276,4 @@ mat-select.mat-select {
 .plus {
     color:red;
 }
+

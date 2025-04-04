@@ -1,52 +1,9 @@
-<!-- <div class="container" fxLayout="row" fxLayoutAlign="center none">
-    <div fxFlex="95%">
-        <mat-card flex-gt-sm="flex-gt-sm">
-            <mat-card-title>카테고리 종류 설정</mat-card-title>
-            <mat-card class="category_setting">
-                <mat-tree
-                    [dataSource]="dataSource"
-                    [treeControl]="treeControl"
-                    class="example-tree">
-                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle="matTreeNodeToggle">
-                        <li class="mat-tree-node">
-                            <button mat-icon-button="mat-icon-button" disabled="disabled"></button>
-                            {{node.name}}
-                        </li>
-                    </mat-tree-node>
-                    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-                        <li>
-                            <div class="mat-tree-node">
-                                <button
-                                    mat-icon-button="mat-icon-button"
-                                    matTreeNodeToggle="matTreeNodeToggle"
-                                    [attr.aria-label]="'Toggle ' + node.name">
-                                    <mat-icon class="mat-icon-rtl-mirror">
-                                        {{treeControl.isExpanded(node) ? 'expand_more' :
-'chevron_right'}}
-                                    </mat-icon>
-                                </button>
-                                {{node.name}}
-                            </div>
-                            <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-                                <ng-container matTreeNodeOutlet="matTreeNodeOutlet"></ng-container>
-                            </ul>
-                        </li>
-                    </mat-nested-tree-node>
-                </mat-tree>
-            </mat-card>
-            <mat-card class="category_value"></mat-card>
-        </mat-card>
-    </div>
-</div> -->
-
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
     <div fxFlex="95%">
         <mat-card flex-gt-sm="flex-gt-sm">
             <mat-card-title>카테고리 종류 설정</mat-card-title>
             <!-- <mat-card class=""> -->
                 <app-add-node (addedNode)="addNode($event)" [isTop]="true"></app-add-node>
-                <!-- <button mat-raised-button class="top-node"(click)="nestedTreeControl.collapseAll()">모두 접기</button>
-                <button mat-raised-button class="top-node"(click)="nestedTreeControl.expandAll()">모두 펼치기</button> -->
                 <button mat-raised-button class="top-node" (click)="toggle()">{{isExpandAll ? '카테고리 열기' : '카테고리 닫기' }}</button>
 
 
