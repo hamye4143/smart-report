@@ -92,11 +92,11 @@ export class SearchListOptionComponent implements OnInit {
     draggableRange: true,
     showTicksValues: true,
     stepsArray: [
-      { value: '2', legend: '2개↑' },
-      { value: '3', legend: '3개↑' },
-      { value: '4', legend: '4개↑' },
-      { value: '5', legend: '5개↑' },
-      { value: '-1', legend: '전체' },
+      { value: 2, legend: '2개↑' },
+      { value: 3, legend: '3개↑' },
+      { value: 4, legend: '4개↑' },
+      { value: 5, legend: '5개↑' },
+      { value: -1, legend: '전체' },
     ]
   };
   value2: number = -1;
@@ -105,11 +105,11 @@ export class SearchListOptionComponent implements OnInit {
     draggableRange: true,
     showTicksValues: true,
     stepsArray: [
-      { value: '1', legend: '1개↑' },
-      { value: '5', legend: '5개↑' },
-      { value: '10', legend: '10개↑' },
-      { value: '20', legend: '20개↑' },
-      { value: '-1', legend: '전체' },
+      { value: 1, legend: '1개↑' },
+      { value: 5, legend: '5개↑' },
+      { value: 10, legend: '10개↑' },
+      { value: 20, legend: '20개↑' },
+      { value: -1, legend: '전체' },
     ]
   };
   value3: number = -1;
@@ -118,11 +118,11 @@ export class SearchListOptionComponent implements OnInit {
     draggableRange: true,
     showTicksValues: true,
     stepsArray: [
-      { value: '1', legend: '1개↑' },
-      { value: '10', legend: '10개↑' },
-      { value: '20', legend: '20개↑' },
-      { value: '30', legend: '30개↑' },
-      { value: '-1', legend: '전체' },
+      { value: 1, legend: '1개↑' },
+      { value: 10, legend: '10개↑' },
+      { value: 20, legend: '20개↑' },
+      { value: 30, legend: '30개↑' },
+      { value: -1, legend: '전체' },
     ]
   };
   value4: number = -1;
@@ -131,11 +131,11 @@ export class SearchListOptionComponent implements OnInit {
     draggableRange: true,
     showTicksValues: true,
     stepsArray: [
-      { value: '1', legend: '1개↑' },
-      { value: '10', legend: '10개↑' },
-      { value: '20', legend: '20개↑' },
-      { value: '30', legend: '30개↑' },
-      { value: '-1', legend: '전체' },
+      { value: 1, legend: '1개↑' },
+      { value: 10, legend: '10개↑' },
+      { value: 20, legend: '20개↑' },
+      { value: 30, legend: '30개↑' },
+      { value: -1, legend: '전체' },
     ]
   };
   value5: number = -1;
@@ -144,11 +144,11 @@ export class SearchListOptionComponent implements OnInit {
     draggableRange: true,
     showTicksValues: true,
     stepsArray: [
-      { value: '1', legend: '1개↑' },
-      { value: '2', legend: '2개↑' },
-      { value: '5', legend: '5개↑' },
-      { value: '10', legend: '10개↑' },
-      { value: '-1', legend: '전체' },
+      { value: 1, legend: '1개↑' },
+      { value: 2, legend: '2개↑' },
+      { value: 5, legend: '5개↑' },
+      { value: 10, legend: '10개↑' },
+      { value: -1, legend: '전체' },
     ]
   };
   constructor(

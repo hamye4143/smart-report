@@ -23,10 +23,6 @@ blogs= Blueprint('blogs',__name__)
 
 
 @blogs.route('/search_blogs/<string:contents>', methods=["GET"])
-
-
-
-
 # @jwt_required
 def search_blogs(contents):
     

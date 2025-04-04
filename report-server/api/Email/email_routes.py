@@ -35,7 +35,7 @@ def sendEmail():
     receiverString = data["receivers"] 
     data["receivers"] = json.loads(data["receivers"]) # 받는 사람 리스트  
 
-    #msg = Message('Hello', sender = 'hamye4143@gmail.com', recipients = ['hamye4143@gmail.com','hamye4143@naver.com'])
+    #msg = Message('Hello', sender = 'xxx@gmail.com', recipients = ['xxx@gmail.com','xxx@aaa.com'])
     msg = Message(data["title"], sender = data['sender'], recipients = data["receivers"])
     msg.body = data["content"]
     
