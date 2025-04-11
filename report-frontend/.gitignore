@@ -1,12 +1,15 @@
-# These are some examples of commonly ignored file patterns.
-# You should customize this list as applicable to your project.
-# Learn more about .gitignore:
-#     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
-
 # Node artifact files
 node_modules/
 dist/
-/public
+public/
+report-server/api/flaskdatabase.db
+
+# Firebase 관련 캐시/설정 파일 무시
+.firebase/
+
+# Environment files
+.env
+.env.*  # 예: .env.local, .env.production
 
 # Compiled Java class files
 *.class
@@ -22,7 +25,6 @@ dist/
 
 # Maven
 target/
-dist/
 
 # JetBrains IDE
 .idea/
@@ -48,4 +50,3 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-

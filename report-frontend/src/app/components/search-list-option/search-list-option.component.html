@@ -9,11 +9,11 @@
             </mat-date-range-input>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
-          
+
             <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
             <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
           </mat-form-field>
-          
+
           <p>Selected range: {{range.value | json}}</p>
 
           <!-- <mat-form-field class="datepicker" appearance=outline>
@@ -51,9 +51,8 @@
             <ng5-slider [(value)]="testValue.value5" [options]="options5"  (valueChange)="valueChange($event,'value5')"></ng5-slider>
         </div>
     </mat-card-content>
-        
+
     <div class="div-button" mat-dialog-actions align="center">
-        <button mat-raised-button id="create-action" color="primary"
-            (click)="apply()">적용</button>
+        <button mat-raised-button id="create-action" color="primary" (click)="apply()">적용</button>
     </div>
 </mat-card>

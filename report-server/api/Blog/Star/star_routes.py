@@ -30,7 +30,6 @@ def star_rating(): # 별점 매기기
     db.session.commit()
 
     dk = get_star_avg(blog_id)
-    print('dkdkdk',dk)
 
     blog = Blog.query.filter_by(id=blog_id).first()
     blog.star = dk

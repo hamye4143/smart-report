@@ -22,7 +22,7 @@ export class DialogStarComponent {
     private dialog : MatDialog,
     private router: Router,
     private notificationService: NotificationService,
-    @Inject(MAT_DIALOG_DATA) public data: any, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private star_service: StarService) {
       if (data) {
         this.blog_id = this.data.blog_id;
@@ -64,8 +64,9 @@ export class DialogStarComponent {
     console.log('data', data)
     this.star_service.starRating(data).subscribe(
       (response: any) => {
-        //성공 후 
-        console.log('200', response['message'])
+        //성공 후
+        console.log('200', response['message']);
+
         this.dialogRef.close(true);
 
       },

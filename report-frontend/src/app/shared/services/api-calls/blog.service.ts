@@ -26,13 +26,13 @@ export class BlogService {
 
 
 
-  
+
   constructor(private http:HttpClient) { }
 
 
   download_single_file(filename:string, file_id:string){
-    
-    const user_id = JSON.parse(localStorage.getItem('user_info'))['id'] //전송해줘야함 
+
+    const user_id = JSON.parse(localStorage.getItem('user_info'))['id'] //전송해줘야함
 
     //test
     const params = new HttpParams().set('user_id',user_id).set('file_id', file_id);
@@ -54,16 +54,16 @@ export class BlogService {
   }
 
   add_blog(blog_props){ //blog_props:Object
-    //에러 처리 후 에러 메시지를 생성하여 이를 방출하는 옵저버블 반환 
+    //에러 처리 후 에러 메시지를 생성하여 이를 방출하는 옵저버블 반환
     return this.http.post(this.add_blog_url,blog_props).pipe(catchError(this.handlerError));
   }
 
   get_all_blogs(){
     return this.http.get(this.get_all_blogs_url).pipe(catchError(this.handlerError));
   }
-  
+
   get_all_categories(){
-    return this.http.get(this.get_all_categories_url).pipe(catchError(this.handlerError)); 
+    return this.http.get(this.get_all_categories_url).pipe(catchError(this.handlerError));
   }
 
   get_single_blog(blog_id:string){
@@ -73,7 +73,7 @@ export class BlogService {
   search_blogs(contents: string){
     return this.http.get(this.search_blog_url + contents).pipe(catchError(this.handlerError));
   }
-  
+
   search_files(keyword: string, page:number, sortBy:number,row:number, i:string){
     console.log('search_files_page',page)
     return this.http.get(this.search_file_url+'?kw='+keyword+"&page="+page+"&sortBy="+sortBy+"&row="+row+"&i="+i).pipe(catchError(this.handlerError));
@@ -85,7 +85,7 @@ export class BlogService {
     "&op_sValue="+options.value+"&op_hValue="+options.value2
     +"&op_dValue="+options.value3+"&op_vValue="+options.value4+"&op_rValue="+options.value5
     +"&date="+options.date
-    
+
     ).pipe(catchError(this.handlerError));
   }
 
@@ -94,7 +94,7 @@ export class BlogService {
     console.log('date',date);
     return this.http.get(this.search_file_date_url + date).pipe(catchError(this.handlerError));
   }
-  
+
   update_blog(blog_props: Object, blog_id:string){
     return this.http.put(this.update_blog_url + blog_id, blog_props).pipe(catchError(this.handlerError));
   }
@@ -111,7 +111,7 @@ export class BlogService {
 
   private handlerError(error: HttpErrorResponse){
     let message = ''; //재할당이 필요한 변수 -->let 사용
-    //에러 유형 구분 
+    //에러 유형 구분
     if (error.error instanceof ErrorEvent){
       //클라이언트 측의 에러
       console.error(`Client-side error: ${error.error.message}`);
@@ -127,5 +127,5 @@ export class BlogService {
     message
   });
   }
-  
+
 }
