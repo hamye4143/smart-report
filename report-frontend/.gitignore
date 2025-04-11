@@ -2,7 +2,6 @@
 node_modules/
 dist/
 public/
-report-server/api/flaskdatabase.db
 
 # Firebase 관련 캐시/설정 파일 무시
 .firebase/
