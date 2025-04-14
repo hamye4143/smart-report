@@ -30,10 +30,14 @@ export class AuthService {
     private notificationService: NotificationService,
     ) { }
 
-
   login(credentials: Object) {
-    return this.http.post(this.login_url, credentials).pipe(catchError(this.handlerError));
+    return this.http.post(this.login_url, credentials, {
+      withCredentials: true
+    }).pipe(catchError(this.handlerError));
   }
+  // login(credentials: Object) {
+  //   return this.http.post(this.login_url, credentials).pipe(catchError(this.handlerError));
+  // }
 
   is_logged_in() { //로그인 여부 확인
 
