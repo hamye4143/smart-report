@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StatisticsService {
-  
-  private getTopTenDownloadedFileUrl:string = 'http://localhost:5000/getTopTenDownloadedFile/';
-  private todayVisitorUrl:string = 'http://localhost:5000/todayVisitor';
-  private registerCountsUrl:string = 'http://localhost:5000/registerCounts';
+
+  private getTopTenDownloadedFileUrl:string = `${API_BASE_URL}/getTopTenDownloadedFile/`;
+  private todayVisitorUrl:string = `${API_BASE_URL}/todayVisitor`;
+  private registerCountsUrl:string = `${API_BASE_URL}/registerCounts`;
 
   constructor(private http: HttpClient) { }
 

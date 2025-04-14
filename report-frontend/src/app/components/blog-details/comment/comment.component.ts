@@ -1,13 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
-import { User } from 'src/app/shared/models/User';
-import { BlogService } from 'src/app/shared/services/api-calls/blog.service';
-import { CommentService } from 'src/app/shared/services/api-calls/comment.service';
-import { AuthService } from 'src/app/shared/services/guards/auth.service';
-import { MyinfoService } from 'src/app/shared/services/myinfo/myinfo.service';
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { DialogBodyComponent } from 'src/app/shared/components/dialog-body/dialog-body.component';
-import { MatDialog } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
+import {User} from 'src/app/shared/models/User';
+import {CommentService} from 'src/app/shared/services/api-calls/comment.service';
+import {AuthService} from 'src/app/shared/services/guards/auth.service';
+import {MyinfoService} from 'src/app/shared/services/myinfo/myinfo.service';
+import {AbstractControl, FormArray, FormControl, FormGroup} from '@angular/forms';
+import {DialogBodyComponent} from 'src/app/shared/components/dialog-body/dialog-body.component';
+import {MatDialog} from '@angular/material/dialog';
+import {NotificationService} from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-comment',
@@ -41,24 +40,24 @@ export class CommentComponent implements OnInit {
   // private kk:string;
 
   constructor(
-    private comment_service:CommentService, 
-    private auth_service: AuthService, 
+    private comment_service:CommentService,
+    private auth_service: AuthService,
     private myinfo_service: MyinfoService,
     private renderer: Renderer2,
     private dialog:MatDialog,
     private notificationService: NotificationService,
     )
      { }
-  
+
 
   @Input() blog_id ="";
   // @Input() comments;
   comments;
   @Output("parentFun") parentFun: EventEmitter<any> = new EventEmitter();
   @ViewChild('div',{static:false}) div: ElementRef;
-  
+
   ngOnInit() {
-    //공통으로 빼기 
+    //공통으로 빼기
     if (this.auth_service.is_logged_in()) { //로그인했다면
       this.myinfo_service.getUser()
       .then(user => {
@@ -73,7 +72,7 @@ export class CommentComponent implements OnInit {
     this.comment_service.get_all_comments(this.blog_id).subscribe(
       (response)=>{
         console.log('commentDataLoad',response)
-        this.comments = response['data']  
+        this.comments = response['data']
         this.comments.forEach(element => {
           this.idList.push(element.id)
         });
@@ -97,7 +96,7 @@ export class CommentComponent implements OnInit {
     this.show_spinner = true;
 
     this.comment_service.add_recomment(comment).subscribe(
-      (response:any)=>{ 
+      (response:any)=>{
         console.log('response',response)
         this.content = "";
         this.show_spinner = false;
@@ -130,9 +129,9 @@ export class CommentComponent implements OnInit {
 
       console.log('comment',comment)
       this.show_spinner = true;
-  
+
       this.comment_service.add_comment(comment).subscribe(
-        (response:any)=>{ 
+        (response:any)=>{
           console.log('response',response)
           this.content = "";
           this.contentPlaceholder ="";
@@ -144,7 +143,7 @@ export class CommentComponent implements OnInit {
           this.show_spinner = false;
           console.log(error.error);
           this.notificationService.openSnackBar(error.eror);
-  
+
         }
       );
     }
@@ -158,8 +157,8 @@ export class CommentComponent implements OnInit {
     // this.new_reivew = true;
     //.comment 안보이게
     //#new_comment.append()
-    //new_comment_2 만 보이도록 
-  
+    //new_comment_2 만 보이도록
+
     this.inner = "<mat-form-field class='full-width'><input matInput type='text' [(ngModel)]='content2' placeholder='대댓글 쓰기'></mat-form-field> <button mat-raised-button color='primary' class = 'add_comment'(click)='submit_comment()'>Add Comment</button>";
     //클릭한 id 만 i
     this.visible2 = true;
@@ -171,7 +170,7 @@ export class CommentComponent implements OnInit {
     // this.renderer.appendChild(this.div.nativeElement, p)
 
 
-  
+
     // this.inner = "<mat-form-field class='full-width'><input matInput type='text' [(ngModel)]='content2' placeholder='대댓글 쓰기'></mat-form-field> <button mat-raised-button color='primary' class = 'add_comment'(click)='submit_comment()'>Add Comment</button>";
 
 
@@ -195,7 +194,7 @@ export class CommentComponent implements OnInit {
     const control = this.getControl(index, field);
     control.setValue(this.accounts[index][field]);
   }
-  
+
   updateField(index: number, field: string): void {
     const control = this.getControl(index, field);
 
@@ -212,14 +211,14 @@ export class CommentComponent implements OnInit {
     this.idList.forEach(element => {
       this.cancelEdit(element)
     });
-    
-     
+
+
     const viewEl = document.getElementById("viewComment_"+commentId);
     const editEl = document.getElementById("editComment_"+commentId);
     this.contentPlaceholder = content;
-    
+
     this.renderer.setStyle(viewEl, 'display', 'none');
-    this.renderer.setStyle(editEl, 'display', 'block');    
+    this.renderer.setStyle(editEl, 'display', 'block');
   }
 
   cancelEdit(commentId){
@@ -227,7 +226,7 @@ export class CommentComponent implements OnInit {
     const editEl = document.getElementById("editComment_"+commentId);
 
     this.renderer.setStyle(viewEl, 'display', 'block');
-    this.renderer.setStyle(editEl, 'display', 'none');    
+    this.renderer.setStyle(editEl, 'display', 'none');
 
   }
   updateComment(commentId){
@@ -236,7 +235,7 @@ export class CommentComponent implements OnInit {
     }
 
     this.comment_service.updateComment(commentId,data).subscribe(
-      (response:any)=>{ 
+      (response:any)=>{
         this.getAllComments();
       },
       error=>{
@@ -262,7 +261,7 @@ export class CommentComponent implements OnInit {
 
   deleteComment(commentId){
     this.comment_service.deleteComment(commentId).subscribe(
-      (response:any)=>{ 
+      (response:any)=>{
         this.getAllComments();
       },
       error=>{

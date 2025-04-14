@@ -1,28 +1,27 @@
-
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { TreeData } from '../../models/Category';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {API_BASE_URL} from "src/constants/api-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TreeDataService {
 
-  private getAllSortsUrl:string = 'http://localhost:5000/get_all_codes';
-  private submitUrl:string = 'http://localhost:5000/insert_codes';
+  private getAllSortsUrl:string = `${API_BASE_URL}/get_all_codes`;
+  private submitUrl:string = `${API_BASE_URL}/insert_codes`;
   private data;
   private root_data=[];
-  
-  private final_data=[];
-  
-  
 
-  
-  constructor(private http:HttpClient) { 
+  private final_data=[];
+
+
+
+
+  constructor(private http:HttpClient) {
     // this.init()
 
-    //순서정하기 
+    //순서정하기
 
   }
 
@@ -33,7 +32,7 @@ export class TreeDataService {
   submit(data){
     return this.http.post(this.submitUrl,data);
   }
- 
+
   findAllChildren(id, results, depth) {
     for (const d in this.data) {
       if (this.data[d].parent_id == id) {
@@ -46,7 +45,7 @@ export class TreeDataService {
 
 
   }
-  
+
   object(data){
     var o = {};
     console.log('data',data)
@@ -60,12 +59,12 @@ export class TreeDataService {
 
     return o;
   }
-  
+
   getDescendant(id) {
     // const o = this.object();
     //const o = this.object([{ id: 1, parent: 0, name: "Parent" }, { id: 2, parent: 1, name: "Child 1" }, { id: 3, parent: 2, name: "Grand Child 1" }, { id: 4, parent: 2, name: "Grand Child 2" }, { id: 5, parent: 1, name: "Child 2" }]);
 
-    
+
     // var result = [];
     // Array.isArray(this.object[id].children) && this.object[id].children.forEach(function iter(a) {
     //     result.push({ id: a.id, parent: a.parent, name: a.name });
@@ -74,7 +73,7 @@ export class TreeDataService {
     // return result;
 }
 
-  
+
 
   // getDescendant(id) {
   //     var result = [];
@@ -98,9 +97,9 @@ export class TreeDataService {
   //     });
   //     return result;
   // }
-  //this.final_data 가 빈값이 아니여야지 옵저버블 생성 
+  //this.final_data 가 빈값이 아니여야지 옵저버블 생성
   _dataChange2 = new BehaviorSubject(this.final_data);
-  _dataChange = 
+  _dataChange =
   // _dataChange = new BehaviorSubject(
      [
        {
@@ -172,12 +171,12 @@ export class TreeDataService {
     //   Children: [
     //     {
     //       Id: 7,
-    //       Name: '중분류 1', //소설 
+    //       Name: '중분류 1', //소설
     //       Description: 'Children 1',
     //       Children: [
     //         {
     //           Id: 8,
-    //           Name: '소분류 1', // 한국소설 
+    //           Name: '소분류 1', // 한국소설
     //           Description: 'GrandChildren 1',
     //           Children: [
     //             // {
@@ -193,14 +192,14 @@ export class TreeDataService {
     //     }
     //   ]
     // }
-    
-
- 
 
 
-    
+
+
+
+
   ]
-  
+
 
 
 }

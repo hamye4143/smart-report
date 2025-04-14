@@ -2,35 +2,36 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import {API_BASE_URL} from "../../../../constants/api-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
-  private addQuestionUrl:string = 'http://localhost:5000/addQuestion';
-  private getAllQuestionsUrl:string = 'http://localhost:5000/getAllQuestions';
-  private getSingleQuestionsUrl:string = 'http://localhost:5000/getSingleQuestion/';
-  private getSingleImageUrl:string = 'http://localhost:5000/showImage/';
-  private addAnswerUrl:string = 'http://localhost:5000/addAnswer';
-  private getAllAnswersUrl:string = 'http://localhost:5000/getAllAnswers/';
-  private checkAnswerSelectedUrl:string = 'http://localhost:5000/checkAnswerSelected/';
-  private updateSingleQuestionUrl:string = 'http://localhost:5000/updateSingleQuestion/';
-  private deleteSingleQuestionUrl:string = 'http://localhost:5000/deleteSingleQuestion/';
-  private updateSingleAnswerUrl:string = 'http://localhost:5000/updateSingleAnswer/';
-  private deleteSingleAnswerUrl:string = 'http://localhost:5000/deleteSingleAnswer/';
+  private addQuestionUrl:string = `${API_BASE_URL}/addQuestion`;
+  private getAllQuestionsUrl:string = `${API_BASE_URL}/getAllQuestions`;
+  private getSingleQuestionsUrl:string = `${API_BASE_URL}/getSingleQuestion/`;
+  private getSingleImageUrl:string = `${API_BASE_URL}/showImage/`;
+  private addAnswerUrl:string = `${API_BASE_URL}/addAnswer`;
+  private getAllAnswersUrl:string = `${API_BASE_URL}/getAllAnswers/`;
+  private checkAnswerSelectedUrl:string = `${API_BASE_URL}/checkAnswerSelected/`;
+  private updateSingleQuestionUrl:string = `${API_BASE_URL}/updateSingleQuestion/`;
+  private deleteSingleQuestionUrl:string = `${API_BASE_URL}/deleteSingleQuestion/`;
+  private updateSingleAnswerUrl:string = `${API_BASE_URL}/updateSingleAnswer/`;
+  private deleteSingleAnswerUrl:string = `${API_BASE_URL}/deleteSingleAnswer/`;
 
 
 
   constructor(private http:HttpClient) { }
 
-  addQuestion(questionProps){ 
+  addQuestion(questionProps){
     return this.http.post(this.addQuestionUrl, questionProps).pipe(catchError(this.handlerError));
   }
 
-  getAllQuestions(){ 
+  getAllQuestions(){
     return this.http.get(this.getAllQuestionsUrl).pipe(catchError(this.handlerError));
   }
-  
+
   getSingleQuestion(id){
     return this.http.get(this.getSingleQuestionsUrl+id).pipe(catchError(this.handlerError));
   }
@@ -69,7 +70,7 @@ export class QuestionService {
 
 
   private handlerError(error: HttpErrorResponse){
-    let message = ''; 
+    let message = '';
     if (error.error instanceof ErrorEvent){
       console.error(`Client-side error: ${error.error.message}`);
       message = error.error.message;

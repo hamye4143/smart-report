@@ -5,16 +5,17 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../../models/User';
 import { Blog } from '../../models/Blog';
+import {API_BASE_URL} from "../../../../constants/api-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyinfoService implements OnInit{
 
-  private myinfo_url:string = 'http://localhost:5000/myinfo/';
-  private myinfo_list_url:string = 'http://localhost:5000/myinfo_list/';
-  private downloads_history_url:string = 'http://localhost:5000/myinfo/downloads/'; 
-  private mylike_list_url:string = 'http://localhost:5000/myinfo/likelist/'; 
+  private myinfo_url:string = `${API_BASE_URL}/myinfo/`;
+  private myinfo_list_url:string = `${API_BASE_URL}/myinfo_list/`;
+  private downloads_history_url:string = `${API_BASE_URL}/myinfo/downloads/`;
+  private mylike_list_url:string = `${API_BASE_URL}/myinfo/likelist/`;
 
 
   private user_id:number
@@ -27,7 +28,7 @@ export class MyinfoService implements OnInit{
   }
 
   getList(): Promise<Blog>{
-    
+
     return this.http.get(this.myinfo_list_url + this.user_id)
     .toPromise()
     .then(response => {
@@ -36,12 +37,12 @@ export class MyinfoService implements OnInit{
     })
     .catch(response => {
       localStorage.removeItem('auth_token');
-      alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);   
+      alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);
       return Promise.reject(response.error.msg);
     });
 
   }
-  
+
   getUser(): Promise<User> {
 
 //  localStorage.setItem('loginUser',null);
@@ -49,7 +50,7 @@ export class MyinfoService implements OnInit{
 
     // this.user_id=JSON.parse(localStorage.getItem('user_info')).id
     this.user_id = loginUser.id;
-    
+
     if( loginUser == null){ //빈칸이라면
       //다시 setItem
       return this.http.get(this.myinfo_url + this.user_id)
@@ -60,8 +61,8 @@ export class MyinfoService implements OnInit{
       })
       .catch(response => {
         localStorage.removeItem('auth_token');
-        alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);   
-        //login으로 보내기 
+        alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);
+        //login으로 보내기
         return Promise.reject(response.error.msg);
       });
 
@@ -82,8 +83,8 @@ export class MyinfoService implements OnInit{
   }
   //안씀
   private handlerError(error: HttpErrorResponse){
-    let message = ''; 
-    //에러 유형 구분 
+    let message = '';
+    //에러 유형 구분
     if (error.error instanceof ErrorEvent){
       //클라이언트 측의 에러
       console.error(`Client-side error: ${error.error.message}`);
@@ -99,5 +100,5 @@ export class MyinfoService implements OnInit{
     message
   });
   }
-  
+
 }

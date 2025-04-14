@@ -13,7 +13,7 @@ export class User {
   providedIn: 'root'
 })
 export class AutoCompleteService {
-  private searchBarUrl:string = 'http://localhost:5000/searchBar/';
+  private searchBarUrl:string = `${API_BASE_URL}/searchBar/`;
 
   constructor(private http: HttpClient) { }
 

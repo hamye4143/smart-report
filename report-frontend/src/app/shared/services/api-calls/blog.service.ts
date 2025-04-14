@@ -2,27 +2,28 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import {API_BASE_URL} from "../../../../constants/api-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
-  private add_blog_url:string = 'http://localhost:5000/add_blog';
-  private get_all_blogs_url:string = 'http://localhost:5000/blogs';
-  private get_all_categories_url:string = 'http://localhost:5000/load_all_category';
-  private get_single_blog_url:string = 'http://localhost:5000/blog/';
-  private delete_blog_url:string = 'http://localhost:5000/delete_blog/';
-  private update_blog_url:string = 'http://localhost:5000/update_blog/';
-  private search_blog_url:string = 'http://localhost:5000/search_blogs/';
-  private file_url:string = 'http://localhost:5000/upload_files';
-  private download_url:string = 'http://localhost:5000/downloadfile';
-  private test_url:string = 'http://localhost:5000/test_url';
-  private search_file_url:string = 'http://localhost:5000/search';
-  private search_file_url2:string = 'http://localhost:5000/search2';
+  private add_blog_url:string = `${API_BASE_URL}/add_blog`;
+  private get_all_blogs_url:string = `${API_BASE_URL}/blogs`;
+  private get_all_categories_url:string = `${API_BASE_URL}/load_all_category`;
+  private get_single_blog_url:string = `${API_BASE_URL}/blog/`;
+  private delete_blog_url:string = `${API_BASE_URL}/delete_blog/`;
+  private update_blog_url:string = `${API_BASE_URL}/update_blog/`;
+  private search_blog_url:string = `${API_BASE_URL}/search_blogs/`;
+  private file_url:string = `${API_BASE_URL}/upload_files`;
+  private download_url:string = `${API_BASE_URL}/downloadfile`;
+  private test_url:string = `${API_BASE_URL}/test_url`;
+  private search_file_url:string = `${API_BASE_URL}/search`;
+  private search_file_url2:string = `${API_BASE_URL}/search2`;
 
-  private search_file_date_url:string = 'http://localhost:5000/searchByDate/';
-  // private category_search_url:string = 'http://localhost:5000/categorySearch/';
-  private category_search_url:string = 'http://localhost:5000/categorySearch';
+  private search_file_date_url:string = `${API_BASE_URL}/searchByDate/`;
+  // private category_search_url:string = `${API_BASE_URL}/categorySearch/`;
+  private category_search_url:string = `${API_BASE_URL}/categorySearch`;
 
 
 

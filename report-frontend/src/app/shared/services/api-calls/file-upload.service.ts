@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class FileUploadService {
 
-  private file_url:string = 'http://localhost:5000/upload_files';
+  private file_url:string = `${API_BASE_URL}/upload_files`;
 
   constructor(private http:HttpClient) { }
 

@@ -1,13 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {API_BASE_URL} from "src/constants/api-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StarService {
-  private star_rating_url:string = 'http://localhost:5000/star_rating';
-  private get_star_value_url:string ='http://localhost:5000/get_star_value/';
-  private check_star_value_url:string ='http://localhost:5000/has_rated_star';
+
+  private star_rating_url:string = `${API_BASE_URL}/star_rating`;
+  private get_star_value_url:string = `${API_BASE_URL}/get_star_value/`;
+  private check_star_value_url:string = `${API_BASE_URL}/has_rated_star`;
 
 
   constructor(private http:HttpClient) { }

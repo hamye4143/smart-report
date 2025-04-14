@@ -157,7 +157,7 @@ import { RedirectComponent } from './components/redirect/redirect.component';
     RedirectComponent
   ],
   imports: [
-  
+
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
@@ -178,7 +178,7 @@ import { RedirectComponent } from './components/redirect/redirect.component';
     AutocompleteLibModule,
     ToastrModule.forRoot(),
     JwtModule.forRoot({
-      //모든 HTTP 요청에 헤더 안에 있는 auth_token이 보내질 것임 --> 유저는 CRUD 작업을 할 수 있다. 
+      //모든 HTTP 요청에 헤더 안에 있는 auth_token이 보내질 것임 --> 유저는 CRUD 작업을 할 수 있다.
       config: {
         tokenGetter: function  tokenGetter() {
              return localStorage.getItem('auth_token');},

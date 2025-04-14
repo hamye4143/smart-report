@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class CommentService {
 
-  private add_comment_url:string = 'http://localhost:5000/add_comment';
-  private add_recomment_url:string = 'http://localhost:5000/add_recomment';
-  private get_comments_url:string = 'http://localhost:5000/get_all_comments/';
-  private update_comment_url:string = 'http://localhost:5000/update_comment/';
-  private delete_comment_url:string = 'http://localhost:5000/delete_comment/';
+  private add_comment_url:string = `${API_BASE_URL}/add_comment`;
+  private add_recomment_url:string = `${API_BASE_URL}/add_recomment`;
+  private get_comments_url:string = `${API_BASE_URL}/get_all_comments/`;
+  private update_comment_url:string = `${API_BASE_URL}/update_comment/`;
+  private delete_comment_url:string = `${API_BASE_URL}/delete_comment/`;
 
 
 
@@ -21,7 +21,7 @@ export class CommentService {
     return this.http.post(this.add_comment_url,blog_props);
   }
 
-  add_recomment(blog_props){ 
+  add_recomment(blog_props){
     return this.http.post(this.add_recomment_url,blog_props);
   }
 

@@ -22,8 +22,8 @@ export class ChartService implements OnInit {
   // service: any;
   visitCountList=[];
   visitDateList=[];
-  private todayVisitorUrl:string = 'http://localhost:5000/todayVisitor';
-  private searchTopKeywordUrl:string = 'http://localhost:5000/searchTopKeyword';
+  private todayVisitorUrl:string = `${API_BASE_URL}/todayVisitor`;
+  private searchTopKeywordUrl:string = `${API_BASE_URL}/searchTopKeyword`;
 
 
   constructor(public service:StatisticsService,private http: HttpClient){
@@ -38,7 +38,7 @@ export class ChartService implements OnInit {
     console.log('chartservice. getData')
     this.service.gettodayVisitor().subscribe((response)=>
     {
-      console.log('response',response);   
+      console.log('response',response);
       this.visitCountList = response['visit_count_list'];
       this.visitDateList = response['visit_date_list'];
       console.log('visitCountList',this.visitCountList,this.visitDateList)
@@ -78,5 +78,5 @@ export class ChartService implements OnInit {
   }
 
 
-  
+
 }
