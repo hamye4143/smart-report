@@ -19,6 +19,7 @@ def create_app():
     app = Flask(__name__)
     # error = ErrorHandler(app, dispatcher='urlprefix')
 
+
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdatabase.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
@@ -52,7 +53,8 @@ def create_app():
     # Allowed extension you can set your own
     #ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-    CORS(app)
+    CORS(app, origins=["https://smart-report-5c622.web.app"])
+
 
 
     from api.Blog.blog_routes import blogs
