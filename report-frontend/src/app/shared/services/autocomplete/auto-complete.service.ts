@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import {API_BASE_URL} from "constants/api-url";
+
 export interface IUserResponse {
   total: number;
   results: User[];

@@ -5,6 +5,7 @@
     "types": [],
     "baseUrl": "src", //
     "paths": {
+      "src/*": ["./*"],                // ✅ 이 줄 추가!
       "constants/*": ["constants/*"],
       "environments/*": ["environments/*"]
     }

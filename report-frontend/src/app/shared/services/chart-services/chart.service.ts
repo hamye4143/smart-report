@@ -1,8 +1,7 @@
-import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
-import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { StatisticsService } from '../api-calls/statistics.service';
+import {HttpClient} from '@angular/common/http';
+import {Injectable, OnInit} from '@angular/core';
+import {StatisticsService} from '../api-calls/statistics.service';
+import {API_BASE_URL} from "constants/api-url";
 
 export interface LineChartData {
   series: Series[],
