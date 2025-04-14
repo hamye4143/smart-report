@@ -3,12 +3,15 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
-    "baseUrl": "src", //
+    "baseUrl": "src",
     "paths": {
-      "src/*": ["./*"],                // ✅ 이 줄 추가!
+      "src/*": ["./*"],
       "constants/*": ["constants/*"],
       "environments/*": ["environments/*"]
     }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": false
   },
   "include": [
     "src/**/*.ts"
