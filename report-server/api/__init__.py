@@ -53,7 +53,8 @@ def create_app():
     # Allowed extension you can set your own
     #ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-    CORS(app, origins=["https://smart-report-5c622.web.app"])
+    CORS(app, origins=["https://smart-report-5c622.web.app"], supports_credentials=True)
+
 
 
 
