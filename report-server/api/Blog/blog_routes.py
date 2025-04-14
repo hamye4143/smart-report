@@ -1,26 +1,27 @@
-from flask import Blueprint,request,jsonify,make_response
-from flask_jwt_extended import jwt_required
-from api import db
-from api.Blog.blog_model import Blog
-from api.Blog.Comment.comment_model import Comment
-from api.Blog.Category.category_model import Category
-from api.Blog.Star.star_routes import get_star_avg
-from api.File.file_model import File
-from api.Blog_File.download_table import DownloadTable
-from api.Tag.tag_model import Tag
-from sqlalchemy import or_
-from api.User.user_model import User
-import os
-from werkzeug.utils import secure_filename
-from api import MY_CONSTANT,create_app
 import json
+import os
 from uuid import uuid4
+
+from flask import Blueprint, request, jsonify
 from flask import send_from_directory
-from sqlalchemy import and_
+from flask_jwt_extended import jwt_required
+from sqlalchemy import or_
+from werkzeug.utils import secure_filename
+
+from api import db
+from api.Blog.Category.category_model import Category
+from api.Blog.Comment.comment_model import Comment
+from api.Blog.Star.star_routes import get_star_avg
+from api.Blog.blog_model import Blog
+from api.Blog_File.download_table import DownloadTable
+from api.File.file_model import File
+from api.Tag.tag_model import Tag
 
 blogs= Blueprint('blogs',__name__)
 
-
+@blogs.route("/ping", methods=["GET"])
+def ping():
+    return {"message": "pong"}
 
 @blogs.route('/search_blogs/<string:contents>', methods=["GET"])
 # @jwt_required

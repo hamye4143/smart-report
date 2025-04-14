@@ -52,7 +52,12 @@ def create_app():
     # Allowed extension you can set your own
     #ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-    CORS(app)
+    CORS(app, resources={
+        r"/*": {
+            "origins": ["https://smart-report-5c622.web.app"],
+            "supports_credentials": True
+        }
+    })
 
 
     from api.Blog.blog_routes import blogs
