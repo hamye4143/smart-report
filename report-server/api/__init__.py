@@ -15,7 +15,7 @@ MY_CONSTANT=42
 
 
 
-def create_app(*args, **kwargs):
+def create_app():
     app = Flask(__name__)
     # error = ErrorHandler(app, dispatcher='urlprefix')
     # CORS(app, origins=["https://smart-report-5c622.web.app"], supports_credentials=True)
