@@ -6,6 +6,12 @@
         <mat-tab label="Login">
           <h4 class="auth-page__group-title">Welcome!</h4>
           <p class="auth-page__group-sub-title">로그인</p>
+
+          <!-- 계정 안내 문구 -->
+          <div style="font-size: 13px; color: gray; margin-bottom: 8px;">
+            예시 계정: <strong>123@naver.com</strong> / 비밀번호: <strong>123</strong>
+          </div>
+
           <!--child의 sendLoginForm 가 output 하면 여기의 sendLoginForm 에서 받음 -->
           <app-login-form (sendLoginForm)="sendLoginForm($event)"></app-login-form>
         </mat-tab>
@@ -16,8 +22,7 @@
           <app-sign-form (sendSignForm)="sendSignForm($event)"></app-sign-form>
         </mat-tab>
       </mat-tab-group>
-
-      <p class="auth-page__footer-title">© 2014-{{todayDate}} Flatlogic, LLC. All rights reserved.</p>
+      <p class="auth-page__footer-title">©Smart-Report. All rights reserved.</p>
     </div>
   </div>
   <div class="auth-page__logo">
