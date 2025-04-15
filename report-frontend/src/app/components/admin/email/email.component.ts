@@ -35,7 +35,7 @@ export class EmailComponent implements OnInit {
   @ViewChild("fileDropRef", { static: false }) fileDropEl: ElementRef;
 
   constructor(
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private emailService: EmailService,
     private auth_service : AuthService,
     private myinfo_service : MyinfoService,
@@ -76,7 +76,7 @@ export class EmailComponent implements OnInit {
       this.receivers.splice(index, 1);
     }
   }
-  
+
   //
 
   getFileDetails(e) {
@@ -96,7 +96,6 @@ export class EmailComponent implements OnInit {
     this
       .myFiles
       .splice(this.myFiles.indexOf(file), 1);
-    console.log(this.myFiles)
 
     // const index = this.tags.indexOf(tag); if (index >= 0) {
     // this.tags.splice(index, 1); }
@@ -114,7 +113,6 @@ export class EmailComponent implements OnInit {
  * handle file from browsing
  */
   fileBrowseHandler(files) {
-    console.log('fileBrowseHandler')
     this.down = true;
 
     this.prepareFilesList(files);
@@ -127,7 +125,6 @@ export class EmailComponent implements OnInit {
         .myFiles
         .push(item);
     }
-    console.log(this.myFiles)
     this.fileDropEl.nativeElement.value = "";
   }
 
@@ -158,7 +155,7 @@ export class EmailComponent implements OnInit {
     this.from = this.from == undefined? '': this.from.trim();
 
 
-    if (!this.title || !this.content || !this.from || this.receivers.length < 1) { 
+    if (!this.title || !this.content || !this.from || this.receivers.length < 1) {
         this.notificationService.openSnackBar('빈값이 있습니다.');
         return false;
     }
@@ -173,7 +170,7 @@ export class EmailComponent implements OnInit {
       frmData.append("title", this.title)
       frmData.append("content", this.content)
       frmData.append("sender", this.from)
-      frmData.append("receivers",JSON.stringify(this.receivers)) //여러면 
+      frmData.append("receivers",JSON.stringify(this.receivers)) //여러면
       frmData.append("user", JSON.stringify(this.loginUser))
       //files
       for (var i = 0; i < this.myFiles.length; i++) {
@@ -181,18 +178,16 @@ export class EmailComponent implements OnInit {
       }
       this.emailService.sendEmail(frmData).subscribe(
         (response: any) => {
-          console.log('response', response)
           this.wellSent = true;
           this.ngOnInit();
-  
+
         },
         error => {
-          console.log('error',error.error)
           this.notificationService.openSnackBar(error.error);
         }
       )
     }
-    
+
   }
 
   enableButton() {

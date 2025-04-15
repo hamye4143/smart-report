@@ -18,7 +18,6 @@ export class TreeFunctionService {
   }
 
   findNodeMaxId(node: TreeData[]) {
-    console.log('node',node)
     if(node[0]){
       const flatArray = this.flatJsonArray([], node);
       const flatArrayWithoutChildren = [];
@@ -26,8 +25,8 @@ export class TreeFunctionService {
         flatArrayWithoutChildren.push(element.Id);
       });
         return Math.max(...flatArrayWithoutChildren);
- 
-    }else{ 
+
+    }else{
         return 0;
     }
   }

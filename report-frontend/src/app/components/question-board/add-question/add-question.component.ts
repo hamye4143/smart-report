@@ -49,15 +49,13 @@ export class AddQuestionComponent extends SubscriptionBaseComponent implements O
           this.loginUser = user;
         });
     } else {
-      //로그인 안함 
+      //로그인 안함
       this.router.navigateByUrl('login');
     }
   }
 
   processFile(imageInput: any) {
-    console.log('imageINput', imageInput)
     this.selectedFile = imageInput.files[0];
-    console.log('imageINput', this.selectedFile)
 
     this.previewImageLoad();
   }
@@ -77,7 +75,7 @@ export class AddQuestionComponent extends SubscriptionBaseComponent implements O
       }
 
     });
-    //알림창 닫으면 
+    //알림창 닫으면
     dialogRef.afterClosed().subscribe((confirm: boolean) => {
       if (confirm) {
         this.submit_blog();
@@ -118,7 +116,6 @@ export class AddQuestionComponent extends SubscriptionBaseComponent implements O
 
 
       feature_image = this.selectedFile
-      console.log('selectedFile', this.selectedFile)
 
 
 
@@ -129,7 +126,6 @@ export class AddQuestionComponent extends SubscriptionBaseComponent implements O
       frmData.append("user", JSON.stringify(this.loginUser))
 
 
-      console.log(frmData['feature_image'])
 
       this.subscription = this.questionService.addQuestion(frmData).subscribe(
         (response: any) => {

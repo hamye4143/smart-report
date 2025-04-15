@@ -40,14 +40,14 @@ export class SearchBarComponent implements OnInit {
   private searchedFiles: Array<File> = [];
   private search_:string ="";
   show_spinner:boolean = false;
-  @Output() searchEvent = new EventEmitter(); //child- > parent 
+  @Output() searchEvent = new EventEmitter(); //child- > parent
   @Input() keyword: string;
   @Input() i: string;
 
 
   keyword2 = 'name';
-  states = [  //starts : fileName이 모든일때는 모든 것에서 , 제목일때는 제목ㄴ에서만, 글쓴이할때는 사람이미지, 파일이미지는 파일이미지  
-    
+  states = [  //starts : fileName이 모든일때는 모든 것에서 , 제목일때는 제목ㄴ에서만, 글쓴이할때는 사람이미지, 파일이미지는 파일이미지
+
     {
       name: 'Arkansas',
       population: '2.978M',
@@ -68,14 +68,14 @@ export class SearchBarComponent implements OnInit {
       population: '27.47M',
       flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
     }
-    
+
   ];
 
   /*예시2*/
   filteredUsers: User[] = [];
   usersForm: FormGroup;
   isLoading = false;
-  
+
   constructor(
     private blog_service:BlogService,
     private dialog: MatDialog,
@@ -117,9 +117,8 @@ export class SearchBarComponent implements OnInit {
   displayFn(user: User) {
     if (user) { return user.name; }
   }
-  
+
   ChangingValue(event) {
-    console.log(event)
   }
   searchFunc() {
     this.search_ =  this.search_ ? this.search_.trim() : ""
@@ -127,7 +126,7 @@ export class SearchBarComponent implements OnInit {
       search_ : this.search_,
       i_ : this.selectedValue
     }
-    
+
     if (this.search_ != "") {
       this.searchEvent.emit(data);
 
@@ -137,21 +136,20 @@ export class SearchBarComponent implements OnInit {
   }
 
   search2() {
-    
-    console.log('this.search_',this.search_)
-    if(this.search_ !=""){ 
+
+    if(this.search_ !=""){
 
         this.router.navigate(['/search-list/'+this.search_]);
 
         this.search_ = this.search_.trim();
-  
+
 
         this.show_spinner = true;
 
 
 
     }
-    
+
   }
 
 

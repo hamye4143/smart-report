@@ -64,7 +64,6 @@ export class PieChartComponent implements OnInit {
     }
 
     this.pieChartData.then(response => {
-      console.log('response',response)
 
       this.apexPieChartOptions = {
         series: response['seriesList'],//this.pieChartData.series,
@@ -91,5 +90,5 @@ export class PieChartComponent implements OnInit {
 
     });
   }
-  
+
 }

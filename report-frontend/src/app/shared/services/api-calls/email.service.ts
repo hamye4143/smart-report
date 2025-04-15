@@ -19,7 +19,6 @@ export class EmailService {
   }
 
   getAllEmails(userProps){ //보낸 메일 함
-    console.log('userProps',userProps)
     return this.http.post(this.getAllEmailsUrl, userProps, {
       headers: this.authService.getAuthHeaders()
     });

@@ -190,7 +190,7 @@ export class AddBlogComponent implements OnInit {
     }
 
     async submit_blog() {
-        
+
         if (this.submitCheck()) {
 
             const frmData = new FormData();
@@ -252,7 +252,7 @@ export class AddBlogComponent implements OnInit {
                         this.tags = [];
                         this.loginUser = null;
                         this.myFiles = [];
-                        
+
                         this.notificationService.openSnackBar('업로드 되었습니다.')
                         // login successful so redirect to return url
                         this.router.navigateByUrl('blog/' + this.blog_id);
@@ -291,7 +291,6 @@ export class AddBlogComponent implements OnInit {
         this
             .myFiles
             .splice(this.myFiles.indexOf(file), 1);
-        console.log(this.myFiles)
 
         // const index = this.tags.indexOf(tag); if (index >= 0) {
         // this.tags.splice(index, 1); }
@@ -312,13 +311,11 @@ export class AddBlogComponent implements OnInit {
             .subscribe(
                 //next
                 (response : any) => { //콜백 의미
-                    console.log('response', response)
 
                     //this.router.navigateByUrl('blog/'+this.blog_id);
                 },
                 //error
                 error => {
-                    console.error('[FileService.upload_files]', error)
                     this.show_spinner = false;
                     this.notificationService.openSnackBar(error.error)
                 },
@@ -351,7 +348,6 @@ export class AddBlogComponent implements OnInit {
                 .myFiles
                 .push(item);
         }
-        console.log(this.myFiles)
         this.fileDropEl.nativeElement.value = "";
     }
 

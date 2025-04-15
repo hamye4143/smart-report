@@ -44,7 +44,7 @@ export class UpdateBlogComponent implements OnInit {
 
 
 
-  private tags: []; // 추가 
+  private tags: []; // 추가
 
   private blog_props = {
     title: "",
@@ -145,12 +145,10 @@ export class UpdateBlogComponent implements OnInit {
     this.blog_service.get_single_blog(this.blog_id).subscribe(
 
       (response: any) => {
-        console.log('response', response.single_blog)
         this.blog_props.title = response.single_blog.title;
         this.blog_props.content = response.single_blog.content;
         this.blog_props.feature_image = response.single_blog.feature_image;
         this.blog_props.category = response.single_blog.category;
-        console.log('blog_props.category',this.blog_props.category)
         response.single_blog.files.forEach(element => {
           this.prevFiles.push(element)
         });
@@ -202,7 +200,7 @@ export class UpdateBlogComponent implements OnInit {
       }
 
       const frmTag = []
-      //추가 --> update 
+      //추가 --> update
       this.tags.map((element) => {
         blog.tags.push(element["name"])
         frmTag.push(element["name"])
@@ -246,7 +244,6 @@ export class UpdateBlogComponent implements OnInit {
   }
 
   setCategoryList(event) {
-    console.log('event',event)
     this.categoryList = event;
   }
 
@@ -254,15 +251,12 @@ export class UpdateBlogComponent implements OnInit {
  * on file drop handler
  */
   onFileDropped($event) {
-    console.log('onFileDropped', $event)
     this.prepareFilesList($event);
   }
   /**
   * handle file from browsing
   */
   fileBrowseHandler(files) {
-
-    console.log('fileBrowseHandler', files)
     this.prepareFilesList(files);
 
   }
@@ -273,25 +267,23 @@ export class UpdateBlogComponent implements OnInit {
         .myFiles
         .push(item);
     }
-    console.log('this.myFiles', this.myFiles)
     this.fileDropEl.nativeElement.value = "";
   }
 
   remove_file_all(): void {
-    
+
     this.prevFiles.forEach(element => {
       this.removedPrevFileIdList.push(element.id)
     });
     this.myFiles = [];
     this.prevFiles = [];
-  
+
   }
 
   remove_file(file): void {
     this.myFiles.splice(this.myFiles.indexOf(file), 1);
   }
   remove_file_prev(file): void {
-    console.log(file)
     this.removedPrevFileIdList.push(file.id)
     this.prevFiles.splice(this.prevFiles.indexOf(file), 1);
   }

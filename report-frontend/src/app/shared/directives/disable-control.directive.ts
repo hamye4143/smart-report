@@ -7,7 +7,6 @@ import { NgControl } from '@angular/forms';
 export class DisableControlDirective {
 
   @Input() set disableControl( condition : boolean ) {
-    console.log('condition',condition)
     const action = condition ? 'disable' : 'enable';
     this.ngControl.control[action]();
   }

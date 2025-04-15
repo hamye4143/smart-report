@@ -48,7 +48,6 @@ export class TreeDataService {
 
   object(data){
     var o = {};
-    console.log('data',data)
     data.forEach(element => {
       element.Children = o[element.Id] && o[element.Id].Children;
       o[element.Id] = element;

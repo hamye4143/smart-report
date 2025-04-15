@@ -54,7 +54,6 @@ export class AllBlogsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ngOnInit')
     this.load_all_blogs();
 
     // get return url from route parameters or default to '/'
@@ -90,7 +89,6 @@ export class AllBlogsComponent implements OnInit {
   }
   addEvent(filterValue: string, event) {
     if (event.value != undefined) {
-      console.log(event.value)
       filterValue = this.datepipe.transform(filterValue, 'M/d/yyyy');
       this.dateValue = filterValue;
     }
@@ -100,7 +98,6 @@ export class AllBlogsComponent implements OnInit {
   }
 
   public customSort = (event) => {
-    console.log(event);
   }
 
   public doFilter = (value: string) => {

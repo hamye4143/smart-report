@@ -38,7 +38,6 @@ export class LayoutComponent implements OnInit {
         private router: Router,
     ) {
         this.isAdmin = localStorage.getItem('isAdmin');
-        console.log('this.admin', this.isAdmin)
 
         this.userName = JSON.parse(localStorage.getItem('user_info'))['name'];
         this.mobileQuery = this
@@ -106,7 +105,6 @@ export class LayoutComponent implements OnInit {
             .getAllSorts()
             .subscribe((response: any) => {
                 this.menuData = response['serialized_data'];
-                console.log(this.menuData);
                 this
                     .menuData
                     .forEach(element => {
@@ -148,8 +146,7 @@ export class LayoutComponent implements OnInit {
     }
 
     searchEvent(event) {
-        console.log('event',event);
-        //search 
+        //search
         this.router.navigate(['/search-list'], { queryParams: { kw: event, page: 1, sortBy: 1, row: 10, i:'all' } });
         // this.router.navigate(['/search-list'], { queryParams: { kw: this.keyword, page: this.page, sortBy :this.sortBy, row:this.row, i:this.i } });
 

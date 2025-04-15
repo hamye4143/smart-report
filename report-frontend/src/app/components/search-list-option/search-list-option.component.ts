@@ -42,29 +42,26 @@ export class SearchListOptionComponent implements OnInit {
   @Output() counterChange2 = new EventEmitter();
   @Input()
   get test() {
-    console.log('get-counter', this.testValue) //여기 컴포넌트에서 변경되면 계속 감지 
     return this.testValue;
   }
 
   set test(val) {
 
-    console.log('val', val);
     this.testValue = val;
 
     this.value = this.testValue.value;
     this.value3 = this.testValue.value3;
     this.value4 = this.testValue.value4;
     this.value5 = this.testValue.value5;
-    console.log('set-counter', this.testValue);
     this.counterChange2.emit(this.testValue);
   }
 
   // @Output() counterChange = new EventEmitter();
   // @Input()
   // get counter() {
-  //   //console.log('get-counter') //여기 컴포넌트에서 변경되면 계속 감지 
+  //   //console.log('get-counter') //여기 컴포넌트에서 변경되면 계속 감지
   //   //return this.value;
-  //   return this.counterValue; 
+  //   return this.counterValue;
   // }
 
   // set counter(val) {
@@ -75,15 +72,13 @@ export class SearchListOptionComponent implements OnInit {
   // }
 
   // valueChange(value: number,type:string ): void {
-  //   //this.counter= value; // ng5-slider의 값을 counter 함수에 넣기    
+  //   //this.counter= value; // ng5-slider의 값을 counter 함수에 넣기
   //   //console.log('this.counter',this.counter)
   //   //this.counter = value;
   //   // this.test['value'] = value;
   // }
 
   valueChange(value: number, type: string): void {
-    console.log('valueChange', value);
-    console.log('type,', type);
     this.test[type] = value;
   }
 
@@ -160,17 +155,13 @@ export class SearchListOptionComponent implements OnInit {
   }
 
   addEvent(filterValue: string, event) {
-    console.log('addEvent')
     if (event.value != undefined) {
       filterValue = this.datepipe.transform(filterValue, 'yyyy-M-dd');
-      console.log(filterValue)
       this.date = filterValue
     }
-    console.log('filterValue', filterValue);
-
   }
   dateCheck() {
-    //날짜값이 둘 다 null이면 날짜 검색을 안하고 싶은것이므로 ok 
+    //날짜값이 둘 다 null이면 날짜 검색을 안하고 싶은것이므로 ok
     if (this.range.value.start == null && this.range.value.end == null) {
       return true;
     } else if (this.range.value.start != null && this.range.value.end != null) {
@@ -183,11 +174,10 @@ export class SearchListOptionComponent implements OnInit {
 
   apply() {
     if (this.dateCheck()) {
-      console.log('op_starValue', this.value)
       const date = JSON.stringify(this.range.value);
 
       // const options = {
-      //   value: this.value, 
+      //   value: this.value,
       //   value2: this.value2,
       //   value3: this.value3,
       //   value4: this.value4,
@@ -196,7 +186,7 @@ export class SearchListOptionComponent implements OnInit {
       // }
 
       const options = {
-        value: this.testValue.value, 
+        value: this.testValue.value,
         value2: this.value2,
         value3: this.testValue.value3,
         value4: this.testValue.value4,
@@ -204,10 +194,8 @@ export class SearchListOptionComponent implements OnInit {
         date: date
       }
 
-      console.log('options', options);
       this.blogService.search_files_options(this.keyword, this.page, this.sortBy, this.row, this.i, options).subscribe(
         (response: any) => {
-          console.log('response', response);
           this.result.emit(response)
 
           //다시 로딩

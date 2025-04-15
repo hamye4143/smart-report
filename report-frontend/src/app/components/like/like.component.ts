@@ -33,13 +33,12 @@ export class LikeComponent implements OnInit {
       this.blog_id = response.id;
     })
 
-    //like 개수 
+    //like 개수
     this.set_like_counts();
 
 
     //like 상태 가져오기
     this.like_service.is_like(this.blog_id).subscribe((response) => {
-      console.log(response)
       this.isLike = response['like_chk'];
     })
 
@@ -53,15 +52,13 @@ export class LikeComponent implements OnInit {
       this.like_service.like_post(this.blog_id)
         .subscribe(
           data => {
-            console.log(data)
-            //색 변화 
+            //색 변화
             event.target.classList.add('like');
             this.isLike = true;
-            //총 몇개인지 다시 불러오기 
+            //총 몇개인지 다시 불러오기
             this.set_like_counts();
           },
           error => {
-            console.log(error.error);
             this.notificationService.openSnackBar(error.error);
             //this.router.navigate(['/login']);
           }
@@ -70,18 +67,15 @@ export class LikeComponent implements OnInit {
       this.like_service.unlike_post(this.blog_id)
         .subscribe(
           data => {
-            console.log(data)
-            //색 변화 
+            //색 변화
             event.target.classList.remove('like');
             this.isLike = false;
             this.set_like_counts();
 
           },
           error => {
-            console.log(error.error);
             this.notificationService.openSnackBar(error.error)
             this.router.navigate(['/login']);
-            //this.open_alert_dialog(error.error);
           }
         );
     }
@@ -117,6 +111,6 @@ export class LikeComponent implements OnInit {
     });
   }
 
-  
+
 
 }

@@ -96,7 +96,6 @@ export class BlogService {
 
 
   searchFilesByDate(date:string){
-    console.log('date',date);
     return this.http.get(this.search_file_date_url + date, {
       headers: this.authService.getAuthHeaders()
     }).pipe(catchError(this.handlerError));

@@ -19,14 +19,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth_service:AuthService,
-    private router:Router, 
+    private router:Router,
     private dialog:MatDialog,
     private notificationService: NotificationService
-    ) 
+    )
   {
 
     const savedUserEmail = localStorage.getItem('savedUserEmail');
-    console.log('savedUserEmail',savedUserEmail)
 
     this.signInForm = new FormGroup({
       id: new FormControl(savedUserEmail, [Validators.required, Validators.email]),
@@ -58,25 +57,22 @@ export class LoginComponent implements OnInit {
 
     this.auth_service.signUp(a).subscribe(
       (response:any) =>{
-        console.log('response',response)
         this.notificationService.openSnackBar('회원가입 성공!');
         this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/login']);
         });
       },
-      error => { //에러 발생 
-        //에러메시지 받아오기 
-        console.log('[AuthService.signUp]'+error.message);
-        //알림창 띄우기 
+      error => { //에러 발생
+        //에러메시지 받아오기
+        //알림창 띄우기
         this.notificationService.openSnackBar(error.message);
       }
     );
-    
+
 
   }
 
   sendLoginForm(a){//submit
-      console.log(a);
 
     //if (this.signInForm.valid) {
         // let credentials = {
@@ -87,12 +83,11 @@ export class LoginComponent implements OnInit {
           email:a.id,
           password: a.password
         }
-        console.log('credentials',credentials)
 
         // let rememberMe = this.signInForm.value.rememberMe;
         const rememberMe = a.rememberMe;
-        //로그인 
-        this.auth_service.login(credentials).subscribe( //subscribe함수를 실행할때 http요청을 함 
+        //로그인
+        this.auth_service.login(credentials).subscribe( //subscribe함수를 실행할때 http요청을 함
           (response:any)=>{
             if(response.token){
                 if (rememberMe) {
@@ -105,14 +100,12 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('user_info',user_info);
               const isAdmin = JSON.parse(localStorage.getItem('user_info'))['is_admin'];
               localStorage.setItem('isAdmin',isAdmin);
-              console.log('localStorage',localStorage);
               this.router.navigate(['/home']);
             }
         },
         error => {
-          console.log('[AuthService.login]', error);
           //('[로그인 실패]\n' + error.msg);
-          this.open_alert_dialog('로그인 실패 '+error.message);   
+          this.open_alert_dialog('로그인 실패 '+error.message);
 
         }
         );
@@ -128,14 +121,14 @@ export class LoginComponent implements OnInit {
   //     (response:any)=>{
   //       if(response.token){
   //         console.log('user_info',response.user_info);
-  //         localStorage.setItem('auth_token', response.token); //데이터 저장 
+  //         localStorage.setItem('auth_token', response.token); //데이터 저장
   //         this.router.navigate(['/admin']);
   //       }
   //   },
   //   error => {
   //     console.log('[AuthService.login]', error);
   //     //('[로그인 실패]\n' + error.msg);
-  //     this.open_alert_dialog('로그인 실패\n<br>'+error.message);   
+  //     this.open_alert_dialog('로그인 실패\n<br>'+error.message);
 
   //   }
   //   );
@@ -150,7 +143,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  
+
 
 
 }

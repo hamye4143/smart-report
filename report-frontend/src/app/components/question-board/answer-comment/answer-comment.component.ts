@@ -51,9 +51,6 @@ export class AnswerCommentComponent implements OnInit {
   async ngOnInit() {
     this.initGroupedForm();
 
-    console.log('isSelected', this.isSelected)
-    console.log('questionId', this.visibleAnswer)
-
 
     if (this.auth_service.is_logged_in()) {
       const a = await this.myinfo_service.getUser().then(user => {
@@ -73,10 +70,8 @@ export class AnswerCommentComponent implements OnInit {
   }
 
   loadDatas() {
-    console.log('loadDatas.questionId', this.questionId)
     this.questionService.getAllAnswers(this.questionId).subscribe(
       (response) => {
-        console.log("response.",response)
         this.serializedData = response['serializedData'];
         this.serializedData.forEach(element => {
           this.idList.push(element.id)
@@ -86,7 +81,6 @@ export class AnswerCommentComponent implements OnInit {
     );
   }
   initGroupedForm(): void {
-    console.log('initGroupedForm')
 
     this.groupedForm = new FormGroup({
       title: new FormControl(this.identity.title),
@@ -96,13 +90,8 @@ export class AnswerCommentComponent implements OnInit {
 
   async submitAnswer() {
 
-    //공통으로 빼기 
-    if (this.loginUser && this.loginUser['is_admin'] == 'Y') { //로그인하고, 관리자라면 
-
-
-      console.log('this.loginUser', this.loginUser)
-      console.log('this.loginUser.id', this.loginUser.id)
-
+    //공통으로 빼기
+    if (this.loginUser && this.loginUser['is_admin'] == 'Y') { //로그인하고, 관리자라면
 
 
       const answer = {
@@ -112,12 +101,10 @@ export class AnswerCommentComponent implements OnInit {
         questionId: this.questionId
       }
 
-      console.log('answer', answer)
       this.show_spinner = true;
 
       this.questionService.addAnswer(answer).subscribe(
         (response: any) => {
-          console.log('response', response)
           this.title = "";
           this.content = "";
           this.show_spinner = false;
@@ -130,7 +117,6 @@ export class AnswerCommentComponent implements OnInit {
 
     } else {
       this.notificationService.openSnackBar('권한이 없습니다.');
-      console.log('noLogin')
       this.router.navigateByUrl('login');
 
     }
@@ -157,48 +143,40 @@ export class AnswerCommentComponent implements OnInit {
   }
 
   checkAnswer(answerId) {
-    console.log(answerId + '채택')
     this.questionService.checkAnswerSelected(answerId).subscribe(
       (response: any) => {
-        console.log('response', response)
         this.isSelected = true;
         this.loadDatas();
       });
   }
 
   updateGroupedEdition(answerId): void {
-    console.log('updateGroupedEdition');
     this.identity = this.groupedForm.value;
-    console.log('this.identity', this.identity)
     this.questionService.updateSingleAnswer(this.identity, answerId).subscribe(
       (response: any) => {
-        console.log('response', response)
       });
 
 
   }
 
   cancelGroupedEdition(): void {
-    console.log('cancelGroupedEdition');
     this.groupedForm.setValue(this.identity);
   }
 
   handleModeChange(mode: 'view' | 'edit', answerId: number): void {
-    //지금 클릭한 것만 editMode로, 클릭했던거나, 그 전껀 모두 viewmode로 
+    //지금 클릭한 것만 editMode로, 클릭했던거나, 그 전껀 모두 viewmode로
     // if(){
 
     // }
     this.cancelGroupedEdition()
     this.mode = mode;
-    console.log('handleModeChange', this.mode);
-    console.log('clickedId', answerId)
     if (this.mode == 'edit') {
       this.clickedId = answerId;
     }
   }
 
   async deleteSingleAnswer(answerId) {
-    //글쓴이 인지 확인 
+    //글쓴이 인지 확인
     this.questionService.deleteSingleAnswer(answerId).subscribe(
       (response) => {
         if (response) {
@@ -223,29 +201,27 @@ export class AnswerCommentComponent implements OnInit {
   */
 
   updateMode(answerId,content,title){
-    console.log('answerId',answerId)
-    console.log('answerId',content)
 
     //???
     this.idList.forEach(element => {
       this.cancelEdit(element)
     });
-    
-     
+
+
     const viewEl = document.getElementById("viewAnswer_"+answerId);
     const editEl = document.getElementById("editAnswer_"+answerId);
     this.contentPlaceholder = content;
     this.titlePlaceholder = title;
-    
+
     this.renderer.setStyle(viewEl, 'display', 'none');
-    this.renderer.setStyle(editEl, 'display', 'block');    
+    this.renderer.setStyle(editEl, 'display', 'block');
   }
   cancelEdit(answerId){
     const viewEl = document.getElementById("viewAnswer_"+answerId);
     const editEl = document.getElementById("editAnswer_"+answerId);
 
     this.renderer.setStyle(viewEl, 'display', 'block');
-    this.renderer.setStyle(editEl, 'display', 'none');    
+    this.renderer.setStyle(editEl, 'display', 'none');
 
   }
 
@@ -256,7 +232,7 @@ export class AnswerCommentComponent implements OnInit {
     }
 
     this.questionService.updateSingleAnswer(data,answerId).subscribe(
-      (response:any)=>{ 
+      (response:any)=>{
         this.loadDatas();
       },
       error=>{

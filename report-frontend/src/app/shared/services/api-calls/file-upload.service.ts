@@ -12,7 +12,6 @@ export class FileUploadService {
   constructor(private http:HttpClient) { }
 
   upload_files(files){
-    console.log('files',files)
     return this.http.post(this.file_url, files);
   }
 }

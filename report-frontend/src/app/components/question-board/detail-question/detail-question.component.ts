@@ -66,9 +66,7 @@ export class DetailQuestionComponent implements OnInit {
     if (this.auth_service.is_logged_in()) { //로그인했다면
       const a = await this.myinfo_service.getUser()
         .then(user => {
-          console.log('asfdasd')
           this.loginUser = user;
-          console.log('this.', this.loginUser)
         })
         .catch(response => {
           this.router.navigate(['/login']);
@@ -78,7 +76,6 @@ export class DetailQuestionComponent implements OnInit {
 
     this.active_route.params.subscribe((response) => {
       this.questionId = response.id;
-      console.log('this.questionId', this.questionId)
     })
 
     this.getQuestionDetail();
@@ -87,7 +84,7 @@ export class DetailQuestionComponent implements OnInit {
   }
 
   initGroupedForm(): void {
-  
+
     this.groupedForm = new FormGroup({
       title: new FormControl(this.identity.title),
       content: new FormControl(this.identity.content)
@@ -98,8 +95,6 @@ export class DetailQuestionComponent implements OnInit {
 
     this.questionService.getSingleQuestion(this.questionId).subscribe(
       (response: any) => {
-        console.log(response)
-        console.log(response.questionData.path);
         this.questionProps.title = response.questionData.title;
         this.questionProps.content = response.questionData.content;
         this.questionProps.feature_image = response.questionData.path;
@@ -113,7 +108,6 @@ export class DetailQuestionComponent implements OnInit {
 
 
         this.isSelected = response.questionData.state == 3;
-        console.log('this.isSelected', this.isSelected)
         this.initGroupedForm();
 
 
@@ -122,34 +116,28 @@ export class DetailQuestionComponent implements OnInit {
   }
 
   updateGroupedEdition(): void {
-    console.log('updateGroupedEdition');
     this.identity = this.groupedForm.value;
-    console.log('this.identity',this.identity)
     const frmData = new FormData();
 
     frmData.append("title", this.identity.title)
     frmData.append("content", this.identity.content)
     frmData.append("fileUpload",this.selectedFile)
-    
+
     this.questionService.updateSingleQuestion(frmData,this.questionId).subscribe(
       (response: any) => {
-        console.log('response',response)
     });
-    
+
 
   }
 
   cancelGroupedEdition(): void {
-    console.log('cancelGroupedEdition');
 
     this.groupedForm.setValue(this.identity);
   }
 
   handleModeChange(mode: 'view' | 'edit'): void {
-    // console.log('handleModeChange');
 
     this.mode = mode;
-    console.log('handleModeChange',this.mode);
     //edit mode: 삭제 버튼 안보이게
     if(this.mode == 'edit'){
       this.visibleDeleteButton = false;
@@ -159,9 +147,7 @@ export class DetailQuestionComponent implements OnInit {
   }
 
   processFile(imageInput: any) {
-    console.log('imageINput',imageInput)
     this.selectedFile = imageInput.files[0];
-    // console.log('imageINput',this.selectedFile)
 
     this.previewImageLoad();
   }
@@ -190,7 +176,7 @@ export class DetailQuestionComponent implements OnInit {
 
   async deleteSingleQuestion(){
 
-    //글쓴이 인지 확인 
+    //글쓴이 인지 확인
     this.questionService.deleteSingleQuestion(this.questionId).subscribe(
       (response)=>{
       if(response){
@@ -208,7 +194,6 @@ export class DetailQuestionComponent implements OnInit {
 
 
   seeImage(imgUrl) {
-    // console.log(imgUrl)
     window.open(imgUrl, "_blank");
   }
 

@@ -61,39 +61,38 @@ export class StatisticsComponent {
    constructor(private service : StatisticsService, private Chartservice: ChartService,private renderer: Renderer2,) {
     this.LineChartData$ =  this.Chartservice.LineChartData();
     this.pieChartData$ = this.Chartservice.loadPieChartData();
-    
+
 
   }
-  
+
   ngOnInit(){
 
 
     this.loadData(1);
     this.loadRegisteration();
 
-  
+
   }
 
 
   loadData(type) {
     this.service.getTopTenDownloadedFile(type).subscribe(
       (response:any) => {
-        console.log('respones입니다./',response)
         this.data = response['serializedResult'];
         for (let index = 0; index < this.data.length; index++) { // 0,1,2
           // const element = array[index];
           this.dataLengthList.push(index)
-          
+
         }
       }
     );
   }
 
- 
+
   loadRegisteration() {
     this.service.getRegisterCounts().subscribe(
       (response:any) => {
-        console.log(response)
+
         this.newregisterCounts = response['NewregisterCounts'];
         this.logoutCounts = response['logoutCounts'];
         this.totalregisterCounts = response['TotalregisterCounts'];
@@ -106,13 +105,12 @@ export class StatisticsComponent {
   }
 
   selectedValue(event: MatSelectChange){
-    console.log(event.value)
     switch (this.selectedMatSelectValue) {
       case matSelectedFields.weekly:
           this.loadData(1); //주간
         break;
       case matSelectedFields.monthly:
-          this.loadData(2); // 월간 
+          this.loadData(2); // 월간
         break;
       default:
     }

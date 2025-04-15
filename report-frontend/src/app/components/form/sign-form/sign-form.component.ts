@@ -10,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class SignFormComponent implements OnInit {
   @Output() sendSignForm = new EventEmitter<void>();
   public form: FormGroup;
-  
+
   constructor(private formBuilder: FormBuilder,) { }
 
   ngOnInit() {
@@ -33,15 +33,13 @@ export class SignFormComponent implements OnInit {
   }
   //비밀번호가 일치하는지 유효성 체크
   checkPassword(group: FormGroup) {
-    console.log('checkPassword')
     let password = group.controls.password.value;
     let passwordRe = group.controls.password_re.value;
     return password === '' || passwordRe === '' || password === passwordRe ? null : { notSame : true }
   }
-  
+
   public sign(): void {
     if (this.form.valid) {
-      console.log('this.form.value',this.form.value)
       this.sendSignForm.emit(this.form.value);
     }
   }

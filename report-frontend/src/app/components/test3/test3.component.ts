@@ -64,16 +64,13 @@ export class Test3Component implements OnInit {
   }
   mainListFunc(event) {
     this.selection.clear();
-    console.log('eve', event)
-    this.aa = event //aa는 모든 카테고리 정보 다 담고있음 
+    this.aa = event //aa는 모든 카테고리 정보 다 담고있음
 
-    console.log('aa', this.aa)
   }
 
   saveAll() {
 
-    //모두 저장 
-    console.log('saveAll',this.aa);
+    //모두 저장
   }
 
   custom_click2(row) {
@@ -87,7 +84,7 @@ export class Test3Component implements OnInit {
     if (idx > -1) {
       this.aa[this.clickListId-1].blogs.splice(idx, 1)
     }else{
-          
+
       const data = { //클릭한 row의 블로그 내용만 첨가
         title: row.title,
         content: row.content,
@@ -100,7 +97,7 @@ export class Test3Component implements OnInit {
 
     /*
     console.log('row',row)
-    
+
     let n = false;
 
     for (let index = 0; index < this.aa[this.clickListId-1].blogs.length; index++) {
@@ -111,10 +108,10 @@ export class Test3Component implements OnInit {
       }else{
         continue;
       }
-      
+
     }
 
-    
+
 
     if(!n){
       const data = { //클릭한 row의 블로그 내용만 첨가
@@ -122,7 +119,7 @@ export class Test3Component implements OnInit {
         id:row.id
       }
       this.aa[this.clickListId-1].blogs.push(data);
-  
+
     }else{// 없애기 (이미 있다면 )
       // this.aa[this.clickListId-1].blogs.splice();
     }
@@ -161,7 +158,6 @@ export class Test3Component implements OnInit {
   }
 
   public customSort = (event) => {
-    console.log(event);
   }
 
   public doFilter = (value: string) => {
@@ -192,7 +188,6 @@ export class Test3Component implements OnInit {
       },
       error => {
         this.show_spinner = false;
-        console.log(error);
       }
     );
   }
@@ -207,7 +202,6 @@ export class Test3Component implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle($event) {
-    console.log('masterToggle', $event)
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
@@ -222,9 +216,8 @@ export class Test3Component implements OnInit {
   }
 
   custom_toggle(row) {
-    console.log('custom_toggle', row)
 
-    //this.dataImsi.push(row) 
+    //this.dataImsi.push(row)
 
 
     //console.log('dataImsi',this.dataImsi)
@@ -234,22 +227,18 @@ export class Test3Component implements OnInit {
 
     this.rowClickList['리스트' + this.clickListId] = this.dataImsi;
 
-    console.log('clickList', this.rowClickList)
   }
 
   clickListIdFunc(event) {
-    console.log('event', event);
     this.dataImsi = [];
     this.selection.clear();
 
     this.clickListId = event.index;
-    console.log('event', this.clickListId); //clickList아이디  //clickListId에만 선택한 row들이 들어가야함 ['리스트1':{},]
     //체크된것들 보여줘야함 ..
     this.checkedList = event.checkedList;
-    //원래 체크된 것들 dataImsi 리스트에 넣기 
+    //원래 체크된 것들 dataImsi 리스트에 넣기
 
     event.row.blogs.forEach(element => {
-      console.log('row.element', element)
       this.dataImsi.push(element);
 
     });
@@ -258,7 +247,7 @@ export class Test3Component implements OnInit {
 
   isChecked(row) {
     const rowId = row.id
-    const n = this.checkedList.includes(rowId)// true or false 
+    const n = this.checkedList.includes(rowId)// true or false
 
     return n;
 

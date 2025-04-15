@@ -19,19 +19,17 @@ export class FileComponent implements OnInit {
 
   getFileDetails (e) {
     // console.log (e.target.files);
-    for (var i = 0; i < e.target.files.length; i++) { 
+    for (var i = 0; i < e.target.files.length; i++) {
       this.myFiles.push(e.target.files[i]);
     }
-    console.log(this.myFiles)
   }
-  
+
   remove_file_all(): void {
     this.myFiles =[];
   }
-  
+
   remove_file(file): void {
     this.myFiles.splice(this.myFiles.indexOf(file), 1);
-    console.log(this.myFiles)
 
     // const index = this.tags.indexOf(tag);
 
@@ -40,14 +38,14 @@ export class FileComponent implements OnInit {
     // }
 
   }
-  
+
 
   uploadFiles () {
     const frmData = new FormData();
-    
-    for (var i = 0; i < this.myFiles.length; i++) { 
+
+    for (var i = 0; i < this.myFiles.length; i++) {
       frmData.append("fileUpload", this.myFiles[i]);
     }
-    
+
   }
 }

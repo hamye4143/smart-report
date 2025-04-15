@@ -13,10 +13,9 @@ export class MylikeListComponent implements OnInit {
   ngOnInit() {
     this.myInfoService.my_like_list().subscribe(
       (response):any =>{
-        console.log(response["likes_blog"])
         this.like_lists = response["likes_blog"]
       });
-      
+
   }
 
 }

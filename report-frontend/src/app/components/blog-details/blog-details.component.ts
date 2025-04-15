@@ -43,7 +43,7 @@ export class BlogDetailsComponent implements OnInit {
   @ViewChild(StarComponent, { static: false }) childC: StarComponent;
 
   constructor(
-    private blog_service:BlogService, 
+    private blog_service:BlogService,
     private active_route:ActivatedRoute,
     private dialog:MatDialog,
     private auth_service:AuthService,
@@ -54,7 +54,7 @@ export class BlogDetailsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    //공통으로 빼기 
+    //공통으로 빼기
     if (this.auth_service.is_logged_in()) { //로그인했다면
       this.myinfo_service.getUser()
       .then(user => {
@@ -68,7 +68,7 @@ export class BlogDetailsComponent implements OnInit {
       this.blog_id = response.id;
       this.get_blog_details();
     })
-    
+
   }
   show_popup(){
     alert('show_popup');
@@ -79,8 +79,6 @@ export class BlogDetailsComponent implements OnInit {
     this.blog_service.get_single_blog(this.blog_id).subscribe(
       (response:any)=>{
         this.data = response.single_blog;
-        console.log(this.blog_props);
-        console.log('response',response.single_blog)
         this.blog_props.id = response.single_blog.id;
         this.blog_props.title = response.single_blog.title;
         this.blog_props.content = response.single_blog.content;
@@ -94,8 +92,6 @@ export class BlogDetailsComponent implements OnInit {
 
         this.blog_props.category = response.single_blog.category;
 
-        console.log('this.category_list',this.category_list)
-      
         response.single_blog.tags.forEach((element:any)=>{
           this.blog_props.tags.push(element);
         });
@@ -116,17 +112,15 @@ export class BlogDetailsComponent implements OnInit {
 
   //모든 파일 다운로드
   download_all_file(){
-    console.log(this.blog_props.files)
     this.blog_props.files.forEach(file => {
       this.download_single_file(file.new_name, file.origin_name, file.id);
     });
   }
 
-  //단일 파일 다운로드 
+  //단일 파일 다운로드
   download_single_file(filename, origin_name, file_id){
     this.blog_service.download_single_file(filename,file_id).subscribe(
       (data:any)=>{
-        console.log('data',data)
         saveAs(data, origin_name)
       },
       error =>{
@@ -137,9 +131,9 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   async delete_single_blog(blog_id:string){
-          
+
     //caniAccess?
-    await this.auth_gaurd_service.canAccess(blog_id).then((result) => { 
+    await this.auth_gaurd_service.canAccess(blog_id).then((result) => {
       //window.alert(result); // true
       if(!result){
         this.notificationService.openSnackBar('글쓴이가 아니므로 삭제 할 수 없습니다.');
@@ -153,12 +147,12 @@ export class BlogDetailsComponent implements OnInit {
       if(response){
         this.notificationService.openSnackBar('삭제되었습니다');
 
-        
+
         //RefreshComponent 빈 화면 컴포넌트
         //빈화면으로 한 번 갔다가 의도한 패스로 다시 보냄
         this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
           this.router.navigate(['admin/all-blogs']);
-        }); 
+        });
 
       }
     },
@@ -192,15 +186,14 @@ export class BlogDetailsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((confirm:boolean)=>{
       if(confirm){
-        console.log('confirm')
 
         //app-star 새로고침
           this.childC.getStarValue();
 
-        
+
       }
     })
   }
-  
+
 
 }

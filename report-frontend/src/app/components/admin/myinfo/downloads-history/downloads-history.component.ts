@@ -10,16 +10,15 @@ export class DownloadsHistoryComponent implements OnInit {
 
   private download_files = [];
 
-  constructor(private myInfoService: MyinfoService) { 
+  constructor(private myInfoService: MyinfoService) {
   }
 
   ngOnInit() {
     this.myInfoService.downloads_history().subscribe(
       (response):any =>{
         this.download_files = response["download_files"]
-        console.log('load',this.download_files)
       });
   }
-  
+
 
 }

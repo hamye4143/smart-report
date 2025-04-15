@@ -31,7 +31,6 @@ export class ChangeInfoComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user_info'));
-    console.log('yser', this.user)
     this.currentName = this.user['name'];
 
     this.form = new FormGroup({
@@ -52,12 +51,12 @@ export class ChangeInfoComponent implements OnInit {
 
     this.form.get('newPasswordConfirm').valueChanges
       .subscribe(val => { this.newPasswordConfirm = val; });
-    
+
     this.form2.get('newName').valueChanges
     .subscribe(val => { this.newName = val; });
-      
+
     }
-    
+
   changeName() {
     const user_id = this.user['id'];
     const credentials = {
@@ -69,7 +68,7 @@ export class ChangeInfoComponent implements OnInit {
         this.form2.reset();
         // this.notificationService.openSnackBar('이름이 변경되었습니다. 다시 로그인해주세요.');
         this.auth_service.logout('이름이 변경되었습니다. 다시 로그인해주세요.');
-        //새로고침 
+        //새로고침
       },
       error => {
         this.notificationService.openSnackBar(error.message);
@@ -88,11 +87,11 @@ export class ChangeInfoComponent implements OnInit {
     const user_id = this.user['id'];
 
     const credentials = {
-      email:email, 
+      email:email,
       currentPassword:this.currentPassword,
       newPassword:this.newPassword
     }
-    
+
     this.authService.changePassword(credentials,user_id)
       .subscribe(
         data => {
@@ -102,7 +101,7 @@ export class ChangeInfoComponent implements OnInit {
           // alert('Your password has been changed.');
         },
         error => {
-          
+
           this.notificationService.openSnackBar(error.message);
           // alert('현재 비밀번호가 맞지않습니다.')
         }

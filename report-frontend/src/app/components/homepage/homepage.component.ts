@@ -32,7 +32,7 @@ export class HomepageComponent implements OnInit {
     'https://cdn.vox-cdn.com/uploads/chorus_image/image/56789263/akrales_170919_1976_0104.0.jpg' ,
     'https://cdn.vox-cdn.com/uploads/chorus_image/image/56674755/mr_pb_is_the_best.0.jpg',
     'assets/kitties.jpg']
-  
+
   constructor(private categoryService: CategoryService, private blog_service:BlogService, private router: Router,private service: StatisticsService) { }
 
   ngOnInit() {
@@ -42,13 +42,13 @@ export class HomepageComponent implements OnInit {
 
 
   search() {
-    
+
     this.blogs = []
     let search_ = "";
     search_ = this.search_.trim();
 
 
-    if(!search_){ 
+    if(!search_){
       return false;
     }
 
@@ -65,18 +65,16 @@ export class HomepageComponent implements OnInit {
       },
       error =>{
         this.show_spinner = false;
-        console.log(error);
       }
     );
-    
+
   }
 
-  loadAllMain() { 
+  loadAllMain() {
     this.categoryService.loadAllMain().subscribe(
       (response:any)=>{
-        console.log('response',response)
         this.all_categories = response.all_categories
-  
+
       },
       error =>{
         console.error('[BlogService.get_all_blogs]',error)
@@ -87,7 +85,6 @@ export class HomepageComponent implements OnInit {
   load_all_blogs(){
     this.blog_service.get_all_categories().subscribe(
     (response:any)=>{
-      console.log('response',response)
       this.all_categories = response.all_categories
     },
     error =>{
@@ -96,11 +93,10 @@ export class HomepageComponent implements OnInit {
     )
   }
 
-  searchEvent(event) { 
-    console.log(event);
+  searchEvent(event) {
     const kw = event.search_;
-    const i = event.i_; 
-    //search 
+    const i = event.i_;
+    //search
     // this.router.navigate(['/search-list'+ +event]);
     this.router.navigate(['/search-list'], { queryParams: { kw: kw, page: 1, sortBy :1, row:10, i: i } });
 

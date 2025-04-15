@@ -125,13 +125,11 @@ export class AuthService {
   // }
 
   changePassword(credentials, user_id) {
-    console.log('user_id', user_id)
     return this.http.put(this.change_info_url + user_id, credentials, {
       headers: this.getAuthHeaders()
     }).pipe(catchError(this.handlerError));
   }
   changeName(credentials, user_id) {
-    console.log('user_id', user_id)
     return this.http.put(this.change_name_url + user_id, credentials, {
       headers: this.getAuthHeaders()
     }).pipe(catchError(this.handlerError));

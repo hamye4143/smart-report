@@ -40,36 +40,29 @@ export class SignupComponent {
   }
 
   //form field에 쉽게 접근하기 위해 getter 세팅
-  get f() { 
+  get f() {
     return this.signUpForm.controls;
    }
 
   submit() {
     if(this.signUpForm.valid){
-      console.log(this.signUpForm)
       let credentials = {
-        //고치기 
+        //고치기
         email:this.signUpForm.value.id,
         password: this.signUpForm.value.password,
         name : this.signUpForm.value.name
       }
-      console.log('credentials',credentials)
 
       this.auth_service.signUp(credentials).subscribe(
         (response:any) =>{
-          console.log('response',response)
-          this.notificationService.openSnackBar('회원가입 성공!');  
+          this.notificationService.openSnackBar('회원가입 성공!');
 
           this.router.navigate(['/login']);
         },
-        error => { //에러 발생 
-          //에러메시지 받아오기 
-          
-          console.log('[AuthService.signUp]'+error.message);
-        
-          
-          //알림창 띄우기 
-          this.notificationService.openSnackBar(error.message);  
+        error => { //에러 발생
+          //에러메시지 받아오기
+          //알림창 띄우기
+          this.notificationService.openSnackBar(error.message);
 
         }
       );

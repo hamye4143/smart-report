@@ -13,7 +13,7 @@ export class EmailHistoryComponent implements OnInit {
   loginUser:User;
   private data;
   //private down:boolean;
-  constructor(private emailService: EmailService, 
+  constructor(private emailService: EmailService,
     private myInfoService: MyinfoService,
     private auth_service : AuthService,
     private myinfo_service : MyinfoService,
@@ -36,18 +36,15 @@ export class EmailHistoryComponent implements OnInit {
 
   loadData(): void {
     const userProps = this.loginUser
-    console.log(userProps)
     this.emailService.getAllEmails(userProps).subscribe(
       (response):any =>{
-        
-        console.log('response',response)
         this.data = response
       });
   }
   cleanString(str) {
     str = str.replace('"[', '[');
     str = str.replace(']"', ']');
-    
+
     const result = JSON.parse(str)
     let string=""
     if(result.length > 1){
@@ -57,7 +54,6 @@ export class EmailHistoryComponent implements OnInit {
   }
 
   enableButton(index) {
-    console.log(index)
     //this.down = !this.down;
 
     const viewEl = document.getElementById("div_"+index);

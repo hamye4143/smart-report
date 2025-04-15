@@ -34,13 +34,10 @@ export class ChartService implements OnInit {
   }
 
   public getData(){
-    console.log('chartservice. getData')
     this.service.gettodayVisitor().subscribe((response)=>
     {
-      console.log('response',response);
       this.visitCountList = response['visit_count_list'];
       this.visitDateList = response['visit_date_list'];
-      console.log('visitCountList',this.visitCountList,this.visitDateList)
 
     });
   }
@@ -48,7 +45,6 @@ export class ChartService implements OnInit {
   // public dashedLineChartData(): Observable<DashedLineChartData>{
     public LineChartData(){
 
-    console.log('chart.service LineChartData');
     return this.http.get(this.todayVisitorUrl).toPromise();
 
     // return of({

@@ -25,7 +25,6 @@ export class AutoCompleteService {
     return this.http.get<IUserResponse>(this.searchBarUrl+word)
     .pipe(
       tap((response: IUserResponse) => {
-        console.log('res',response)
         response.results = response.results
           .map(user => new User(user.id, user.name))
           .filter(user => user.name.toLowerCase().startsWith(filter.name))

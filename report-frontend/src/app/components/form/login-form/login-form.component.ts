@@ -11,17 +11,16 @@ import { AuthService } from 'src/app/shared/services/guards/auth.service';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  @Output() sendLoginForm = new EventEmitter<void>(); 
+  @Output() sendLoginForm = new EventEmitter<void>();
   signInForm: FormGroup;
 
   constructor(private auth_service:AuthService,
-    private router:Router, 
+    private router:Router,
     private dialog:MatDialog) { }
 
   ngOnInit() {
 
     const savedUserEmail = localStorage.getItem('savedUserEmail');
-    console.log('savedUserEmail',savedUserEmail)
 
     this.signInForm = new FormGroup({
       id: new FormControl(savedUserEmail, [Validators.required, Validators.email]),

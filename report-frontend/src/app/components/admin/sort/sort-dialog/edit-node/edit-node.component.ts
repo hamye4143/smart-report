@@ -17,15 +17,14 @@ export class EditNodeComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
-    console.log('currentNode',this.currentNode.Name)
     const dialogRef = this.dialog.open(EditNodeDialog, {
       width: '250px',
       data: {Name: this.currentNode.Name, Description: this.currentNode.Description, Component: '수정'}
     });
-    //닫으면 
+    //닫으면
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('result',result)
+
         const node: TreeData = {
           Id: null,
           Name: result.nodeName,

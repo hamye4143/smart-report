@@ -15,7 +15,7 @@ export interface TreeType {
 export class Test2Component {
   counterValue;
   form: FormGroup;
-  
+
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -24,27 +24,25 @@ export class Test2Component {
   }
 
   @Output() counterChange = new EventEmitter();
-  
+
   @Input()
-  get counter() { 
+  get counter() {
     // this.counterValue.children[0]= 'this.form.value';
     // console.log('this.counterValue',this.counterValue);
 
     // this.counterValue =this.form.value;
-    
+
     return this.counterValue;
   }
-  
+
   set counter(val) {
-    console.log('set')
     this.form.reset();
- 
+
     this.counterValue = val;
     this.counterChange.emit(this.counterValue);
   }
 
   onAddSurgeries() {
-    console.log('counterValue',this.counterValue)
     const control = new FormGroup({
       'Name': new FormControl(null),
       'Description': new FormControl(null),
@@ -56,10 +54,9 @@ export class Test2Component {
   }
 
   onItemChange(event) {
-    console.log(event)
   }
-  
- 
+
+
 
 }
 

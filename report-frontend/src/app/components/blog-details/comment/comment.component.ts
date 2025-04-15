@@ -71,7 +71,6 @@ export class CommentComponent implements OnInit {
   getAllComments(){
     this.comment_service.get_all_comments(this.blog_id).subscribe(
       (response)=>{
-        console.log('commentDataLoad',response)
         this.comments = response['data']
         this.comments.forEach(element => {
           this.idList.push(element.id)
@@ -84,7 +83,6 @@ export class CommentComponent implements OnInit {
   }
 
   re_submit_comment(groupNum){
-    console.log('re_submit_comment',groupNum)
     const comment = {
       content: this.content,
       user_id: this.loginUser.id,
@@ -97,7 +95,6 @@ export class CommentComponent implements OnInit {
 
     this.comment_service.add_recomment(comment).subscribe(
       (response:any)=>{
-        console.log('response',response)
         this.content = "";
         this.show_spinner = false;
 
@@ -116,7 +113,6 @@ export class CommentComponent implements OnInit {
         user_id: this.loginUser.id,
         blog_id: this.blog_id
       }
-      console.log('comment',comment)
       return comment;
     }
     this.notificationService.openSnackBar('빈 값입니다.');
@@ -127,12 +123,10 @@ export class CommentComponent implements OnInit {
     const comment = this.submitCheck();
     if(comment){
 
-      console.log('comment',comment)
       this.show_spinner = true;
 
       this.comment_service.add_comment(comment).subscribe(
         (response:any)=>{
-          console.log('response',response)
           this.content = "";
           this.contentPlaceholder ="";
           this.show_spinner = false;
@@ -141,7 +135,6 @@ export class CommentComponent implements OnInit {
         },
         error=>{
           this.show_spinner = false;
-          console.log(error.error);
           this.notificationService.openSnackBar(error.eror);
 
         }
@@ -151,7 +144,6 @@ export class CommentComponent implements OnInit {
 
 
   open_answer_review(id){
-    console.log('click',id)
     this.answer_id = id;
     // this.visible = false;
     // this.new_reivew = true;
@@ -185,8 +177,6 @@ export class CommentComponent implements OnInit {
     });
   }
   getControl(index: number, field: string): FormControl {
-    console.log('index',index)
-    console.log('index',field)
     return this.formArray.at(index).get(field) as FormControl;
   }
 
@@ -204,10 +194,7 @@ export class CommentComponent implements OnInit {
   }
 
   updateMode(commentId,content){
-    console.log('commentId',commentId)
-    console.log('commentId',content)
 
-    //???
     this.idList.forEach(element => {
       this.cancelEdit(element)
     });

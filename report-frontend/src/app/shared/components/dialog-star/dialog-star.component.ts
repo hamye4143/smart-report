@@ -32,7 +32,6 @@ export class DialogStarComponent {
 
   countStar(star) {
     this.selectedValue = star;
-    console.log('Value of star', star);
   }
 
   setStar() {
@@ -61,18 +60,13 @@ export class DialogStarComponent {
       user_id: JSON.parse(localStorage.getItem('user_info'))['id']
     }
 
-    console.log('data', data)
     this.star_service.starRating(data).subscribe(
       (response: any) => {
         //성공 후
-        console.log('200', response['message']);
-
         this.dialogRef.close(true);
 
       },
       error => {
-
-        console.log(error.error)
         this.dialogRef.close(true);
         this.notificationService.openSnackBar(error.error)
         this.router.navigate(['/login']);

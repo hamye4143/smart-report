@@ -25,15 +25,10 @@ export class TagComponent implements OnInit,OnChanges {
   //자식 컴포넌트에 입력 프로퍼티가 존재하기 때문에 실행
   //입력 프로퍼티가 변경될 때마다 실행
   ngOnChanges(changes: SimpleChanges) {
-    console.log('[onChanges]',this.tags_data);
-    console.log('[onChanges]',this.test);
 
-    if(changes['tags_data']){
-      console.log('changes감지',changes['tags_data'])
-    }
     //length가 있을때까지
     if(this.tags_data.length){
-      this.tags_data.forEach(element => {        
+      this.tags_data.forEach(element => {
         this.tags.push({name:element.name});
       });
       }
@@ -44,11 +39,11 @@ export class TagComponent implements OnInit,OnChanges {
     // console.log('[ngOnInit]',this.tags_data)
     // console.log('[ngOnInit]',this.test)
     // if(this.tags_data.length){
-    //   this.tags_data.forEach(element => {        
+    //   this.tags_data.forEach(element => {
     //     this.tags.push({name:element.name});
     //   });
     //   }
-    // this.tags.push({name:'name'}) 
+    // this.tags.push({name:'name'})
   }
 
 
@@ -56,7 +51,7 @@ export class TagComponent implements OnInit,OnChanges {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    
+
     // Add our fruit
     if ((value || '').trim()) {
       this.tags.push({name: value.trim()});
@@ -67,7 +62,7 @@ export class TagComponent implements OnInit,OnChanges {
       input.value = '';
     }
 
-    
+
   }
 
   remove(tag: Tag): void {
@@ -77,7 +72,7 @@ export class TagComponent implements OnInit,OnChanges {
       this.tags.splice(index, 1);
     }
   }
-  
+
   update(event: MatChipInputEvent): void{
 
 
@@ -91,9 +86,9 @@ export class TagComponent implements OnInit,OnChanges {
   //   this.tags.push({name: value.trim()});
   //   console.log(this.tags)
 
-  //   //db에서 원래의 tags 가져와서 세팅 
-    
-    
+  //   //db에서 원래의 tags 가져와서 세팅
+
+
   // }
 
 

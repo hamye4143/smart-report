@@ -29,36 +29,33 @@ export class CategorySelectComponent implements OnInit,OnChanges {
   ngOnInit(): void {
     this.setCategories();
   }
-  
+
   ngOnChanges() {
-    console.log('updateCategory',this.updateCategory)
     if(this.updateCategory[0]){
       this.updateCategory.forEach(element => {
         this.chipsList.push(element);
       });
     }
   }
-  
+
   loadCategory(){
     this.chipsList.push(this.updateCategory);
 
   }
 
-  setCategories() { 
-    
+  setCategories() {
+
 
     this.nestedTreeControl = new NestedTreeControl<TreeData>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
-    
+
     this.dataService.getAllSorts().subscribe((response : any) => {
 
       if(response.serialized_data[0]){
         this.categories = response.serialized_data
-        console.log('this.categories',this.categories)
         const o = this.object(this.categories);
 
         this.finalData = o[0].Children;
-        console.log('this.finalData',this.finalData)
 
         this.finalData.forEach(element => {
             this.typesOfBigCategory.push(element);
@@ -66,35 +63,28 @@ export class CategorySelectComponent implements OnInit,OnChanges {
 
         this.TotalCategory = [];
         this.TotalCategory.push(this.typesOfBigCategory)
-        
+
     }
-      
+
     });
-    
+
   }
 
   onSelection(e,v){
-    console.log('e',e)
     this.chipsList[e.option.value.group_code_id-1] = {'Id':e.option.value.Id ,'Name':e.option.value.Name};
-    this.chipsList.splice(e.option.value.group_code_id); 
-    console.log('this.chipsList',this.chipsList);
+    this.chipsList.splice(e.option.value.group_code_id);
     this.category_list.emit(this.chipsList);
-  
 
-    console.log('this.chipsList',this.chipsList);
-    //선택한 것의 바로 밑에 제외하고 다 지우기 
+
+    //선택한 것의 바로 밑에 제외하고 다 지우기
 
     const children = e.option.value.Children;
-        //아래에 element 생성 
+        //아래에 element 생성
 
 
-    console.log('e.option.value.group_code_id',e.option.value.group_code_id)
-    console.log('children',children)
     //if(children[0]){
     this.TotalCategory[e.option.value.group_code_id] = children;
     //}
-    console.log('TotalCategory',e.option.value.group_code_id+1)
-    console.log('this',this.TotalCategory)
     this.TotalCategory.splice(e.option.value.group_code_id+1); //+1
 
   }
@@ -110,7 +100,7 @@ export class CategorySelectComponent implements OnInit,OnChanges {
             .Children
             .push(element);
     });
-    
+
 
     return o;
 }

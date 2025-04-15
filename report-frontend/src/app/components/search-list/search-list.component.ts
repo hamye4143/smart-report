@@ -13,7 +13,7 @@ import { SearchListOptionComponent } from '../search-list-option/search-list-opt
   styleUrls: ['./search-list.component.css']
 })
 export class SearchListComponent {
-  
+
   @ViewChildren(SearchListOptionComponent) childReference: any;
 
   private currentPage: number = 1;
@@ -46,7 +46,7 @@ export class SearchListComponent {
   totalpagesList: any;
 
   totalLength = 0;
-  tableSize = 1; //row 
+  tableSize = 1; //row
   tableSizes = [10, 15, 20];
   public isActive: boolean = true;
   noData = false;
@@ -131,18 +131,15 @@ export class SearchListComponent {
     ]
   };
   fetchSearches(): void {
-    console.log('newPage', this.currentPage)
-    console.log('tableSize', this.tableSize)
 
     //show_spinner
 
     this.route.queryParams.subscribe(params => {
-      //다시 할당 
+      //다시 할당
       this.keyword = params['kw'];
 
-      this.page = params['page'] ? params['page'] : 1; //1 
+      this.page = params['page'] ? params['page'] : 1; //1
 
-      console.log('this.page', this.page); //x 
 
       // this.page = page;
       this.sortBy = params['sortBy'] ? params['sortBy'] : 1;
@@ -163,7 +160,6 @@ export class SearchListComponent {
 
     this.blog_service.search_files(this.keyword, this.currentPage, this.sortBy, this.row, this.i).subscribe(
       (response: any) => {
-        console.log(response)
 
         this.show_spinner = false;
 
@@ -174,13 +170,11 @@ export class SearchListComponent {
         } else {
           this.noData = false;
           this.searchedFiles = response.searchFiles
-          console.log('searchedFiles', this.searchedFiles)
           this.totalLength = response.count;
           this.nextUrl = response.next_url;
           this.prevUrl = response.prev_url;
           this.totalPagesLength = response.total_pages;
           this.totalpagesList = Array(this.totalPagesLength).fill(0).map((x, i) => i + 1);
-          console.log(this.totalpagesList);
         }
 
 
@@ -188,17 +182,14 @@ export class SearchListComponent {
       },
       error => {
         this.show_spinner = false;
-        console.log(error);
       }
     );
   }
 
 
   searchEvent(event) {
-    console.log('event', event)
     this.keyword = event.search_;
     this.i = event.i_;
-    console.log('this.i', this.i)
 
 
     this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
@@ -209,8 +200,6 @@ export class SearchListComponent {
 
 
   pageChange(newPage: number) {
-    console.log('currentPage', this.currentPage)//1
-    console.log(newPage, 'pageChange');//2
     this.currentPage = newPage; //
 
     this.router.navigate(["/search-list"], { queryParams: { kw: this.keyword, page: newPage, sortBy: this.sortBy, row: this.row } }).then(() => {
@@ -222,7 +211,7 @@ export class SearchListComponent {
   // onTableDataChange(event){
   //   this.currentPage = event;
   //   this.fetchSearches();
-  // }  
+  // }
 
   onTableSizeChange(event): void {
     this.tableSize = event.target.value;
@@ -240,22 +229,15 @@ export class SearchListComponent {
   }
 
   selectedDate(date) {
-    // ngModel still returns the old value
-    console.log("ngModel: " + this.value);
-
-    // date passes the newly selected value  
-    console.log("Selected Value: " + date);
 
   }
 
   addEvent(filterValue: string, event) {
-    console.log('addEvent')
     if (event.value != undefined) {
       filterValue = this.datepipe.transform(filterValue, 'yyyy-M-dd');
 
       this.blog_service.searchFilesByDate(filterValue).subscribe(
         (response) => {
-          console.log('response', response);
 
           this.show_spinner = false;
           if (response['message']) {
@@ -265,13 +247,11 @@ export class SearchListComponent {
           } else {
             this.noData = false;
             this.searchedFiles = response['searchFiles']
-            console.log('searchedFiles', this.searchedFiles)
             this.totalLength = response['count'];
             this.nextUrl = response['next_url'];
             this.prevUrl = response['prev_url'];
             this.totalPagesLength = response['total_pages'];
             this.totalpagesList = Array(this.totalPagesLength).fill(0).map((x, i) => i + 1);
-            console.log(this.totalpagesList);
           }
 
 
@@ -279,8 +259,6 @@ export class SearchListComponent {
         }
       );
     }
-
-    console.log('filterValue', filterValue);
 
   }
 
@@ -292,16 +270,13 @@ export class SearchListComponent {
 
     } else {
 
-      console.log('event', response)
       this.noData = false;
       this.searchedFiles = response.searchFiles
-      console.log('searchedFiles', this.searchedFiles)
       this.totalLength = response.count;
       this.nextUrl = response.next_url;
       this.prevUrl = response.prev_url;
       this.totalPagesLength = response.total_pages;
       this.totalpagesList = Array(this.totalPagesLength).fill(0).map((x, i) => i + 1);
-      console.log(this.totalpagesList);
     }
   }
 
@@ -314,7 +289,6 @@ export class SearchListComponent {
   }
 
   test_() {
-    console.log('childReference', this.childReference);
     this.childReference.apply();
   }
 }

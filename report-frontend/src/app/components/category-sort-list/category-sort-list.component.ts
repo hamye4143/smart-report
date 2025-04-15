@@ -15,7 +15,7 @@ export class CategorySortListComponent extends SubscriptionBaseComponent impleme
   categroySortList;
   private searchedFiles: Array<File> = [];
   totalLength = 0;
-  tableSize = 1; //row 
+  tableSize = 1; //row
   tableSizes = [10, 15, 20];
   page: number;
   sortBy: number;
@@ -38,7 +38,6 @@ export class CategorySortListComponent extends SubscriptionBaseComponent impleme
     this.route.queryParams.subscribe(params => {
       this.categoryName = params['cn'];
       this.page = params['page'] ? params['page'] : 1;
-      console.log('this.page', this.page);
       this.sortBy = params['sortBy'] ? params['sortBy'] : 1;
 
       this.row = params['row'] ? params['row'] : 1;
@@ -46,21 +45,16 @@ export class CategorySortListComponent extends SubscriptionBaseComponent impleme
       this.tableSize = this.row;
     });
 
-    console.log('this.currentPage', this.currentPage)
 
     this.subscription = this.service.category_search(this.categoryName, this.currentPage, this.sortBy, this.row).subscribe(
       (response) => {
-        console.log(response);
         this.categroySortList = response['categroySortList'];
         this.searchedFiles = response['searchFiles'];
-        console.log('searchedFiles', this.searchedFiles)
       }
     );
   }
 
   pageChange(newPage: number) {
-    console.log('currentPage', this.currentPage)//1
-    console.log(newPage, 'pageChange');//2
     this.currentPage = newPage;
     this.router.navigate(["/category-list"], { queryParams: { cn: this.categoryName, page: newPage, sortBy: this.sortBy, row: this.row, i:'all' } }).then(() => {
       this.loadData();
@@ -68,7 +62,6 @@ export class CategorySortListComponent extends SubscriptionBaseComponent impleme
 
   }
   onTableSizeChange(event): void {
-    console.log(event)
     this.tableSize = event.target.value;
     this.currentPage = 1;
 
@@ -79,7 +72,7 @@ export class CategorySortListComponent extends SubscriptionBaseComponent impleme
 
 
   searchEvent(event) {
-    //search 
+    //search
     this.router.navigate(['/search-list'], { queryParams: { kw: event.search_, page: 1, sortBy :1, row:10, i: event.i_ } });
 
 

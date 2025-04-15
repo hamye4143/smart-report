@@ -109,11 +109,10 @@ export class TestComponent implements OnInit {
     this.nodeBaguni = event['node']['data']
     this.clickedPid = event['node']['data']['Id'];
     const sendData = event['node']['data'];
-    console.log(sendData)
     this.parentNode = event['node']['data'];
 
     this.sendData = sendData;
-    //자식 컴포넌트에 sendData를 보내고, 수정 한 것을 부모와 양방향 통신 
+    //자식 컴포넌트에 sendData를 보내고, 수정 한 것을 부모와 양방향 통신
 
 
   }
@@ -122,46 +121,45 @@ export class TestComponent implements OnInit {
       for (let index = 0; index < nodes.length; index++) {
         const element = nodes[index];
         let result = this.searchTree(element, eventPid);
-        console.log('result를 봅ㅎ시다')
         if (result != null) {
           return result;
         } else {
           continue;
         }
-  
+
       }
     }
-    
+
     change(event) {
       if (event['childrendAddData'] != undefined) {
         this.childrendAddData = event['childrendAddData']
         console.log('childrendAddData', this.childrendAddData['surgeries'])
         const parentNode = this.forLoop(this.clickedPid, this.nodes)
         console.log('parentNode', parentNode)
-  
+
         this.childrendAddData['surgeries'].forEach(element => {
           // console.log('el',parentNode)
           parentNode.Children.push(element)
-  
+
         });
         console.log('heh', this.nodes)
         //this.addNode()
         // this.tree.treeModel.update();
         //tree.treeModel.update();
       }
-  
+
       // const parentNode = this.forLoop(this.clickedPid,this.nodes)
       // console.log('parentNode',parentNode)
-  
+
       // this.childrendAddData['surgeries'].forEach(element => {
       //   parentNode.children.push(element)
       // });
       // this.tree.treeModel.update();
-  
-  
+
+
       event = event['data']
       if (event != undefined) {
-  
+
         const ab = this.forLoop(event.pid, this.nodes)
         if (ab != undefined) {
           ab['Name'] = event.Name;
@@ -169,7 +167,7 @@ export class TestComponent implements OnInit {
           ab['isUse'] = event.isUse;
         }
       }
-  
+
     }
   */
   searchTree(element, matchingPid) {
@@ -247,7 +245,7 @@ export class TestComponent implements OnInit {
   }
   deleteNode2() {
     const nodeToDelete = this.tree.treeModel.getNodeById(this.nodeBaguni.Id); //삭제할 노드 선택
-    
+
     if(nodeToDelete.id == 1) {
       alert('전체 카테고리는 삭제 불가');
     }else{
@@ -274,8 +272,8 @@ export class TestComponent implements OnInit {
 
   /*
   addChildrenNode() {
-    //부모 qid의 노드 찾기 부모.children = [] 가져온 데이터 
-    //nodes에서 qid 
+    //부모 qid의 노드 찾기 부모.children = [] 가져온 데이터
+    //nodes에서 qid
 
     const parentNode = this.forLoop(this.clickedPid, this.nodes)
     console.log('parentNode', parentNode)
@@ -309,35 +307,32 @@ export class TestComponent implements OnInit {
       code: 'new',
       is_use: 'Y',
       group_code_id: this.parentNode.group_code_id + 1, //this.parentNode.parent_group_code_id + 1
-      order: 1,//아무거나 
+      order: 1,//아무거나
       parent_group_code_id: this.parentNode.parent_group_code_id + 1,
       parent_id: this.parentNode.Id//부모 아이디  parentNode
     });
 
     this.tree.treeModel.update();
-    console.log('this.nodeBaguni', this.nodeBaguni)
     const someNode = this.tree.treeModel.getNodeById(this.nodeBaguni.Id);
     someNode.expand();
     // const firstRoot = this.tree.treeModel.roots[0];
-    // firstRoot.setActiveAndVisible(); 
+    // firstRoot.setActiveAndVisible();
     const thisNode = this.tree.treeModel.getNodeById(this.maxId);
     thisNode.setActiveAndVisible();
 
   }
 
   onTreeLoad(tree) {
-    console.log('onTreeLoad', tree)
     tree.treeModel.expandAll();
   }
   addMainNode() {
-    //옆에 새로운 화면 
+    //옆에 새로운 화면
   }
 
   findNodeMaxId(node) {
 
     if (node[0]) {
       const flatArray = this.flatJsonArray([], node);
-      console.log('비지않음', flatArray)
       const flatArrayWithoutChildren = [];
       flatArray.forEach(element => {
         flatArrayWithoutChildren.push(element.Id);
@@ -345,7 +340,6 @@ export class TestComponent implements OnInit {
       return Math.max(...flatArrayWithoutChildren);
 
     } else {
-      console.log('빔')
       return 0;
     }
   }
@@ -362,21 +356,19 @@ export class TestComponent implements OnInit {
   }
 
   saveCategory() {
-    console.log('saveCategory', this.nodes)
 
-    //child 없애고 한개한개 넣어줘야함 
+    //child 없애고 한개한개 넣어줘야함
     const real_data = []
     // const sendData = this.nodes[0].Children
     // console.log('sendData', sendData)
 
     this.result = [];
     if (this.nodes[0]) {
-      this.convertTreeToList(this.nodes[0]); //전체 카테고리 있을 시 
+      this.convertTreeToList(this.nodes[0]); //전체 카테고리 있을 시
       //this.convertTreeToList(this.nodes);
     }
 
 
-    console.log(this.result)
     this.result.forEach(element => { //this.sendData
 
       const data = {
@@ -393,7 +385,6 @@ export class TestComponent implements OnInit {
       }
       real_data.push(data);
     });
-    console.log('real_data', real_data)
 
     this.dataService.submit(real_data).subscribe((response: any) => {
       // this.ngOnInit();
@@ -418,8 +409,7 @@ export class TestComponent implements OnInit {
 
   result = [];
   makeBackendData(sendData) {   //tree_to_list
-    //보낼데이터를 하나하나 풀어주는 함수 (object 반대 함수) 
-    console.log('makeBackendData', sendData)
+    //보낼데이터를 하나하나 풀어주는 함수 (object 반대 함수)
     for (let index = 0; index < sendData.length; index++) {
       const element = sendData[index]; //{전체 :, children~~ }
       this.visitNode2(element);
@@ -460,11 +450,11 @@ export class TestComponent implements OnInit {
   convertTreeToList(root) {
     const stack = [root];
     this.result = [];
-  
+
     while (stack.length !== 0) {
       const node = stack.pop();
       this.result.push(node);
-  
+
       if (node.Children) {
         for (let i = node.Children.length - 1; i >= 0; i--) {
           stack.push(node.Children[i]);
@@ -484,12 +474,11 @@ export class TestComponent implements OnInit {
       this.tree.treeModel.collapseAll();
     }
   }
-  
+
   /*
   visitNode(node, hashMap, array) {
     if (!hashMap[node.data]) {
       hashMap[node.data] = true;
-      // console.log('node', node)
       array.push(node);
     }
   }
