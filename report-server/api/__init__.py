@@ -150,7 +150,7 @@ def create_app():
 
     @click.command(name='create_admin')   
     @with_appcontext
-    def create_admin():
+    def create_admin(): # flask create_admin 해야 실행(수동)
 
         admin=User(email="123@naver.com",password="123", name="제니", is_admin='Y') # admin
         admin.password = generate_password_hash(admin.password,'sha256',salt_length=12)
@@ -168,13 +168,40 @@ def create_app():
             Code_detail_table(group_code_id=1, code="all",code_name="전체", parent_group_code_id=0,parent_id=0, order=1,detail="전체"), #1
         ])
 
-  
         db.session.commit()
-        
 
     app.cli.add_command(create_admin)
 
-    
+
+    # 추가 - 자동 DB 초기화 코드 추가
+    # 앱 시작시 자동 실행
+    with app.app_context():
+        db.create_all()
+
+        # 기본 관리자 유저가 없다면 생성
+        if not User.query.filter_by(email="123@naver.com").first():
+            admin = User(
+                email="123@naver.com",
+                password=generate_password_hash("123", 'sha256', salt_length=12),
+                name="제니",
+                is_admin='Y'
+            )
+            db.session.add(admin)
+
+            # 코드 테이블 초기화
+            Code_detail_table.query.delete()
+            Code_table.query.delete()
+
+            db.session.add_all([
+                Code_table(code="lv1", code_name="대분류", detail="대분류입니다."),
+                Code_table(code="lv2", code_name="중분류", detail="중분류입니다."),
+                Code_table(code="lv3", code_name="소분류", detail="소분류입니다."),
+                Code_detail_table(group_code_id=1, code="all", code_name="전체",
+                                  parent_group_code_id=0, parent_id=0, order=1, detail="전체")
+            ])
+
+            db.session.commit()
+
 
     return app 
 
