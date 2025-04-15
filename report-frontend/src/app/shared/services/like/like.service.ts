@@ -41,7 +41,9 @@ export class LikeService {
       action: 'unlike'
     }
 
-    return this.http.post(this.like_post_url , data);
+    return this.http.post(this.like_post_url, data, {
+      headers: this.authService.getAuthHeaders(),
+    });
 
   }
 

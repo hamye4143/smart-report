@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {API_BASE_URL} from "constants/api-url";
+import {AuthService} from "src/app/shared/services/guards/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,18 @@ export class CommentService {
   private update_comment_url:string = `${API_BASE_URL}/update_comment/`;
   private delete_comment_url:string = `${API_BASE_URL}/delete_comment/`;
 
-
-
-
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   add_comment(blog_props){
-    return this.http.post(this.add_comment_url,blog_props);
+    return this.http.post(this.add_comment_url, blog_props, {
+      headers: this.authService.getAuthHeaders()
+    });
   }
 
   add_recomment(blog_props){
-    return this.http.post(this.add_recomment_url,blog_props);
+    return this.http.post(this.add_recomment_url, blog_props, {
+      headers: this.authService.getAuthHeaders()
+    });
   }
 
   get_all_comments(blogId){
@@ -32,14 +34,16 @@ export class CommentService {
 
   updateComment(commentId,content){
     // return this.http.put(this.get_comments_url + blogId);
-    console.log('conetnet',content)
-    return this.http.put(this.update_comment_url + commentId, content);
+    return this.http.put(this.update_comment_url + commentId, content, {
+      headers: this.authService.getAuthHeaders()
+    });
   }
 
   deleteComment(commentId){
-    console.log('commentId',commentId)
     // return this.http.put(this.get_comments_url + blogId);
-    return this.http.delete(this.delete_comment_url + commentId);
+    return this.http.delete(this.delete_comment_url + commentId, {
+      headers: this.authService.getAuthHeaders()
+    });
   }
 
 }

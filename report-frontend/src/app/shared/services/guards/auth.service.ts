@@ -27,7 +27,6 @@ export class AuthService {
     private router: Router,
     private dialog:MatDialog,
     private notificationService: NotificationService,
-    private authService: AuthService
     ) { }
 
   getToken(): string | null {
@@ -57,7 +56,7 @@ export class AuthService {
   logoutHttp() {
     const loginUser = JSON.parse(localStorage.getItem('user_info'));
     return this.http.put(this.logout_url, loginUser.id, {
-      headers: this.authService.getAuthHeaders()
+      headers: this.getAuthHeaders()
     }).pipe(catchError(this.handlerError));
   }
 
@@ -128,13 +127,13 @@ export class AuthService {
   changePassword(credentials, user_id) {
     console.log('user_id', user_id)
     return this.http.put(this.change_info_url + user_id, credentials, {
-      headers: this.authService.getAuthHeaders()
+      headers: this.getAuthHeaders()
     }).pipe(catchError(this.handlerError));
   }
   changeName(credentials, user_id) {
     console.log('user_id', user_id)
     return this.http.put(this.change_name_url + user_id, credentials, {
-      headers: this.authService.getAuthHeaders()
+      headers: this.getAuthHeaders()
     }).pipe(catchError(this.handlerError));
   }
 
