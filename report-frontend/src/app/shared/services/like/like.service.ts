@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {API_BASE_URL} from "src/constants/api-url";
+import {AuthService} from "src/app/shared/services/guards/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LikeService {
-
 
   private like_post_url: string = `${API_BASE_URL}/like`;
   private has_liked_post_url: string = `${API_BASE_URL}/has_liked_post`;
@@ -15,7 +15,7 @@ export class LikeService {
   private loginUser =JSON.parse(localStorage.getItem('user_info'));
   private user_id = this.loginUser.id;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   like_post(post_id){
 
@@ -26,8 +26,11 @@ export class LikeService {
     }
 
     // return this.http.post(this.like_post_url + post_id + "/like", data);
-    return this.http.post(this.like_post_url , data);
-
+    return this.http.post(this.like_post_url, data,
+      {
+        headers: this.authService.getAuthHeaders()
+      }
+    );
   }
 
   unlike_post(post_id){

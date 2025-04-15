@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {API_BASE_URL} from "../../../../constants/api-url";
+import {AuthService} from "src/app/shared/services/guards/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,13 @@ export class QuestionService {
   private deleteSingleAnswerUrl:string = `${API_BASE_URL}/deleteSingleAnswer/`;
 
 
-
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {
+  }
 
   addQuestion(questionProps){
-    return this.http.post(this.addQuestionUrl, questionProps).pipe(catchError(this.handlerError));
+    return this.http.post(this.addQuestionUrl, questionProps, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
   getAllQuestions(){
@@ -41,7 +44,9 @@ export class QuestionService {
   }
 
   addAnswer(answerProps){
-    return this.http.post(this.addAnswerUrl, answerProps).pipe(catchError(this.handlerError));
+    return this.http.post(this.addAnswerUrl, answerProps, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
   getAllAnswers(questionId){

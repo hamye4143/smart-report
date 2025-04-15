@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {API_BASE_URL} from "../../../../constants/api-url";
+import {AuthService} from "src/app/shared/services/guards/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +21,12 @@ export class BlogService {
   private test_url:string = `${API_BASE_URL}/test_url`;
   private search_file_url:string = `${API_BASE_URL}/search`;
   private search_file_url2:string = `${API_BASE_URL}/search2`;
-
   private search_file_date_url:string = `${API_BASE_URL}/searchByDate/`;
   // private category_search_url:string = `${API_BASE_URL}/categorySearch/`;
   private category_search_url:string = `${API_BASE_URL}/categorySearch`;
 
 
-
-
-  constructor(private http:HttpClient) { }
-
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   download_single_file(filename:string, file_id:string){
 
@@ -44,27 +41,23 @@ export class BlogService {
       'filename':filename
     }
 
-
-    return this.http.post(this.download_url, data, { responseType: 'blob'} ).pipe(catchError(this.handlerError));
-
+    return this.http.post(this.download_url, data, {
+      headers: this.authService.getAuthHeaders(),
+      responseType: 'blob'
+    }).pipe(catchError(this.handlerError));
   }
 
   upload_files(files){
-    console.log('files',files)
-    return this.http.post(this.file_url, files).pipe(catchError(this.handlerError));
+    return this.http.post(this.file_url, files, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
   add_blog(blog_props){ //blog_props:Object
-
-    const auth_token = localStorage.getItem('auth_token'); // 토큰 꺼내오기
-
-    console.log('auth_token///0', auth_token);
     //에러 처리 후 에러 메시지를 생성하여 이를 방출하는 옵저버블 반환
-    return this.http.post(this.add_blog_url,blog_props,
+    return this.http.post(this.add_blog_url, blog_props,
       {
-        headers: {
-          Authorization: `Bearer ${auth_token}`
-        }
+        headers: this.authService.getAuthHeaders()
       }).pipe(catchError(this.handlerError));
   }
 
@@ -85,36 +78,46 @@ export class BlogService {
   }
 
   search_files(keyword: string, page:number, sortBy:number,row:number, i:string){
-    console.log('search_files_page',page)
-    return this.http.get(this.search_file_url+'?kw='+keyword+"&page="+page+"&sortBy="+sortBy+"&row="+row+"&i="+i).pipe(catchError(this.handlerError));
+    return this.http.get(this.search_file_url + '?kw=' + keyword + "&page=" + page + "&sortBy=" + sortBy + "&row=" + row + "&i=" + i, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
   search_files_options(keyword: string, page:number, sortBy:number,row:number, i:string, options){
-    console.log('search_files_page',options)
-    return this.http.get(this.search_file_url2+'?kw='+keyword+"&page="+page+"&sortBy="+sortBy+"&row="+row+"&i="+i+
-    "&op_sValue="+options.value+"&op_hValue="+options.value2
-    +"&op_dValue="+options.value3+"&op_vValue="+options.value4+"&op_rValue="+options.value5
-    +"&date="+options.date
-
+    return this.http.get(this.search_file_url2 + '?kw=' + keyword + "&page=" + page + "&sortBy=" + sortBy + "&row=" + row + "&i=" + i +
+      "&op_sValue=" + options.value + "&op_hValue=" + options.value2
+      + "&op_dValue=" + options.value3 + "&op_vValue=" + options.value4 + "&op_rValue=" + options.value5
+      + "&date=" + options.date,
+      {
+        headers: this.authService.getAuthHeaders()
+      }
     ).pipe(catchError(this.handlerError));
   }
 
 
   searchFilesByDate(date:string){
     console.log('date',date);
-    return this.http.get(this.search_file_date_url + date).pipe(catchError(this.handlerError));
+    return this.http.get(this.search_file_date_url + date, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
-  update_blog(blog_props: Object, blog_id:string){
-    return this.http.put(this.update_blog_url + blog_id, blog_props).pipe(catchError(this.handlerError));
+  update_blog(blog_props: Object, blog_id: string){
+    return this.http.put(this.update_blog_url + blog_id, blog_props, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
-  delete_blog(id:string){
-    return this.http.delete(this.delete_blog_url + id).pipe(catchError(this.handlerError));
+  delete_blog(id: string){
+    return this.http.delete(this.delete_blog_url + id, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
   category_search(categoryName: string,page:number, sortBy: number, row:number ){
-    return this.http.get(this.category_search_url + '?cn='+ categoryName + "&page="+ page + "&sortBy=" + sortBy + "&row"+row).pipe(catchError(this.handlerError));
+    return this.http.get(this.category_search_url + '?cn=' + categoryName + "&page=" + page + "&sortBy=" + sortBy + "&row" + row, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
 
   //에러 핸들러 함수

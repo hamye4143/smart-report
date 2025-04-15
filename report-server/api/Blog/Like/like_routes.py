@@ -8,7 +8,7 @@ from flask_jwt_extended import jwt_required
 likes= Blueprint('likes',__name__)
 
 
-@likes.route('/like',methods=["POST"])#/<action>
+@likes.route('/like', methods=["POST"])#/<action>
 @jwt_required
 def like_action(): #post_id, user_id
     data = request.get_json()
@@ -41,6 +41,7 @@ def like_post(post,user_id):
     if not has_liked_post(post,user_id): # 그 전에 좋아요하지 않았다면  --> 좋아요 
         like = PostLike(user_id=user_id, blog_id=post.id)
         db.session.add(like) 
+
 
 
 def unlike_post(post,user_id):

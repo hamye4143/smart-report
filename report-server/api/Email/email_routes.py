@@ -1,15 +1,13 @@
-from flask_mail import Mail, Message
-from flask import Flask
-from flask import Blueprint,request,jsonify,make_response,current_app
-from flask_jwt_extended import jwt_required
-from api.Email.email_model import Email
-from api.Email.email_model import Email_File
 import json
-from api import db
 import smtplib
 
-from smtplib import SMTPException
+from flask import Blueprint, request, jsonify, current_app
+from flask_jwt_extended import jwt_required
+from flask_mail import Mail, Message
 
+from api import db
+from api.Email.email_model import Email
+from api.Email.email_model import Email_File
 
 email=Blueprint('email', __name__)
 

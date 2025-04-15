@@ -167,7 +167,9 @@ def createQuestion():
     
     
         #path= UPLOAD_FOLDER + '/'+ filename 
-        path = 'http://localhost:5000/showImage/'+filename
+        # path = 'http://localhost:5000/showImage/'+filename
+        path = request.host_url.rstrip('/') + '/showImage/' + filename
+
         type=uploaded_file.content_type
     newQuestion=Question(title=data["title"],content=data["content"],author_id = data["user"]["id"], feature_image=origin_name,origin_name=origin_name ,new_name=filename,path=path ,type=type)
     print(newQuestion)
@@ -291,7 +293,8 @@ def updateSingleQuestion(id):
         origin_name = uploaded_file.filename #원래 파일 이름 
         filename =  secure_filename(f_name)
         uploaded_file.save(os.path.join(UPLOAD_FOLDER, filename))
-        path = 'http://localhost:5000/showImage/'+filename
+        # path = 'http://localhost:5000/showImage/'+filename
+        path = request.host_url.rstrip('/') + '/showImage/' + filename
         type= uploaded_file.content_type
 
 

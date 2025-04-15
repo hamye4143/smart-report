@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/User';
 import { Blog } from '../../models/Blog';
 import {API_BASE_URL} from "../../../../constants/api-url";
+import {AuthService} from "src/app/shared/services/guards/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class MyinfoService implements OnInit{
   private user_id:number
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
 
@@ -29,17 +30,19 @@ export class MyinfoService implements OnInit{
 
   getList(): Promise<Blog>{
 
-    return this.http.get(this.myinfo_list_url + this.user_id)
-    .toPromise()
-    .then(response => {
-      localStorage.setItem('loginUser', JSON.stringify(response['serialized_data']));
-      return response['serialized_data'];
+    return this.http.get(this.myinfo_list_url + this.user_id, {
+      headers: this.authService.getAuthHeaders()
     })
-    .catch(response => {
-      localStorage.removeItem('auth_token');
-      alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);
-      return Promise.reject(response.error.msg);
-    });
+      .toPromise()
+      .then(response => {
+        localStorage.setItem('loginUser', JSON.stringify(response['serialized_data']));
+        return response['serialized_data'];
+      })
+      .catch(response => {
+        localStorage.removeItem('auth_token');
+        alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);
+        return Promise.reject(response.error.msg);
+      });
 
   }
 
@@ -53,18 +56,20 @@ export class MyinfoService implements OnInit{
 
     if( loginUser == null){ //빈칸이라면
       //다시 setItem
-      return this.http.get(this.myinfo_url + this.user_id)
-      .toPromise()
-      .then(response => {
-        localStorage.setItem('loginUser', JSON.stringify(response['serialized_user']));
-        return response['serialized_user'];
+      return this.http.get(this.myinfo_url + this.user_id, {
+        headers: this.authService.getAuthHeaders()
       })
-      .catch(response => {
-        localStorage.removeItem('auth_token');
-        alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);
-        //login으로 보내기
-        return Promise.reject(response.error.msg);
-      });
+        .toPromise()
+        .then(response => {
+          localStorage.setItem('loginUser', JSON.stringify(response['serialized_user']));
+          return response['serialized_user'];
+        })
+        .catch(response => {
+          localStorage.removeItem('auth_token');
+          alert('[회원 정보 조회중 오류 발생]\n' + response.error.msg);
+          //login으로 보내기
+          return Promise.reject(response.error.msg);
+        });
 
   }else {
     return Promise.resolve(loginUser);
@@ -76,7 +81,9 @@ export class MyinfoService implements OnInit{
   }
 
   downloads_history(){
-    return this.http.get(this.downloads_history_url + this.user_id).pipe(catchError(this.handlerError));
+    return this.http.get(this.downloads_history_url + this.user_id, {
+      headers: this.authService.getAuthHeaders()
+    }).pipe(catchError(this.handlerError));
   }
   my_like_list(){
     return this.http.get(this.mylike_list_url + this.user_id).pipe(catchError(this.handlerError));
