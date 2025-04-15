@@ -7,7 +7,7 @@ import {API_BASE_URL} from "../../../../constants/api-url";
 @Injectable({
   providedIn: 'root'
 })
-export class BlogService {
+export class BlogServiace {
   private add_blog_url:string = `${API_BASE_URL}/add_blog`;
   private get_all_blogs_url:string = `${API_BASE_URL}/blogs`;
   private get_all_categories_url:string = `${API_BASE_URL}/load_all_category`;
@@ -55,8 +55,16 @@ export class BlogService {
   }
 
   add_blog(blog_props){ //blog_props:Object
+
+    const auth_token = localStorage.getItem('access_token'); // 토큰 꺼내오기
+
     //에러 처리 후 에러 메시지를 생성하여 이를 방출하는 옵저버블 반환
-    return this.http.post(this.add_blog_url,blog_props).pipe(catchError(this.handlerError));
+    return this.http.post(this.add_blog_url,blog_props,
+      {
+        headers: {
+          Authorization: `Bearer ${auth_token}`
+        }
+      }).pipe(catchError(this.handlerError));
   }
 
   get_all_blogs(){

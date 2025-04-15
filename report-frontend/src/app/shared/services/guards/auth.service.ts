@@ -21,7 +21,6 @@ export class AuthService {
   private change_info_url: string = `${API_BASE_URL}/change_info/`;
   private change_name_url: string = `${API_BASE_URL}/change_name/`;
 
-
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
