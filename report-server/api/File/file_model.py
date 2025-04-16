@@ -12,7 +12,6 @@ class File(db.Model):
     type = db.Column(db.String(120))         # MIME 타입은 120이면 충분
     size = db.Column(db.String(120))         # 문자열 형태면 길이 유지
     download_cnt = db.Column(db.Integer, default=0)
-
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
