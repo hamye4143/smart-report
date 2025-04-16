@@ -5,35 +5,38 @@ from pytz import timezone
 
 KST = datetime.now(timezone('Asia/Seoul'))
 
+
 class Blog(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
-    title=db.Column(db.String(50),nullable=False)
-    content=db.Column(db.Text,nullable=False)
-    feature_image= db.Column(db.String,nullable=True) # False
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)  # 50 → 100으로 넉넉하게
+    content = db.Column(db.Text, nullable=False)
+
+    feature_image = db.Column(db.String(255), nullable=True)  # 경로일 수 있으므로 길이 확장
     created_at = db.Column(db.DateTime, default=datetime.today())
-    author_id = db.Column(db.Integer,db.ForeignKey('user.id'), nullable=False) # User table 참조 
-    # main_admin_id = db.Column(db.Integer,db.ForeignKey('main_admin.id'), nullable=True) # User table 참조 
-    star = db.Column(db.Integer,default=0)
-    view_count = db.Column(db.Integer,default=0)
-    tags=db.relationship('Tag',cascade="delete",secondary=tag_blog,backref=db.backref('blogs_associated',lazy="dynamic"))
-    #backref: 반대의 상황, Tag에서 blogs들을 쉽게 찾기 위해 , Blog에 등록된 컬럼 이름으로 설정하면 안됨
-    #blog에서 해당 tag를 확인할 수 도 있음
-    #secondary: 연관 테이블인 tag_blog객체를 참조한다. 
-    #lazy : 관련된 객체들이 어떻게 로드될지
-    # 관련된 tags들만 삭제되게끔
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+    star = db.Column(db.Integer, default=0)
+    view_count = db.Column(db.Integer, default=0)
 
-    new_author = db.relationship('User', backref='blog_associated_users', lazy=True) # Blog에서 관련된 user 찾기 위해
-    #backref:User에서도 blogs들을 쉽게 찾을 수 있게 --> user.blog_associated_users 접근
+    # Many-to-many: Tags
+    tags = db.relationship(
+        'Tag',
+        cascade="delete",
+        secondary=tag_blog,
+        backref=db.backref('blogs_associated', lazy="dynamic")
+    )
 
-    files = db.relationship('File', backref = 'blog_associated_files', lazy=True, cascade="all, delete") # Blog에서 관련된 file
-    #blog에서 해당 files들을 확일 할 수 있음
+    # One-to-many: Blog → User
+    new_author = db.relationship('User', backref='blog_associated_users', lazy=True)
 
-    comments = db.relationship('Comment', backref = 'blog_associated_comments', lazy=True, cascade="all, delete") # Blog에서 관련된 comment
-   
-    # the one-to-one relation
-    category = db.relationship('Category', backref = 'blog_associated_category', lazy=True, cascade="all, delete")
+    # One-to-many: Blog → File
+    files = db.relationship('File', backref='blog_associated_files', lazy=True, cascade="all, delete")
 
+    # One-to-many: Blog → Comment
+    comments = db.relationship('Comment', backref='blog_associated_comments', lazy=True, cascade="all, delete")
+
+    # One-to-many (혹은 one-to-one?): Blog → Category
+    category = db.relationship('Category', backref='blog_associated_category', lazy=True, cascade="all, delete")
 
     @property
     def serialize(self):

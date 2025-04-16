@@ -5,21 +5,17 @@ from pytz import timezone
 KST = datetime.now(timezone('Asia/Seoul'))
 
 class File(db.Model): 
-    id=db.Column(db.Integer,primary_key=True)
-    origin_name = db.Column(db.String(120)) #파일 원래 이름
-    new_name=db.Column(db.String(20)) #파일 새로운 이름
-    path = db.Column(db.String(120))#경로
-    type = db.Column(db.String(120)) # 타입 
-    size = db.Column(db.String(120)) # 사이즈 
-    download_cnt = db.Column(db.Integer, default=0) # 다운로드 수 
-    # blog_title = db.Column(db.String(50),nullable=False)
-    # blog_content = db.Column(db.Text,nullable=False)
-    # created_at = db.Column(db.DateTime, default=datetime.today())
-    #file_category = 
+    id = db.Column(db.Integer, primary_key=True)
+    origin_name = db.Column(db.String(255))  # 넉넉하게 경로/이름 대비
+    new_name = db.Column(db.String(100))     # UUID + 확장자 충분히 커야 함
+    path = db.Column(db.String(500))         # 절대경로 or URL 등
+    type = db.Column(db.String(120))         # MIME 타입은 120이면 충분
+    size = db.Column(db.String(120))         # 문자열 형태면 길이 유지
+    download_cnt = db.Column(db.Integer, default=0)
 
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    blog_id = db.Column(db.Integer,db.ForeignKey('blog.id'), nullable=False) #    
-    author_id = db.Column(db.Integer,db.ForeignKey('user.id'), nullable=False) # 누가 올린파일인지
 
     # download_users=db.relationship('User',backref=db.backref('fils_associated_downloadusers',lazy=True))# N:M
     # new_author = db.relationship('User', backref='blog_associated_users', lazy=True) # Blog에서 관련된 user 찾기 위해
