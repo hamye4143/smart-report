@@ -178,6 +178,7 @@ def create_app():
     # 추가 - 자동 DB 초기화 코드 추가
     # 앱 시작시 자동 실행
     with app.app_context():
+        db.drop_all()
         db.create_all()
 
         # 기본 관리자 유저가 없다면 생성
