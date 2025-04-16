@@ -1,13 +1,14 @@
-from flask import Flask,jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
-import click
-from flask.cli import with_appcontext
-from flask_jwt_extended import JWTManager
-from werkzeug.security import generate_password_hash
-import os 
 import datetime
+import os
+
+import click
+from flask import Flask
+from flask.cli import with_appcontext
+from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from flask_sqlalchemy import SQLAlchemy
 from pytz import timezone
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -19,7 +20,8 @@ def create_app():
     app = Flask(__name__)
     # error = ErrorHandler(app, dispatcher='urlprefix')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdatabase.db'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdatabase.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     app.config['JWT_SECRET_KEY']='MY_SECRET_KEY'
