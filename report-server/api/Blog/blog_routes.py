@@ -235,8 +235,15 @@ def download_single_file():
 
     path = os.getcwd()
     UPLOAD_FOLDER = os.path.join(path, 'uploads')
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
 
     file_ = File.query.filter_by(new_name=filename).first()
+
+    # 파일이 DB에는 있지만 실제 경로에 없을 경우
+    if not file_ or not os.path.exists(file_path):
+        return jsonify({"message": "파일이 존재하지 않거나 이미 삭제되었습니다."}), 404
+
+
     file_.download_cnt += 1
     file_id = file_.id
 
