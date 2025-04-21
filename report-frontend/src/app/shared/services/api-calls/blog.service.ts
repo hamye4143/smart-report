@@ -42,7 +42,7 @@ export class BlogService {
 
     return this.http.post(this.download_url, data, {
       headers: this.authService.getAuthHeaders(),
-      responseType: 'blob'
+      responseType: 'blob' // 에러도 blob으로 감싸버림
     }).pipe(catchError(this.handlerError));
   }
 

@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/shared/services/guards/auth.service';
 import { MyinfoService } from 'src/app/shared/services/myinfo/myinfo.service';
 import { User } from 'src/app/shared/models/User';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-blog-details',
@@ -119,15 +120,21 @@ export class BlogDetailsComponent implements OnInit {
 
   //단일 파일 다운로드
   download_single_file(filename, origin_name, file_id){
-    this.blog_service.download_single_file(filename,file_id).subscribe(
-      (data:any)=>{
+    this.blog_service.download_single_file(filename, file_id).subscribe(
+      (data: any) => {
         saveAs(data, origin_name)
       },
-      error =>{
-        console.error('[BlogService.download_single_file]',error)
+      async (error: HttpErrorResponse) => {
+        console.error('[BlogService.download_single_file]', error)
 
-        if (error.status === 404) {
-          this.notificationService.openSnackBar('⚠️ 파일이 만료되었거나 삭제되었습니다.');
+        // 👇 error.error가 Blob 타입인지 확인
+        if (error.error instanceof Blob) {
+          const text = await error.error.text(); // HTML이나 문자열로 변환
+          if (text.includes('404')) {
+            this.notificationService.openSnackBar('⚠️ 파일이 만료되었거나 삭제되었습니다.');
+          } else {
+            this.notificationService.openSnackBar('파일 다운로드에 실패했습니다.');
+          }
         } else {
           this.notificationService.openSnackBar('파일 다운로드에 실패했습니다.');
         }
