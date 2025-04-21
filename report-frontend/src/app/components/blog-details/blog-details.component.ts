@@ -89,8 +89,6 @@ export class BlogDetailsComponent implements OnInit {
         this.blog_props.comments = [];
         this.blog_props.commentCount = response.single_blog.comments.length;
         this.blog_props.viewCount = response.single_blog.view_count;
-
-
         this.blog_props.category = response.single_blog.category;
 
         response.single_blog.tags.forEach((element:any)=>{
@@ -101,13 +99,11 @@ export class BlogDetailsComponent implements OnInit {
           this.blog_props.files.push(element)
         });
 
-        // response.single_blog.comments.forEach((element:any)=>{
-        //   this.blog_props.comments.push(element)
-        // });
-
     },
     error =>{
-      console.error('[BlogService.get_blog_detail]',error)
+      console.error('[BlogService.get_blog_detail]',error);
+      this.notificationService.openSnackBar('⚠️ 정보를 가져오는데 문제가 생겼습니다.');
+
     });
   }
 
