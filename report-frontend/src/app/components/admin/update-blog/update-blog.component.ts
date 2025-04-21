@@ -236,7 +236,7 @@ export class UpdateBlogComponent implements OnInit {
 
         },
         error => {
-          console.error('[BlogService.update_blog]', error)
+          console.error('[BlogService.update_blog]', error);
           this.notificationService.openSnackBar(error.error);
         }
       );

@@ -124,11 +124,8 @@ export class BlogDetailsComponent implements OnInit {
       (data: any) => {
         saveAs(data, origin_name)
       }, error => {
-        if (error.status === 404 || error.message.includes('404')) {
-          this.notificationService.openSnackBar('⚠️ 파일이 만료되었거나 삭제되었습니다.');
-        } else {
-          this.notificationService.openSnackBar('파일 다운로드에 실패했습니다.');
-        }
+        console.log(error);
+        this.notificationService.openSnackBar('⚠️ 파일이 만료되었거나 삭제되었습니다.');
       }
     );
   }

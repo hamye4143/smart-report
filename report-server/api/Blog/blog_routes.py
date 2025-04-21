@@ -74,7 +74,8 @@ def get_single_blog(id):
     for tag in blog.tags:
         serialized_blog["tags"].append(tag.serialize)
     for file in blog.files:
-        serialized_blog["files"].append(file.serialize)
+        if not file.is_deleted:
+            serialized_blog["files"].append(file.serialize)
     comments = Comment.query.filter(Comment.blog_id == id).order_by(Comment.groupNum).all()
     for comment in comments:
         new_comment = comment.serialize
@@ -97,7 +98,10 @@ def delete_blog(id):
         file_path = os.path.join(UPLOAD_FOLDER, file.new_name)
         if os.path.exists(file_path):
             os.remove(file_path)
-        db.session.delete(file)
+
+        # DB에서는 삭제 대신 soft delete
+        file.is_deleted = True  # soft delete
+        # db.session.delete(file)
 
     db.session.delete(blog)
     db.session.commit()
@@ -134,7 +138,9 @@ def update_blog(id):
         file_path = os.path.join(UPLOAD_FOLDER, file.new_name)
         if os.path.exists(file_path):
             os.remove(file_path)
-        db.session.delete(file)
+        # DB에서는 삭제 대신 soft delete
+        file.is_deleted = True  # soft delete
+        # db.session.delete(file)
     db.session.commit()
 
     uploaded_files = request.files.getlist("fileUpload")

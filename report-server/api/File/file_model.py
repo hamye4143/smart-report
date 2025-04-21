@@ -14,7 +14,7 @@ class File(db.Model):
     download_cnt = db.Column(db.Integer, default=0)
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    is_deleted = db.Column(db.Boolean, default=False)
 
     # download_users=db.relationship('User',backref=db.backref('fils_associated_downloadusers',lazy=True))# N:M
     # new_author = db.relationship('User', backref='blog_associated_users', lazy=True) # Blog에서 관련된 user 찾기 위해
