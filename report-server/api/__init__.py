@@ -161,6 +161,7 @@ def create_app():
         #그 전 카테고리 지우기 
         Code_detail_table.query.delete() 
         Code_table.query.delete()
+
         db.session.commit()
 
         db.session.add_all([
@@ -190,6 +191,12 @@ def create_app():
                 is_admin='Y'
             )
             db.session.add(admin)
+
+            # ️ Category 관련 먼저 삭제
+            Category_setting.query.delete()
+            Sort_model_relation.query.delete()
+            Sort_model.query.delete()
+            Category.query.delete()
 
             # 코드 테이블 초기화
             Code_detail_table.query.delete()
