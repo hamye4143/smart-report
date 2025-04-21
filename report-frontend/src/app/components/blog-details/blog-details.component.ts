@@ -125,6 +125,12 @@ export class BlogDetailsComponent implements OnInit {
       },
       error =>{
         console.error('[BlogService.download_single_file]',error)
+
+        if (error.status === 404) {
+          this.notificationService.openSnackBar('⚠️ 파일이 만료되었거나 삭제되었습니다.');
+        } else {
+          this.notificationService.openSnackBar('파일 다운로드에 실패했습니다.');
+        }
       }
     );
 
