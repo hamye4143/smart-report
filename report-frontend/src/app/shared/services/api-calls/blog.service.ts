@@ -18,7 +18,6 @@ export class BlogService {
   private search_blog_url:string = `${API_BASE_URL}/search_blogs/`;
   private file_url:string = `${API_BASE_URL}/upload_files`;
   private download_url:string = `${API_BASE_URL}/downloadfile`;
-  private test_url:string = `${API_BASE_URL}/test_url`;
   private search_file_url:string = `${API_BASE_URL}/search`;
   private search_file_url2:string = `${API_BASE_URL}/search2`;
   private search_file_date_url:string = `${API_BASE_URL}/searchByDate/`;
