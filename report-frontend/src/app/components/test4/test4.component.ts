@@ -81,9 +81,9 @@ export class Test4Component implements OnInit {
     // const data = [{'title':'제목', 'description':'본문'}]
     const data = {
       blogs:[], //이 안에 포함된 블로그 정보들 {},{}
-      description: "설명을 쓰세요.",
+      description: '',
       id: null,//카테고리admin 순서
-      title: "제목을 쓰세요."
+      title: ''
     }
     this.mainListData.push(data)
   }
