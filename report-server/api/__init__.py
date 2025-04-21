@@ -21,7 +21,7 @@ def create_app():
     # error = ErrorHandler(app, dispatcher='urlprefix')
 
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flaskdatabase.db'
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///flaskdatabase.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     app.config['JWT_SECRET_KEY']='MY_SECRET_KEY'
@@ -56,7 +56,7 @@ def create_app():
 
     CORS(app, resources={
         r"/*": {
-            "origins": ["https://smart-report-5c622.web.app"],
+            "origins": ["https://smart-report-5c622.web.app", "http://localhost:4200"],
             "supports_credentials": True
         }
     })
@@ -154,7 +154,7 @@ def create_app():
     @with_appcontext
     def create_admin(): # flask create_admin 해야 실행(수동)
 
-        admin=User(email="123@naver.com",password="123", name="제니", is_admin='Y') # admin
+        admin=User(email="demo@demo.com",password="demo", name="제니", is_admin='Y') # admin
         admin.password = generate_password_hash(admin.password,'sha256',salt_length=12)
         db.session.add(admin)
         
@@ -182,10 +182,10 @@ def create_app():
         db.create_all()
 
         # 기본 관리자 유저가 없다면 생성
-        if not User.query.filter_by(email="123@naver.com").first():
+        if not User.query.filter_by(email="demo@demo.com").first():
             admin = User(
-                email="123@naver.com",
-                password=generate_password_hash("123", 'sha256', salt_length=12),
+                email="demo@demo.com",
+                password=generate_password_hash("demo", 'sha256', salt_length=12),
                 name="제니",
                 is_admin='Y'
             )

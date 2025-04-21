@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://smart-report-backend.onrender.com' // localhost:5000
+  apiUrl: 'http://localhost:5000', // 'https://smart-report-backend.onrender.com' // localhost:5000
 };
 
 /*
