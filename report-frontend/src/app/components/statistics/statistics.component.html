@@ -1,98 +1,128 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center none">
-    <div fxFlex="100%">
-        <div class="top-ten">
-            <div class="title">{{currentDate | date:'yyyy년 MM월 dd일'}}</div>
-            <div class="select-div">
-                <mat-select class="chart-select" [(ngModel)]="selectedMatSelectValue"
-                    (selectionChange)="selectedValue($event)">
-                    <mat-option [value]="matSelectFields.weekly">주간</mat-option>
-                    <mat-option [value]="matSelectFields.monthly">월간</mat-option>
-                </mat-select>
-            </div>
-        </div>
-
-        <h4> 이번주/이번달 다운로드순 레포트 TOP 10</h4>
-        <div class="container">
-            <carousel *ngIf="data" [cellsToScroll]="3" objectFit="contain" [height]="350">
-                <div class="carousel-cell" *ngFor="let item of dataLengthList">
-                    <div class="card box-shadow" [routerLink]="['/blog/', data[item][0].id]">
-                        <div class="img-div">
-                            <img class="card-img-top" src="./assets/article.svg" alt="Card image cap">
-                        </div>
-                        <span class="img-name">{{data[item][1]?.origin_name}}</span>
-                        <div class="card-body">
-                            <h5 class="card-title">{{data[item][0]?.title}}</h5>
-                            <p class="card-text">{{data[item][0]?.content}}</p>
-                        </div>
-                    </div>
-                </div>
-            </carousel>
-        </div>
-
-
-
-
-
-
-        <div class="charts-content__charts-wrapper">
-            <mat-card class="visits-chart charts-content__chart-item">
-                <mat-card-title class="visits-chart__header">
-                    <h5 class="visits-chart__title">오늘 접속자수</h5>
-                </mat-card-title>
-
-                <mat-card-content class="visits-chart__content">
-                    <div class="visits-chart__content-info">
-                        <h6 class="visits-chart__content-info-title">{{todayVisitors}}명</h6>
-                        <ngx-trend class="visits-chart__content-info-chart" autoDraw="true" autoDrawDuration="3000"
-                            autoDrawEasing="ease-out" smooth="true" [data]="[0,2,5,9,5,10,3,5,0,0,1,8,2,9,0]"
-                            [gradient]="['#2196F3']" radius="6.6" strokeWidth="5" strokeLinecap="round"></ngx-trend>
-                    </div>
-
-                    <div class="visits-chart__content-stats">
-                        <div>
-                            <p class="visits-chart__content-stats-title">Registration</p>
-                            <p class="visits-chart__content-stats-data">{{totalregisterCounts}}</p>
-                        </div>
-
-                        <div>
-                            <p class="visits-chart__content-stats-title">Sign Out</p>
-                            <p class="visits-chart__content-stats-data">{{logoutCounts}}</p>
-                        </div>
-
-                        <div>
-                            <p class="visits-chart__content-stats-title">NEW</p>
-                            <p class="visits-chart__content-stats-data">
-                                <span class="plus">+</span>{{newregisterCounts}}</p>
-                        </div>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-
-
-
-
-
-            <mat-card class="charts-content__chart-item">
-                <mat-card-title>
-                    <p>오늘 검색어 키워드 TOP5</p>
-                </mat-card-title>
-                <app-pie-chart [pieChartData]="pieChartData$"></app-pie-chart>
-
-            </mat-card>
-
-        </div>
-
-
-        <div class="charts-content__charts-wrapper">
-            <mat-card class="charts-content__chart-item">
-                <mat-card-title>
-                    <p>일주일 접속자 수</p>
-                </mat-card-title>
-                <app-line-chart (todayVisitors)="todayVisitors($event)" [LineChartData]="LineChartData$">
-                </app-line-chart>
-
-            </mat-card>
-        </div>
-
+<div class="dashboard-container">
+    <!-- 헤더 -->
+    <div class="dashboard-header">
+      <div class="dashboard-title">
+        {{ currentDate | date: 'yyyy년 MM월 dd일' }}
+      </div>
+      <mat-form-field appearance="outline" class="dashboard-select-field">
+        <mat-label>기간 선택</mat-label>
+        <mat-select [(value)]="selectedMatSelectValue" (selectionChange)="setSelectValue($event.value)">
+          <mat-option [value]="matSelectFields.weekly">주간</mat-option>
+          <mat-option [value]="matSelectFields.monthly">월간</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-</div>
+  
+    <!-- 주요 위젯 3종 -->
+    <div class="dashboard-widgets">
+      <div class="widget">
+        <div class="widget-title">오늘 방문자</div>
+        <div class="widget-main">{{ todayVisitors | number }}</div>
+        <div class="widget-sub">어제대비 <span [class.up]="todayVsYesterday.startsWith('+')" [class.down]="todayVsYesterday.startsWith('-')">{{ todayVsYesterday }}</span></div>
+      </div>
+      <div class="widget">
+        <div class="widget-title">활성 유저</div>
+        <div class="widget-main">{{ activeUsers | number }}</div>
+        <div class="widget-sub">이용률 {{ usageRate }}%</div>
+      </div>
+      <div class="widget">
+        <div class="widget-title">평균 이용시간</div>
+        <div class="widget-main">{{ avgSessionTime }}</div>
+        <div class="widget-sub">최근 로그인: {{ lastLogin }}</div>
+      </div>
+    </div>
+  
+    <!-- 실시간 알림 -->
+    <div class="alerts">
+      <div class="alert" *ngFor="let alert of alerts" [class]="alert.type">
+        <span class="alert-time">{{ alert.time }}</span>
+        <span class="alert-text">{{ alert.text }}</span>
+      </div>
+    </div>
+  
+    <!-- Top 10 Carousel (다운로드/트렌드) -->
+    <section class="dashboard-section">
+      <h4 class="section-title">다운로드 순 리포트 TOP 10</h4>
+      <carousel *ngIf="data && data.length > 0" [cellsToScroll]="3" [height]="210" objectFit="cover">
+        <div *ngFor="let item of dataLengthList" class="dashboard-card" [routerLink]="['/blog/', data[item][0].id]">
+          <img class="dashboard-card-img" src="./assets/article.svg" alt="Card image">
+          <div class="dashboard-card-content">
+            <div class="dashboard-card-title">{{ data[item][0]?.title }}</div>
+            <div class="dashboard-card-subtitle">{{ data[item][1]?.origin_name }}</div>
+            <div class="dashboard-card-desc">{{ data[item][0]?.content }}</div>
+            <div class="dashboard-card-downloads">
+              <span>다운로드: {{ data[item][1]?.downloads }}</span>
+              <span 
+              [class.up]="data[item][1]?.trend && data[item][1]?.trend.startsWith('+')" 
+              [class.down]="data[item][1]?.trend && data[item][1]?.trend.startsWith('-')">
+              {{ data[item][1]?.trend || '-' }}
+            </span>
+            </div>
+          </div>
+        </div>
+      </carousel>
+    </section>
+  
+    <!-- 통계 & 그래프 -->
+    <div class="dashboard-grid">
+      <mat-card class="dashboard-metric-card">
+        <div class="metric-title">오늘 접속자수</div>
+        <div class="metric-main">{{ todayVisitors }}명</div>
+        <ngx-trend
+          [data]="[47, 99, 54, 77, 120, 80, todayVisitors]"
+          [autoDraw]="true"
+          [autoDrawDuration]="2500"
+          [autoDrawEasing]="'ease-out'"
+          [smooth]="true"
+          [gradient]="['#2196F3']"
+          [radius]="6.6"
+          [strokeWidth]="5"
+          [strokeLinecap]="'round'">
+        </ngx-trend>
+        <div class="metric-sub">
+          <span>가입 {{ totalregisterCounts }}</span>
+          <span>로그아웃 {{ logoutCounts }}</span>
+          <span>탈퇴 {{ deactivateCounts }}</span>
+          <span>신규 <span class="metric-plus">+{{ newSignups }}</span></span>
+        </div>
+      </mat-card>
+      <mat-card class="dashboard-metric-card">
+        <div class="metric-title">오늘 검색어 키워드 TOP5</div>
+        
+        <app-pie-chart [pieChartData]="pieChartData$"></app-pie-chart>
+      </mat-card>
+    </div>
+  
+    <mat-card class="dashboard-chart-card">
+      <div class="metric-title">일주일 접속자 수</div>
+      <app-line-chart [LineChartData]="LineChartData$"></app-line-chart>
+    </mat-card>
+    <mat-card class="dashboard-chart-card">
+      <div class="metric-title">TOP10 리포트 다운로드</div>
+      <app-bar-chart [barChartData]="barChartData$"></app-bar-chart>
+    </mat-card>
+  
+    <!-- 최근 등록 리포트 리스트 -->
+    <div class="recent-reports">
+      <h4>최근 리포트 등록</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>등록자</th>
+            <th>시간</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of recentReports">
+            <td>{{ report.title }}</td>
+            <td>{{ report.user }}</td>
+            <td>{{ report.time }}</td>
+            <td>{{ report.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -87,6 +87,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 import { RedirectComponent } from './components/redirect/redirect.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -138,6 +139,7 @@ import { RedirectComponent } from './components/redirect/redirect.component';
     DateFilterComponent,
     CategorySelectComponent,
     LineChartComponent,
+    BarChartComponent,
     PieChartComponent,
     CategorySortListComponent,
     AddQuestionComponent,

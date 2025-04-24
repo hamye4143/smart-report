@@ -25,13 +25,11 @@
         <mat-menu #menuTop="matMenu">
           <button mat-menu-item [routerLink]="['/admin/all-blogs']">레포트 관리</button>
           <button mat-menu-item [routerLink]="['/admin/category']">메인화면 관리</button>
-          <!-- <button mat-menu-item [routerLink]="['/test3']">메인화면 관리 - 테스트</button> -->
-
-          <button mat-menu-item [routerLink]="['/admin/sort']">카테고리 관리</button>
         </mat-menu>
-
-        <button mat-button [routerLink]="['/admin/email']">메일</button>
+        <button mat-button [routerLink]="['/admin/sort']">카테고리</button>
         <button mat-button [routerLink]="['/statistics']">통계</button>
+        <button mat-button [routerLink]="['/admin/email']">메일</button>
+
         <button mat-button [routerLink]="['/question-list']">문의사항</button>
       </div>
       <span class="navbar-spacer"></span>

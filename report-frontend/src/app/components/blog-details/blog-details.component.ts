@@ -103,7 +103,6 @@ export class BlogDetailsComponent implements OnInit {
     error =>{
       console.error('[BlogService.get_blog_detail]',error);
       this.notificationService.openSnackBar('⚠️ 정보를 가져오는데 문제가 생겼습니다.');
-
     });
   }
 
@@ -153,7 +152,9 @@ export class BlogDetailsComponent implements OnInit {
       }
     },
     error =>{
-      console.error('[BlogService.update_blog]',error)
+      console.error('[BlogService.delete_blog]',error)
+      this.notificationService.openSnackBar('⚠️ 정보를 삭제하는데 문제가 생겼습니다.');
+
     }
     );
   }

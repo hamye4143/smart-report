@@ -1,0 +1,37 @@
+.bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    .bar {
+      display: flex;
+      align-items: center;
+      .label {
+        width: 110px;
+        font-size: 0.95rem;
+        color: #1976d2;
+        flex-shrink: 0;
+        text-align: right;
+        margin-right: 10px;
+        font-weight: 600;
+      }
+      .bar-visual {
+        background: linear-gradient(90deg, #64b5f6, #1976d2 85%);
+        min-width: 30px;
+        height: 20px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        transition: width 0.2s;
+        .value {
+          font-size: 0.95rem;
+          color: #fff;
+          font-weight: 700;
+          margin-left: 10px;
+          text-shadow: 1px 1px 2px #1976d2aa;
+        }
+      }
+    }
+  }
+  

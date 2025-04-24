@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29307a22-ce95-4010-aeac-2a17924351f7" name="Changes" comment="" />
+    <list default="true" id="29307a22-ce95-4010-aeac-2a17924351f7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report-server/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/report-server/api/__init__.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,24 +14,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2vX6fnvsBwPrF8KYlLSPXQnlJiq" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/dev/private/smart-report",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/private/smart-report&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -44,6 +48,7 @@
       <option name="presentableId" value="Default" />
       <updated>1744279177380</updated>
       <workItem from="1744279178545" duration="1000" />
+      <workItem from="1745415372566" duration="25000" />
     </task>
     <servers />
   </component>

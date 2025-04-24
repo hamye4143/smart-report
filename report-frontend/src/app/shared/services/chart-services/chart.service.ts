@@ -1,7 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable, OnInit} from '@angular/core';
 import {StatisticsService} from '../api-calls/statistics.service';
-import {API_BASE_URL} from "constants/api-url";
+import { API_BASE_URL } from 'src/constants/api-url';
+import { log } from 'console';
 
 export interface LineChartData {
   series: Series[],
@@ -23,6 +24,7 @@ export class ChartService implements OnInit {
   visitDateList=[];
   private todayVisitorUrl:string = `${API_BASE_URL}/todayVisitor`;
   private searchTopKeywordUrl:string = `${API_BASE_URL}/searchTopKeyword`;
+  private barChartDataUrl:string = `${API_BASE_URL}/charts/bar`;
 
 
   constructor(public service:StatisticsService,private http: HttpClient){
@@ -72,6 +74,11 @@ export class ChartService implements OnInit {
     // });
   }
 
+
+  public loadBarChartData() {
+    
+    return this.http.get(this.barChartDataUrl).toPromise();
+  }
 
 
 }
