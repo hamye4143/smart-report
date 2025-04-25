@@ -69,7 +69,6 @@ import { AnswerCommentComponent } from './components/question-board/answer-comme
 import { TestComponent } from './components/test/test.component';
 import { EDITABLE_CONFIG, EditableConfig, EditableModule } from '@ngneat/edit-in-place';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
-// import { TreeModule } from 'angular-tree-component';
 import { TreeModule } from '@circlon/angular-tree-component';
 import { Test2Component } from './components/test2/test2.component';
 import { Test3Component } from './components/test3/test3.component';

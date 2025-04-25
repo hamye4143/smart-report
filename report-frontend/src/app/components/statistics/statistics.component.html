@@ -1,18 +1,8 @@
-<div class="dashboard-container">
-    <!-- 헤더 -->
-    <div class="dashboard-header">
-      <div class="dashboard-title">
-        {{ currentDate | date: 'yyyy년 MM월 dd일' }}
-      </div>
-      <mat-form-field appearance="outline" class="dashboard-select-field">
-        <mat-label>기간 선택</mat-label>
-        <mat-select [(value)]="selectedMatSelectValue" (selectionChange)="setSelectValue($event.value)">
-          <mat-option [value]="matSelectFields.weekly">주간</mat-option>
-          <mat-option [value]="matSelectFields.monthly">월간</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card flex-gt-sm="flex-gt-sm">
+      <mat-card-title>{{ currentDate | date: 'yyyy년 MM월 dd일' }}</mat-card-title>
+ 
     <!-- 주요 위젯 3종 -->
     <div class="dashboard-widgets">
       <div class="widget">
@@ -43,25 +33,23 @@
     <!-- Top 10 Carousel (다운로드/트렌드) -->
     <section class="dashboard-section">
       <h4 class="section-title">다운로드 순 리포트 TOP 10</h4>
-      <carousel *ngIf="data && data.length > 0" [cellsToScroll]="3" [height]="210" objectFit="cover">
-        <div *ngFor="let item of dataLengthList" class="dashboard-card" [routerLink]="['/blog/', data[item][0].id]">
-          <img class="dashboard-card-img" src="./assets/article.svg" alt="Card image">
-          <div class="dashboard-card-content">
-            <div class="dashboard-card-title">{{ data[item][0]?.title }}</div>
-            <div class="dashboard-card-subtitle">{{ data[item][1]?.origin_name }}</div>
-            <div class="dashboard-card-desc">{{ data[item][0]?.content }}</div>
-            <div class="dashboard-card-downloads">
-              <span>다운로드: {{ data[item][1]?.downloads }}</span>
-              <span 
-              [class.up]="data[item][1]?.trend && data[item][1]?.trend.startsWith('+')" 
-              [class.down]="data[item][1]?.trend && data[item][1]?.trend.startsWith('-')">
-              {{ data[item][1]?.trend || '-' }}
-            </span>
+      <carousel *ngIf="data && data.length > 0" [cellsToScroll]="3" objectFit="contain" [height]="280">
+        <div class="carousel-cell" *ngFor="let item of dataLengthList">
+          <div class="card" [routerLink]="['/blog/', data[item][0].id]">
+            <div class="img-div">
+              <img class="card-img-top" src="./assets/article.svg" alt="Card image cap">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{data[item][0]?.title}}</h5>
+              <p class="card-text">{{data[item][1]?.origin_name}}</p>
             </div>
           </div>
         </div>
       </carousel>
+
+    
     </section>
+    
   
     <!-- 통계 & 그래프 -->
     <div class="dashboard-grid">
@@ -88,7 +76,6 @@
       </mat-card>
       <mat-card class="dashboard-metric-card">
         <div class="metric-title">오늘 검색어 키워드 TOP5</div>
-        
         <app-pie-chart [pieChartData]="pieChartData$"></app-pie-chart>
       </mat-card>
     </div>
@@ -124,5 +111,9 @@
         </tbody>
       </table>
     </div>
+    </mat-card>
+    </div>
   </div>
+  
+
   

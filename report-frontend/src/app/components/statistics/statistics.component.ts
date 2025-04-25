@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsService } from 'src/app/shared/services/api-calls/statistics.service';
 import { ChartService } from 'src/app/shared/services/chart-services/chart.service';
-import { Observable } from 'rxjs';
 
 enum matSelectedFields {
   weekly = 'Weekly',
@@ -58,6 +57,7 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.loadData(this.selectedMatSelectValue === matSelectedFields.weekly ? 1 : 2);
+    this.loadTodayVisitors();
     this.loadRegisteration();
     this.loadWidgets();
     this.loadAlerts();
@@ -69,16 +69,28 @@ export class StatisticsComponent implements OnInit {
     this.service.getTopTenDownloadedFile(type).subscribe(
       (response: any) => {
         this.data = response['serializedResult'] ?? [];
-        this.dataLengthList = Array.from({ length: this.data.length }, (_, i) => i);
+        this.dataLengthList = Array.from({ length: this.data.length }, (_, i) => i); 
+
+        console.log( this.data );
+        
       }
     );
   }
 
+  loadTodayVisitors() {
+    this.service.gettodayVisitor().subscribe(
+      (response:any) => {
+
+        console.log(response);
+        
+        this.todayVisitors = response.todayVisitors ?? 0;
+      }
+    )
+  }
+
   loadRegisteration() {
     this.service.getRegisterCounts().subscribe(
-      (response: any) => {
-        console.log('data', response);
-        
+      (response: any) => {        
         this.newSignups = response['NewregisterCounts'] ?? 0;
         this.logoutCounts = response['logoutCounts'] ?? 0;
         this.totalregisterCounts = response['TotalregisterCounts'] ?? 0;
@@ -91,7 +103,7 @@ export class StatisticsComponent implements OnInit {
     this.service.getDashboardWidgets().subscribe(
       (res: any) => {
        
-        this.todayVisitors = res.todayVisitors ?? 0;
+        // this.todayVisitors = res.todayVisitors ?? 0;
         this.activeUsers = res.activeUsers ?? 0;
         this.avgSessionTime = res.avgSessionTime ?? '';
         this.usageRate = res.usageRate ?? 0;

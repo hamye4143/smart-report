@@ -1,68 +1,55 @@
+from datetime import date
+from datetime import timedelta
+
+from flask import Blueprint, jsonify
+from sqlalchemy.sql import func
+
 from api import db
+from api.Blog.blog_model import Blog
 from api.Blog_File.download_table import DownloadTable
 from api.File.file_model import File
-from flask import Blueprint,jsonify,request
-from flask_jwt_extended import jwt_required
-from sqlalchemy.sql import func
-from datetime import date
-from sqlalchemy.sql.expression import bindparam
-from sqlalchemy import Interval
-from datetime import datetime, timedelta
-from api.Blog.blog_model import Blog
-import datetime
-
 
 blogFiles= Blueprint('blogfiles',__name__)
 
 
-@blogFiles.route('/getTopTenDownloadedFile/<int:type_>',methods=["GET"])
-#
+@blogFiles.route('/getTopTenDownloadedFile/<int:type_>', methods=["GET"])
 def GetTopTenDownloadedFiles(type_):
     today = date.today()
     list_ = []
-    if type_ == 1: # 이번주간 다운로드 파일 탑텐 
-        #이번주 시작일 : 월요일 : 23일(고정) + 6일까지
-        thisWeekMonday = today - timedelta(days = today.weekday())
-        print('monday',thisWeekMonday)
-        stmt = db.session.query(DownloadTable.file_id).filter(DownloadTable.created_at <= thisWeekMonday + timedelta(days=6) ).subquery()
 
-        
-        for b,f in db.session.query(Blog,File).join(stmt, File.id == stmt.c.file_id).order_by(File.download_cnt.desc()).filter(File.blog_id == Blog.id).limit(10):
-            data = ["",""]
-            data[0]= b.serialize
-            data[1]= f.serialize
-            list_.append(data)   
-            print(list_)         
-        
+    # ---- (1) 기간 조건 ----
+    if type_ == 1:  # 주간
+        # 이번주 월요일~오늘까지 (또는 일요일까지, 현재는 오늘까지)
+        week_start = today - timedelta(days=today.weekday())  # 이번주 월요일
+        week_end = week_start + timedelta(days=6)  # 이번주 일요일
+        period_filter = (DownloadTable.created_at >= week_start) & (DownloadTable.created_at <= week_end)
+    else:  # 월간
+        year_month = today.strftime('%Y-%m')
+        period_filter = func.strftime("%Y-%m", DownloadTable.created_at) == year_month
 
+    # ---- (2) 파일별 다운로드 수 집계 (TOP 10) ----
+    download_stats = (
+        db.session.query(
+            DownloadTable.file_id,
+            func.sum(DownloadTable.cnt).label('total_downloads')
+        )
+        .filter(period_filter)
+        .group_by(DownloadTable.file_id)
+        .order_by(func.sum(DownloadTable.cnt).desc())
+        .limit(10)
+        .all()
+    )
+    file_ids = [row.file_id for row in download_stats]
 
-    else: #월간 2020-11월 달 다운로드 파일 탑 텐
+    # ---- (3) Blog & File join하여 데이터 가공 ----
+    files = File.query.filter(File.id.in_(file_ids)).all()
+    files_dict = {f.id: f for f in files}
 
-        thisYearMonth = str(today.year)+'-'+str(today.month)
-        #다운로드
-        #11 월 것 리스트 
-        row = db.session.query(DownloadTable).filter(func.strftime("%Y-%m", DownloadTable.created_at) == thisYearMonth).all() 
-        print('row',row)
-        stmt = db.session.query(DownloadTable.file_id).filter(func.strftime("%Y-%m",DownloadTable.created_at) == thisYearMonth ).subquery()
-        #월간 
-        
-        # for f in db.session.query(File).join(stmt, File.id == stmt.c.file_id).order_by(File.download_cnt.desc()).limit(10):
-        #     print(f.id) 
-        for b,f in db.session.query(Blog,File).join(stmt, File.id == stmt.c.file_id).order_by(File.download_cnt.desc()).filter(File.blog_id == Blog.id).limit(10):
-            data = ["",""]
-            data[0]= b.serialize
-            data[1]= f.serialize
-            list_.append(data)   
-            print(list_)         
-        
+    for file_id in file_ids:
+        f = files_dict[file_id]
+        # 파일이 어떤 블로그에 속하는지 (1:1 또는 1:N, 보통 blog_id 있음)
+        blog = Blog.query.filter_by(id=f.blog_id).first() if hasattr(f, 'blog_id') else None
+        if blog:
+            list_.append([blog.serialize, f.serialize])
 
-
-        
-
-    return jsonify({"serializedResult":list_})
-         
-
-
-
-
-    
+    return jsonify({"serializedResult": list_})
