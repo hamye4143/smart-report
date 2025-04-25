@@ -9,8 +9,7 @@ from api.User.user_model import User
 from pytz import timezone
 from flask import jsonify
 from datetime import date, datetime, timedelta
-from sqlalchemy import func, desc
-
+from sqlalchemy import func, desc, cast, Date
 
 visitor = Blueprint('visitor', __name__)
 
@@ -43,7 +42,6 @@ def initTodayVisitor():
 
 
 
-
 @visitor.route('/todayVisitor', methods=["GET"])
 def todayVisitor():
     today = date.today()
@@ -56,7 +54,7 @@ def todayVisitor():
     print('startDay', startDay)
     print('endDay', endDay)
 
-    # (1) 7일간 일별 유저수 (user_id 중복 제외)
+    # (1) 7일간 일별 유저수 (user_id 중복 제외) -> 이 부분은 SQL 그대로 사용 가능
     result = db.session.execute("""
         SELECT COUNT(*) as count, visit_date FROM (
             SELECT visit_date, user_id 
@@ -74,10 +72,9 @@ def todayVisitor():
         visit_count_list.append(i.count)
         visit_date_list.append(i.visit_date)
 
-    # (2) 오늘 방문자 (user_id 기준)
-    today_str = today.strftime("%Y-%m-%d")
+    # (2) 오늘 방문자 (user_id 기준) - PostgreSQL 호환!
     today_visitor_count = Visitor.query \
-        .filter(func.strftime("%Y-%m-%d", Visitor.login_date) == today_str) \
+        .filter(cast(Visitor.login_date, Date) == today) \
         .group_by(Visitor.user_id).count()
 
     # (3) 방어 코드
@@ -100,16 +97,16 @@ def registerCounts():  # 오늘 등록한 사람 , 로그아웃한 인간 몇명
     today = date.today()
     TotalregisterCounts = db.session.query(User.id).count()
 
-    registerations = User.query.filter(today == func.DATE(User.created_at)).all()
+    # created_at에서 날짜만 추출해서 today와 비교 (PostgreSQL 호환)
+    registerations = User.query.filter(cast(User.created_at, Date) == today).all()
     NewregisterCounts = len(registerations)
 
-    logouts = Visitor.query.filter(today == func.DATE(Visitor.logout_date)).group_by(Visitor.user_id).all()
+    # logout_date에서 날짜만 추출해서 today와 비교 (PostgreSQL 호환)
+    logouts = Visitor.query.filter(cast(Visitor.logout_date, Date) == today).group_by(Visitor.user_id).all()
     print('visitor', logouts)
     logoutCounts = len(logouts)
     return jsonify({'NewregisterCounts': NewregisterCounts, 'logoutCounts': logoutCounts,
                     'TotalregisterCounts': TotalregisterCounts})
-
-
 @visitor.route('/widgets', methods=["GET"])
 def getWidgets():  #
 

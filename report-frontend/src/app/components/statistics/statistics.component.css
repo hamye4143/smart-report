@@ -143,17 +143,11 @@
 /* 반응형 스타일 */
 @media (max-width: 1020px) {
   .dashboard-widgets, .dashboard-grid { flex-direction: column; gap: 13px; }
-  .dashboard-section carousel .dashboard-card, .dashboard-section ivy-carousel .dashboard-card, .dashboard-card {
-    min-width: 160px; max-width: 170px;
-  }
 }
 @media (max-width: 700px) {
   .container { padding: 12px 0; }
   mat-card-title { font-size: 1.06rem; }
   .section-title { font-size: 0.99rem; }
-  .dashboard-card, .dashboard-section carousel .dashboard-card, .dashboard-section ivy-carousel .dashboard-card {
-    min-width: 110px; max-width: 120px;
-  }
   .dashboard-card-title { font-size: 0.91rem; }
   .dashboard-card-desc { font-size: 0.89rem; }
   .recent-reports { padding: 0.7rem; }
@@ -271,4 +265,8 @@
   width: 100% !important;
   display: block;
   margin: 0 auto;
+}
+
+.dashboard-section {
+  margin: 40px 0;
 }
