@@ -20,4 +20,16 @@
         <button class="form-actions__login" type="submit" mat-raised-button color="primary"
             [disabled]="!signInForm.valid">로그인</button>
     </div>
+
+
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-progress-spinner mode="indeterminate" diameter="48"></mat-progress-spinner>
+    <div class="loading-message">
+      로그인 중입니다.<br>
+      <b>잠시만 기다려주세요...</b>
+    </div>
+  </div>
+
+
 </form>
+

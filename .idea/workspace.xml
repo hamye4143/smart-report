@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="29307a22-ce95-4010-aeac-2a17924351f7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/report-frontend/src/app/components/blog-details/blog-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report-server/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/report-server/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report-frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/report-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report-frontend/src/app/components/form/login-form/login-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/report-frontend/src/app/components/form/login-form/login-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report-frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/report-frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +18,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1

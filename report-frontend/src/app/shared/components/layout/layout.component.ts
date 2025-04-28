@@ -1,16 +1,16 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
+import {MediaMatcher} from '@angular/cdk/layout';
+import {NestedTreeControl} from '@angular/cdk/tree';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {MatTreeNestedDataSource} from '@angular/material/tree';
 
-import { TreeData } from '../../models/Category';
-import { AuthService } from '../../services/guards/auth.service';
-import { SortService } from '../../services/sort/sort.service';
-import { TreeDataService } from '../../services/tree/tree-data.service';
-import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
-import { of as observableOf } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import {TreeData} from '../../models/Category';
+import {AuthService} from '../../services/guards/auth.service';
+import {TreeDataService} from '../../services/tree/tree-data.service';
+import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
+import {of as observableOf} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+
 @Component({
     selector: 'app-layout', templateUrl: './layout.component.html', styleUrls: ['./layout.component.css'],
     // providers:[SortComponent]

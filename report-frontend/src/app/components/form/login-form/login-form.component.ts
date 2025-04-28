@@ -12,6 +12,7 @@ import {AuthService} from 'src/app/shared/services/guards/auth.service';
 export class LoginFormComponent implements OnInit {
   @Output() sendLoginForm = new EventEmitter<void>();
   signInForm: FormGroup;
+  isLoading = false;
 
   constructor(
     private auth_service: AuthService,
@@ -33,6 +34,7 @@ export class LoginFormComponent implements OnInit {
 
   public login(): void {
     if (this.signInForm.valid) {
+      this.isLoading = true;
       this.sendLoginForm.emit(this.signInForm.value);
     }
   }
