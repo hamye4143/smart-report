@@ -1,5 +1,5 @@
 <!-- 오버레이: isLoading이 false면 전체를 덮음 -->
-<div *ngIf="!isLoading" class="loading-overlay">
+<div *ngIf="isLoading" class="loading-overlay">
   <mat-progress-spinner mode="indeterminate" diameter="48"></mat-progress-spinner>
   <div class="loading-message">
     로그인 중입니다.<br>
